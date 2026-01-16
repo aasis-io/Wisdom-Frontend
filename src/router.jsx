@@ -9,18 +9,20 @@ import Consulting from "./pages/Consulting";
 import ContactUs from "./pages/ContactUs";
 import Home from "./pages/Home";
 import Journals from "./pages/Journals";
-import NotFoundPage from "./pages/NotFoundPage"; // ✅ Import 404 page
+import NotFoundPage from "./pages/NotFoundPage";
 import Research from "./pages/Research";
 import Services from "./pages/Services";
 
-// Admin Layout + Routes
+// Admin
+import AdminProtectedRoute from "./admin/AdminProtectedRoute";
 import { adminRoutes } from "./admin/AdminRoutes";
 import AppLayout from "./admin/layout/AppLayout";
+import SignInForm from "./pages/Auth/SignIn";
 
 export const router = createBrowserRouter([
   // FRONTEND ROUTES
   {
-    element: <Layout />, // Main website layout
+    element: <Layout />,
     children: [
       { path: "/", element: <Home /> },
       { path: "/about", element: <About /> },
@@ -32,15 +34,22 @@ export const router = createBrowserRouter([
       { path: "/contact", element: <ContactUs /> },
       { path: "/journals", element: <Journals /> },
 
-      // Catch-all route for 404
-      { path: "*", element: <NotFoundPage /> }, // ✅ This will render 404 for all unknown URLs
+      // Admin Sign In (PUBLIC)
+      { path: "/waarcadmin/signin", element: <SignInForm /> },
+
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
 
-  // ADMIN ROUTES
+  // PROTECTED ADMIN ROUTES
   {
-    path: "/admin/*", // All admin pages
-    element: <AppLayout />, // Layout includes ThemeProvider + SidebarProvider
-    children: adminRoutes, // Array of admin routes
+    element: <AdminProtectedRoute />, // 🔐 Guard
+    children: [
+      {
+        path: "/admin/*",
+        element: <AppLayout />,
+        children: adminRoutes,
+      },
+    ],
   },
 ]);
