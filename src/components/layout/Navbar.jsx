@@ -1,4 +1,4 @@
-import { useState } from "react";
+ 
 import {
   FaEnvelope,
   FaFacebookF,
@@ -13,6 +13,8 @@ import { HiOutlineMail, HiOutlineMenuAlt3 } from "react-icons/hi";
 import { RxCross2 } from "react-icons/rx";
 import { Link } from "react-router";
 import Logo from "./../../assets/images/logo-dark.svg";
+import axiosInstance from "../../Axios/AxiosInstance";
+import { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
@@ -22,8 +24,37 @@ const NAV_ITEMS = [
   { label: "Blogs", href: "/blogs" },
 ];
 
+const fetchSiteSettings = async () => {
+  try {
+    const response = await axiosInstance.get("/getSiteSettings");
+    const data = response.data;
+    console.log("daaaaaaaaaaaaaata"+ JSON.stringify(data));
+    return data;
+  } catch (error) {
+    console.error("Error fetching site settings:", error);
+    return null;
+  }
+};
+
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [siteSettings, setSiteSettings] = useState(null);
+
+  
+useEffect(() => {
+  const getSettings = async () => {
+    const settings = await fetchSiteSettings();
+    if (settings) {
+      console.log("Site Settings:", settings);
+      setSiteSettings(settings);
+    } else {
+      console.log("Failed to fetch site settings.");
+    }   
+  };
+
+  getSettings();
+}, []);
 
   return (
     <>
@@ -35,15 +66,15 @@ export default function Navbar() {
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-2">
                 <FaPhoneAlt className="text-[#F4B740]" />
-                <span>+977-9841XXXXXX</span>
+                <span>+977-{siteSettings?.phone}</span>
               </div>
               <div className="flex items-center gap-2">
                 <FaEnvelope className="text-[#F4B740]" />
-                <span>info@waarc.org</span>
+                <span>{siteSettings?.email}</span>
               </div>
               <div className="flex items-center gap-2">
                 <FaMapMarkerAlt className="text-[#F4B740]" />
-                <span>Chandragiri Municipality - 6, Kathmandu</span>
+                <span>{siteSettings?.location}</span>
               </div>
             </div>
 
@@ -52,7 +83,7 @@ export default function Navbar() {
                 (Icon, index) => (
                   <a
                     key={index}
-                    href="#"
+                    href={siteSettings?.facebook}
                     className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F4B740] text-[#0E1B3D] hover:opacity-90"
                   >
                     <Icon size={14} />
@@ -67,7 +98,7 @@ export default function Navbar() {
             {/* Left: Phone icon and number */}
             <div className="flex items-center gap-2">
               <FaPhoneAlt className="text-[#F4B740]" />
-              <span>+977-9840033688</span>
+              <span>+977-{siteSettings?.phone}</span>
             </div>
 
             {/* Right: Call Now button */}
@@ -103,7 +134,10 @@ export default function Navbar() {
               <FaSearch size={16} />
             </button>
 
-            <Link to={"/contact"} className="hidden md:inline-flex items-center gap-2 bg-[#0E1B3D] px-5 py-3 rounded-lg text-sm font-medium text-white hover:opacity-90">
+            <Link
+              to={"/contact"}
+              className="hidden md:inline-flex items-center gap-2 bg-[#0E1B3D] px-5 py-3 rounded-lg text-sm font-medium text-white hover:opacity-90"
+            >
               <HiOutlineMail size={20} />
               Contact Us
             </Link>
@@ -139,7 +173,10 @@ export default function Navbar() {
               </Link>
             ))}
 
-            <Link to={"/contact"} className="mt-4 flex items-center gap-2 rounded-lg bg-[#F4B740] px-4 py-2 text-sm font-medium text-[#0E1B3D]">
+            <Link
+              to={"/contact"}
+              className="mt-4 flex items-center gap-2 rounded-lg bg-[#F4B740] px-4 py-2 text-sm font-medium text-[#0E1B3D]"
+            >
               <HiOutlineMail size={18} />
               Contact Us
             </Link>
