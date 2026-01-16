@@ -16,6 +16,7 @@ import Services from "./pages/Services";
 // Admin Layout + Routes
 import { adminRoutes } from "./admin/AdminRoutes";
 import AppLayout from "./admin/layout/AppLayout";
+import SignInForm from "./pages/Auth/SignInForm";
 
 export const router = createBrowserRouter([
   // FRONTEND ROUTES
@@ -31,16 +32,17 @@ export const router = createBrowserRouter([
       { path: "/blogs/:slug", element: <BlogDetail /> },
       { path: "/contact", element: <ContactUs /> },
       { path: "/journals", element: <Journals /> },
+      { path: "/waarcadmin/signin", element: <SignInForm /> },
 
       // Catch-all route for 404
-      { path: "*", element: <NotFoundPage /> }, // ✅ This will render 404 for all unknown URLs
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
 
   // ADMIN ROUTES
   {
     path: "/admin/*", // All admin pages
-    element: <AppLayout />, // Layout includes ThemeProvider + SidebarProvider
-    children: adminRoutes, // Array of admin routes
+    element: <AppLayout />,
+    children: adminRoutes,
   },
 ]);

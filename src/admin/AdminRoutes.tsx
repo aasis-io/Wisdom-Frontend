@@ -1,6 +1,6 @@
 // src/admin/AdminRoutes.jsx
 import AdminNotFound from "./pages/AdminNotFound";
-import SignIn from "./pages/AuthPages/SignIn";
+import SignIn from "../pages/Auth/SignInForm";
 import SignUp from "./pages/AuthPages/SignUp";
 import Blank from "./pages/Blank";
 import Calendar from "./pages/Calendar";
