@@ -365,7 +365,7 @@ export default function BlogDetail() {
               >
                 {!item.ordered && (
                   <div
-                    className="mt-2 h-2 w-2 rounded-full flex-shrink-0"
+                    className="mt-2 h-2 w-2 rounded-full shrink-0"
                     style={{ backgroundColor: secondaryColor }}
                   />
                 )}
@@ -652,7 +652,7 @@ export default function BlogDetail() {
                 <img
                   src={blogPost.author.image}
                   alt={blogPost.author.name}
-                  className="h-24 w-24 rounded-full object-cover flex-shrink-0"
+                  className="h-24 w-24 rounded-full object-cover shrink-0"
                 />
                 <div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-2">

@@ -37,7 +37,7 @@ export default function ScrollToTop() {
       onClick={scrollToTop}
       aria-label="Scroll to top"
       className={`
-        fixed z-[60]
+        fixed z-60
         flex h-11 w-11 items-center justify-center
         rounded-full bg-[#17254e] text-white
         shadow-lg transition-all duration-300

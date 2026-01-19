@@ -1,5 +1,5 @@
-import React from "react";
 import { FaBullseye, FaLightbulb } from "react-icons/fa";
+import { Link } from "react-router";
 import Bg from "./../../assets/images/bg.png";
 import Hero from "./../../assets/images/hero.png";
 import Wave from "./../../assets/images/wave.svg";
@@ -32,9 +32,9 @@ export default function HeroSection() {
             </p>
 
             <div className="mt-8 flex">
-              <button className="rounded-xl bg-[#1e2a4a] px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-[#16203a]">
+              <Link to={"/contact"} className="rounded-xl bg-[#1e2a4a] px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-[#16203a]">
                 Get in touch
-              </button>
+              </Link>
             </div>
 
             {/* Icons Row */}

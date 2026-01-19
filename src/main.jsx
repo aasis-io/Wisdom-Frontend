@@ -1,19 +1,39 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { HelmetProvider } from "react-helmet-async"; // ✅ needed for <Helmet>
+import { Toaster } from "react-hot-toast"; // ✅ ADD THIS
 import { RouterProvider } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/pagination";
-import { ThemeProvider } from "./admin/context/ThemeContext"; // Theme context for admin
 import "./index.css";
 import { router } from "./router";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <HelmetProvider>
-      <ThemeProvider>
+        {/* ✅ Toast container */}
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              borderRadius: "12px",
+              background: "#17254E",
+              color: "#fff",
+            },
+            success: {
+              iconTheme: {
+                primary: "#22c55e",
+                secondary: "#fff",
+              },
+            },
+            error: {
+              iconTheme: {
+                primary: "#ef4444",
+                secondary: "#fff",
+              },
+            },
+          }}
+        />
+
         <RouterProvider router={router} />
-      </ThemeProvider>
-    </HelmetProvider>
   </React.StrictMode>
 );

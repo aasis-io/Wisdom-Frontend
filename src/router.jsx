@@ -14,10 +14,6 @@ import Research from "./pages/Research";
 import Services from "./pages/Services";
 
 // Admin
-import AdminProtectedRoute from "./admin/AdminProtectedRoute";
-import { adminRoutes } from "./admin/AdminRoutes";
-import AppLayout from "./admin/layout/AppLayout";
-import SignInForm from "./pages/Auth/SignIn";
 
 export const router = createBrowserRouter([
   // FRONTEND ROUTES
@@ -35,21 +31,21 @@ export const router = createBrowserRouter([
       { path: "/journals", element: <Journals /> },
 
       // Admin Sign In (PUBLIC)
-      { path: "/waarcadmin/signin", element: <SignInForm /> },
+      // { path: "/waarcadmin/signin", element: <SignInForm /> },
 
       { path: "*", element: <NotFoundPage /> },
     ],
   },
 
   // PROTECTED ADMIN ROUTES
-  {
-    element: <AdminProtectedRoute />, // 🔐 Guard
-    children: [
-      {
-        path: "/admin/*",
-        element: <AppLayout />,
-        children: adminRoutes,
-      },
-    ],
-  },
+  // {
+  //   element: <AdminProtectedRoute />,
+  //   children: [
+  //     {
+  //       path: "/admin/*",
+  //       element: <AppLayout />,
+  //       children: adminRoutes,
+  //     },
+  //   ],
+  // },
 ]);
