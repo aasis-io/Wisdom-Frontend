@@ -18,7 +18,7 @@ export default function HeroSection() {
       <div className="grid gap-12 lg:grid-cols-[40%_60%] items-center">
           {/* Left Content */}
           <div className="lg:text-left">
-            <h1 className="text-4xl font-extrabold leading-snug text-[#1e2a4a] sm:text-4xl md:text-5xl xl:text-5xl">
+            <h1 className="text-4xl font-extrabold leading-snug text-[#17254e] sm:text-4xl md:text-5xl xl:text-5xl">
               Where Research
               <br />
               Meets Real-World
