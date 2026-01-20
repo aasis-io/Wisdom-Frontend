@@ -2,7 +2,8 @@ import { Mail } from "lucide-react";
 
 export function NewsletterCTA() {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-8 bg-white">
+    <section className="bg-white">
+      <div className="mx-auto max-w-6xl px-6 py-8">
       <div className="rounded-3xl bg-[#18284f] px-8 py-14 text-center text-white shadow-lg">
         <h3 className="mx-auto max-w-2xl text-lg font-medium leading-relaxed">
           Subscribe to get information, latest news and other
@@ -25,6 +26,7 @@ export function NewsletterCTA() {
           </button>
         </div>
       </div>
+    </div>
     </section>
   );
 }

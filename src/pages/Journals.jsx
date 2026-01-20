@@ -52,6 +52,30 @@ const journals = [
 ];
 
 const Journals = () => {
+  // Uncomment the following lines when connecting to backend
+  /*
+  const [journals, setJournals] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchJournals = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get("/api/journals"); // Replace with your API endpoint
+        setJournals(response.data);
+      } catch (err) {
+        console.error("Failed to fetch journals:", err);
+        setError("Failed to load journals. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJournals();
+  }, []);
+  */
+
   return (
     <section className="bg-white">
       {/* Breadcrumb */}
@@ -78,6 +102,10 @@ const Journals = () => {
             view or download.
           </p>
         </div>
+
+        {/* Loading & Error messages (for future backend) */}
+        {/* {loading && <p className="text-slate-600">Loading journals...</p>} */}
+        {/* {error && <p className="text-red-500">{error}</p>} */}
 
         {/* Journal Cards */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -147,6 +175,13 @@ const Journals = () => {
               </div>
             </div>
           ))}
+
+          {/* No journals message (for future backend) */}
+          {/* {!loading && journals.length === 0 && (
+            <p className="text-slate-600 col-span-full">
+              No journals available at the moment.
+            </p>
+          )} */}
         </div>
       </section>
     </section>

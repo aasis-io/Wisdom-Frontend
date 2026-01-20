@@ -5,7 +5,7 @@ export default function EventRegistrationSection() {
   return (
     <section className="w-full bg-white py-12">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="grid overflow-hidden rounded-3xl bg-gradient-to-br from-[#0E1B3D] to-[#142657] shadow-xl lg:grid-cols-2">
+        <div className="grid overflow-hidden rounded-3xl bg-linear-to-br from-[#0E1B3D] to-[#142657] shadow-xl lg:grid-cols-2">
           {/* LEFT CONTENT */}
           <div className="flex flex-col justify-center px-8 py-14 pb-4 sm:pb-14 text-white sm:px-12 text-center">
             <h2 className="mb-6 text-lg font-medium leading-7 md:text-xl">

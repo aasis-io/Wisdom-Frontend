@@ -39,7 +39,7 @@ export default function ReviewsSection() {
       z-0
       opacity-[0.06]
       bg-[radial-gradient(#000_1px,transparent_1px)]
-      bg-[length:24px_24px]
+      bg-size-[24px_24px]
     "
       />
 
