@@ -22,7 +22,7 @@ function PlanCard({ image, category, title, description }) {
       </div>
 
       {/* Content */}
-      <div className="flex min-h-[210px] flex-col justify-between p-6">
+      <div className="flex min-h-52.5 flex-col justify-between p-6">
         <div>
           <span className="text-sm font-semibold text-[#f4b740]">
             {category}
