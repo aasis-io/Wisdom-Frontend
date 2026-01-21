@@ -1,20 +1,22 @@
 import {
-    ArrowRight,
-    Award,
-    Briefcase,
-    CheckCircle2,
-    ChevronRight,
-    FileText,
-    Lightbulb,
-    LineChart,
-    Scale,
-    Settings,
-    ShieldCheck,
-    Target,
-    TrendingUp,
-    Users,
+  ArrowRight,
+  Award,
+  Briefcase,
+  CheckCircle2,
+  ChevronRight,
+  FileText,
+  Lightbulb,
+  LineChart,
+  Scale,
+  Settings,
+  ShieldCheck,
+  Target,
+  TrendingUp,
+  Users,
 } from "lucide-react";
 import { Link } from "react-router";
+import Italy from "./../assets/images/italy.jpg";
+import Thailand from "./../assets/images/thailand.jpg";
 
 const hero = {
   title: "Strategic Consulting for Development Impact",
@@ -288,6 +290,50 @@ export default function Consulting() {
         </div>
       </section>
 
+      {/* CONSULTING SERVICES: ITALY & THAILAND */}
+      <section className="bg-slate-50 py-12">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold text-slate-900">
+              International Consulting Services
+            </h2>
+            <p className="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+              Expert consulting for Nepali clients targeting Italy and Thailand
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-8 md:grid-cols-2">
+            {/* ITALY */}
+            <div className="group">
+              <div className="overflow-hidden rounded-2xl">
+                <img
+                  src={Italy}
+                  alt="Consulting for Italy"
+                  className="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <h3 className="mt-4 text-xl font-semibold text-slate-900 text-center">
+                Consulting for Italy
+              </h3>
+            </div>
+
+            {/* THAILAND */}
+            <div className="group">
+              <div className="overflow-hidden rounded-2xl">
+                <img
+                  src={Thailand}
+                  alt="Consulting for Thailand"
+                  className="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <h3 className="mt-4 text-xl font-semibold text-slate-900 text-center">
+                Consulting for Thailand
+              </h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* INTRO SECTION */}
       <section className="mx-auto max-w-7xl px-6 py-12">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
@@ -405,7 +451,7 @@ export default function Consulting() {
                       {item.features.map((feature, j) => (
                         <li key={j} className="flex items-start gap-2">
                           <CheckCircle2
-                            className="mt-0.5 h-4 w-4 flex-shrink-0"
+                            className="mt-0.5 h-4 w-4 shrink-0"
                             style={{ color: secondaryColor }}
                           />
                           <span className="text-sm text-slate-700">

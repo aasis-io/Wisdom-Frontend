@@ -1,4 +1,10 @@
-import { ChevronRight, GraduationCap, Lightbulb, Target, Users } from "lucide-react";
+import {
+  ChevronRight,
+  GraduationCap,
+  Lightbulb,
+  Target,
+  Users,
+} from "lucide-react";
 import React from "react";
 import { FaCalendarAlt, FaChartLine, FaFileAlt, FaUsers } from "react-icons/fa";
 import { Link } from "react-router";
@@ -81,7 +87,6 @@ export default function About() {
             <Link to={"/about"} className="hover:text-slate-900">
               About Us
             </Link>
-            
           </div>
         </div>
       </section>
@@ -92,7 +97,7 @@ export default function About() {
           alt="Education and research"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/90 via-[#1e293b]/70 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-[#0f172a]/90 via-[#1e293b]/70 to-transparent" />
         <div className="relative mx-auto flex min-h-[50vh] max-w-7xl items-center px-6">
           <div className="max-w-3xl text-white">
             <h1 className="text-3xl font-extrabold leading-tight md:text-4xl xl:text-5xl">
@@ -171,7 +176,7 @@ export default function About() {
 
             {/* Image Content */}
             <div className="relative flex justify-center items-center">
-              <div className="absolute -top-8 -right-2 h-20 w-20 rounded-full bg-gradient-to-tr from-[#17254e] to-[#455171] opacity-50 animate-pulse"></div>
+              <div className="absolute -top-8 -right-2 h-20 w-20 rounded-full bg-linear-to-tr from-[#17254e] to-[#455171] opacity-50 animate-pulse"></div>
 
               <div className="relative w-full max-w-md lg:max-w-lg">
                 <img
@@ -226,7 +231,7 @@ export default function About() {
           {/* Cards */}
           <div className="grid gap-16 lg:grid-cols-2">
             {/* Mission Card */}
-            <div className="group relative h-[360px] overflow-hidden rounded-3xl shadow-2xl">
+            <div className="group relative h-90 overflow-hidden rounded-3xl shadow-2xl">
               <img
                 src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d"
                 alt="Our Mission"
@@ -234,7 +239,7 @@ export default function About() {
               />
 
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/90 via-[#0f172a]/70 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-r from-[#0f172a]/90 via-[#0f172a]/70 to-transparent" />
 
               {/* Content */}
               <div className="relative z-10 flex h-full flex-col justify-end p-10 text-white">
@@ -249,7 +254,7 @@ export default function About() {
             </div>
 
             {/* Vision Card */}
-            <div className="group relative h-[360px] overflow-hidden rounded-3xl shadow-2xl lg:mt-20">
+            <div className="group relative h-90 overflow-hidden rounded-3xl shadow-2xl lg:mt-20">
               <img
                 src="https://images.unsplash.com/photo-1516321497487-e288fb19713f"
                 alt="Our Vision"
@@ -257,7 +262,7 @@ export default function About() {
               />
 
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/90 via-[#0f172a]/70 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-r from-[#0f172a]/90 via-[#0f172a]/70 to-transparent" />
 
               {/* Content */}
               <div className="relative z-10 flex h-full flex-col justify-end p-10 text-white">
@@ -291,7 +296,7 @@ export default function About() {
               return (
                 <div
                   key={service.id}
-                  className="group relative h-[420px] overflow-hidden rounded-2xl shadow-2xl"
+                  className="group relative h-105 overflow-hidden rounded-2xl shadow-2xl"
                 >
                   {/* Background Image */}
                   <img
@@ -301,7 +306,7 @@ export default function About() {
                   />
 
                   {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/90 via-[#0f172a]/70 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-r from-[#0f172a]/90 via-[#0f172a]/70 to-transparent" />
 
                   {/* Content */}
                   <div className="relative z-10 flex h-full flex-col justify-end p-8 text-white">
@@ -407,7 +412,7 @@ export default function About() {
             insights, creating solutions that empower, educate, and inspire
             meaningful impact.
           </p>
-          <button className="mt-12 rounded-xl bg-gradient-to-r from-[#17254e] to-[#455171] px-14 py-5 font-semibold text-white shadow-2xl transition-transform hover:scale-105 hover:shadow-3xl">
+          <button className="mt-12 rounded-xl bg-linear-to-r from-[#17254e] to-[#455171] px-14 py-5 font-semibold text-white shadow-2xl transition-transform hover:scale-105 hover:shadow-3xl">
             Contact Us
           </button>
         </div>

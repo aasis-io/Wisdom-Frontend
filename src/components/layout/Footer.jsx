@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="relative bg-[#0E1B3D] text-white">
       {/* WAVE TOP */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none">
+      <div className="absolute -top-1 left-0 w-full overflow-hidden leading-none z-10">
         <svg
           className="block h-20 w-full"
           viewBox="0 0 1440 100"
@@ -15,7 +15,7 @@ export default function Footer() {
         >
           <path
             d="M0,30 C240,45 480,25 720,30 960,35 1200,45 1440,30 L1440,0 L0,0 Z"
-            fill="#ffffff"
+            fill="#ffffff" // wave color
           />
         </svg>
       </div>
@@ -160,7 +160,7 @@ export default function Footer() {
         {/* BOTTOM BAR */}
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <p className="text-sm text-white/60">
-            © 2025 WAARC. All rights reserved.
+            © 2026 WAARC. All rights reserved.
           </p>
 
           <div className="flex items-center gap-5 text-white/70">

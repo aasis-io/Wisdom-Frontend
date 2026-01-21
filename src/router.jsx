@@ -12,6 +12,7 @@ import Journals from "./pages/Journals";
 import NotFoundPage from "./pages/NotFoundPage";
 import Research from "./pages/Research";
 import Services from "./pages/Services";
+import Team from "./pages/Team";
 
 // Admin
 
@@ -29,6 +30,7 @@ export const router = createBrowserRouter([
       { path: "/blogs/:slug", element: <BlogDetail /> },
       { path: "/contact", element: <ContactUs /> },
       { path: "/journals", element: <Journals /> },
+      { path: "/team", element: <Team /> },
 
       // Admin Sign In (PUBLIC)
       // { path: "/waarcadmin/signin", element: <SignInForm /> },

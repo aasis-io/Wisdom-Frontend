@@ -90,16 +90,31 @@ const Journals = () => {
           </div>
         </div>
       </section>
+      <section className="mx-auto max-w-7xl px-6 py-12">
+        <div className="mb-8">
+          <h1 className="text-3xl font-semibold text-slate-900">
+            Journal Links
+          </h1>
+          <p className="mt-2 text-slate-600 max-w-2xl"></p>
+        </div>
+
+        {/* Loading & Error messages (for future backend) */}
+        {/* {loading && <p className="text-slate-600">Loading journals...</p>} */}
+        {/* {error && <p className="text-red-500">{error}</p>} */}
+
+        {/* Journal Cards */}
+      </section>
 
       {/* Content */}
       <section className="mx-auto max-w-7xl px-6 py-12">
         <div className="mb-8">
           <h1 className="text-3xl font-semibold text-slate-900">
-            Journal Database
+            Our Publications
           </h1>
-          <p className="mt-2 text-slate-600 max-w-2xl">
-            Access peer-reviewed journals in PDF format. Click any journal to
-            view or download.
+          <p className="mt-2 text-slate-600 max-w-3xl">
+            Discover our range of publications, showcasing the latest insights
+            and research. Click any article to read the full content and explore
+            the knowledge we share.
           </p>
         </div>
 
@@ -160,7 +175,7 @@ const Journals = () => {
                     rel="noopener noreferrer"
                     className="text-sm font-medium text-slate-700 hover:text-slate-900"
                   >
-                    View Journal →
+                    View Article →
                   </a>
 
                   <a
