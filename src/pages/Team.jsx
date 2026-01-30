@@ -1,6 +1,8 @@
 import { ChevronDown, ChevronRight, ChevronUp } from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "react-router";
+import Hari from "/team/hari.jpg";
+import Prem from "/team/prem.jpeg";
 
 /* Example team data */
 const teamMembers = [
@@ -14,15 +16,15 @@ const teamMembers = [
   {
     id: 2,
     name: "Er. Hari Parsad Ghimire",
-    role: "IT Expert & Educational Counsellor",
-    image: "",
+    role: "Senior Research Fellow",
+    image: Hari,
     description: "",
   },
   {
     id: 3,
     name: "Prem Bahadur Giri",
     role: "Policy Expert & Educational Counsellor",
-    image: "",
+    image: Prem,
     description: "",
   },
 ];
@@ -47,7 +49,7 @@ const TeamCard = ({ member }) => {
         <img
           src={member.image}
           alt={member.name}
-          className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="h-96 w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
 
@@ -111,7 +113,7 @@ const Team = () => {
       </div>
 
       {/* Team Grid */}
-      <div className="mx-auto max-w-7xl px-6 pb-20">
+      <div className="mx-auto max-w-5xl px-6 pb-20">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {teamMembers.map((member) => (
             <TeamCard key={member.id} member={member} />

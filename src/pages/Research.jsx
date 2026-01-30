@@ -437,7 +437,7 @@ export default function Research() {
                       {item.features.slice(0, 4).map((feature, j) => (
                         <li key={j} className="flex items-start gap-2">
                           <CheckCircle2
-                            className="mt-0.5 h-4 w-4 flex-shrink-0"
+                            className="mt-0.5 h-4 w-4 shrink-0"
                             style={{ color: secondaryColor }}
                           />
                           <span className="text-sm text-slate-700">
