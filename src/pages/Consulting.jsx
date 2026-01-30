@@ -291,44 +291,85 @@ export default function Consulting() {
       </section>
 
       {/* CONSULTING SERVICES: ITALY & THAILAND */}
-      <section className="bg-slate-50 py-12">
+      <section className="bg-slate-50 py-14">
         <div className="mx-auto max-w-7xl px-6">
+          {/* Heading */}
           <div className="text-center">
             <h2 className="text-4xl font-bold text-slate-900">
-              International Consulting Services
+              International Study Consulting
             </h2>
             <p className="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
-              Expert consulting for Nepali clients targeting Italy and Thailand
+              Expert guidance for Nepali students planning to study in Italy and
+              Thailand
             </p>
           </div>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-2">
-            {/* ITALY */}
-            <div className="group">
-              <div className="overflow-hidden rounded-2xl">
+          {/* Cards */}
+          <div className="mt-14 grid gap-10 md:grid-cols-2">
+            {/* ITALY CARD */}
+            <div className="group rounded-3xl bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+              {/* Image wrapper with padding */}
+              <div className="relative overflow-hidden rounded-2xl">
                 <img
                   src={Italy}
-                  alt="Consulting for Italy"
+                  alt="Study in Italy"
                   className="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
+
+                {/* Flag */}
+                <div className="absolute top-3 right-3 flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 shadow backdrop-blur">
+                  <img
+                    src="https://flagcdn.com/w20/it.png"
+                    alt="Italy Flag"
+                    className="h-4 w-6 rounded-sm object-cover"
+                  />
+                  <span className="text-sm font-medium text-slate-800">
+                    Italy
+                  </span>
+                </div>
               </div>
-              <h3 className="mt-4 text-xl font-semibold text-slate-900 text-center">
-                Consulting for Italy
-              </h3>
+
+              {/* Content */}
+              <div className="pt-5 text-center">
+                <h3 className="text-xl font-semibold text-slate-900">
+                  Study in Italy
+                </h3>
+                <p className="mt-2 text-sm text-slate-600">
+                  Admissions, visas, scholarships & university guidance
+                </p>
+              </div>
             </div>
 
-            {/* THAILAND */}
-            <div className="group">
-              <div className="overflow-hidden rounded-2xl">
+            {/* THAILAND CARD */}
+            <div className="group rounded-3xl bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+              <div className="relative overflow-hidden rounded-2xl">
                 <img
                   src={Thailand}
-                  alt="Consulting for Thailand"
+                  alt="Study in Thailand"
                   className="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
+
+                {/* Flag */}
+                <div className="absolute top-3 right-3 flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 shadow backdrop-blur">
+                  <img
+                    src="https://flagcdn.com/w20/th.png"
+                    alt="Thailand Flag"
+                    className="h-4 w-6 rounded-sm object-cover"
+                  />
+                  <span className="text-sm font-medium text-slate-800">
+                    Thailand
+                  </span>
+                </div>
               </div>
-              <h3 className="mt-4 text-xl font-semibold text-slate-900 text-center">
-                Consulting for Thailand
-              </h3>
+
+              <div className="pt-5 text-center">
+                <h3 className="text-xl font-semibold text-slate-900">
+                  Study in Thailand
+                </h3>
+                <p className="mt-2 text-sm text-slate-600">
+                  Affordable education, fast processing & full support
+                </p>
+              </div>
             </div>
           </div>
         </div>
