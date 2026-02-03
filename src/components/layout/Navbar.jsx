@@ -37,6 +37,7 @@ const NAV_ITEMS = [
   },
   { label: "Services", href: "/services" },
   { label: "Journal Database", href: "/journals" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Blogs", href: "/blogs" },
 ];
 
