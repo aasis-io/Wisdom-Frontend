@@ -24,7 +24,7 @@ const teamMembers = [
   {
     id: 3,
     name: "Prem Bahadur Giri",
-    role: "Policy Expert & Educational Counsellor",
+    role: "Senior Research Fellow",
     image: Prem,
     description: "",
   },

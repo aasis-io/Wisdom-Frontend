@@ -296,7 +296,7 @@ export default function Consulting() {
           {/* Heading */}
           <div className="text-center">
             <h2 className="text-4xl font-bold text-slate-900">
-              International Study Consulting
+              Study Destinations
             </h2>
             <p className="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
               Expert guidance for Nepali students planning to study in Italy and

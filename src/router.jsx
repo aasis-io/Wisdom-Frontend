@@ -7,6 +7,7 @@ import BlogDetail from "./pages/BlogDetail";
 import Blogs from "./pages/Blogs";
 import Consulting from "./pages/Consulting";
 import ContactUs from "./pages/ContactUs";
+import Gallery from "./pages/Gallery";
 import Home from "./pages/Home";
 import Journals from "./pages/Journals";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -31,6 +32,7 @@ export const router = createBrowserRouter([
       { path: "/contact", element: <ContactUs /> },
       { path: "/journals", element: <Journals /> },
       { path: "/team", element: <Team /> },
+      { path: "/gallery", element: <Gallery /> },
 
       // Admin Sign In (PUBLIC)
       // { path: "/waarcadmin/signin", element: <SignInForm /> },

@@ -40,8 +40,39 @@ export default function Footer() {
           </div>
 
           {/* LINKS — 60% */}
-          <div className="grid gap-10 grid-cols-2 lg:col-span-3 lg:grid-cols-4">
+          <div className="grid gap-10 grid-cols-2 lg:col-span-3 lg:grid-cols-3">
             {/* QUICK LINKS */}
+            <div>
+              <h4 className="mb-4 text-sm font-semibold text-white/90">
+                Useful Links
+              </h4>
+              <ul className="space-y-3 text-sm text-white/70">
+                <li>
+                  <a
+                    href="https://europass.europa.eu/en/create-europass-cv"
+                    className="hover:text-white"
+                  >
+                    Create your Europass CV
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://noc.moest.gov.np/"
+                    className="hover:text-white"
+                  >
+                    Apply for NOC
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://opcr.nepalpolice.gov.np/#/login"
+                    className="hover:text-white"
+                  >
+                    Online Police Clearance Report
+                  </a>
+                </li>
+              </ul>
+            </div>
             <div>
               <h4 className="mb-4 text-sm font-semibold text-white/90">
                 Quick Links
@@ -100,7 +131,7 @@ export default function Footer() {
             </div>
 
             {/* SOCIAL */}
-            <div>
+            {/* <div>
               <h4 className="mb-4 text-sm font-semibold text-white/90">
                 Social
               </h4>
@@ -121,36 +152,9 @@ export default function Footer() {
                   </a>
                 </li>
               </ul>
-            </div>
+            </div> */}
 
             {/* LEGAL */}
-            <div>
-              <h4 className="mb-4 text-sm font-semibold text-white/90">
-                Legal
-              </h4>
-              <ul className="space-y-3 text-sm text-white/70">
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Terms
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Privacy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Cookies
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
 

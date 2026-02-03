@@ -14,9 +14,9 @@ const services = [
     path: "/services/research",
   },
   {
-    title: "Consulting",
+    title: "Education and Study Abroad Advisory",
     description:
-      "Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor Incididunt Ut",
+      "Guiding students towards the right education and global opportunities",
     image: ConsultingImg,
     path: "/services/consulting",
   },
