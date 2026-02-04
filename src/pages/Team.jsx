@@ -44,7 +44,7 @@ const TeamCard = ({ member }) => {
         (member.description.length > previewLength ? "..." : "");
 
   return (
-    <div className="group">
+    <div className="group flex flex-col items-center text-center">
       {/* Image */}
       <div className="overflow-hidden rounded-full w-64 h-64">
         <img
@@ -55,14 +55,16 @@ const TeamCard = ({ member }) => {
       </div>
 
       {/* Content */}
-      <div className="mt-4 px-2">
+      <div className="mt-4 px-2 flex flex-col items-center">
         <h3 className="text-lg font-semibold text-slate-900">{member.name}</h3>
         <p className="text-sm font-medium text-[#1e2a4a]">{member.role}</p>
 
         {/* Description with Read more */}
         {member.description && (
           <>
-            <p className="mt-2 text-sm text-slate-600">{displayedText}</p>
+            <p className="mt-2 text-sm text-slate-600 max-w-xs">
+              {displayedText}
+            </p>
 
             {member.description.length > previewLength && (
               <button
