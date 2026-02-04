@@ -84,6 +84,26 @@ const services = [
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200",
   },
 ];
+const studyDestinations = [
+  {
+    country: "Italy",
+    title: "Study in Italy",
+    description: "Admissions, visas, scholarships & university guidance",
+    image: Italy,
+    flag: "https://flagcdn.com/w20/it.png",
+    alt: "Study in Italy",
+    path: "/study/italy",
+  },
+  {
+    country: "Thailand",
+    title: "Study in Thailand",
+    description: "Affordable education, fast processing & full support",
+    image: Thailand,
+    flag: "https://flagcdn.com/w20/th.png",
+    alt: "Study in Thailand",
+    path: "/study/thailand",
+  },
+];
 
 const approach = {
   title: "Our Consulting Approach",
@@ -290,7 +310,6 @@ export default function Consulting() {
         </div>
       </section>
 
-      {/* CONSULTING SERVICES: ITALY & THAILAND */}
       <section className="bg-slate-50 py-14">
         <div className="mx-auto max-w-7xl px-6">
           {/* Heading */}
@@ -298,7 +317,7 @@ export default function Consulting() {
             <h2 className="text-4xl font-bold text-slate-900">
               Study Destinations
             </h2>
-            <p className="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+            <p className="mx-auto mt-4 max-w-3xl text-lg text-slate-600">
               Expert guidance for Nepali students planning to study in Italy and
               Thailand
             </p>
@@ -306,71 +325,45 @@ export default function Consulting() {
 
           {/* Cards */}
           <div className="mt-14 grid gap-10 md:grid-cols-2">
-            {/* ITALY CARD */}
-            <div className="group rounded-3xl bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-xl">
-              {/* Image wrapper with padding */}
-              <div className="relative overflow-hidden rounded-2xl">
-                <img
-                  src={Italy}
-                  alt="Study in Italy"
-                  className="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+            {studyDestinations.map((item, index) => (
+              <Link to={item.path}>
+                <div
+                  key={index}
+                  className="group rounded-3xl bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-xl"
+                >
+                  {/* Image */}
+                  <div className="relative overflow-hidden rounded-2xl">
+                    <img
+                      src={item.image}
+                      alt={item.alt}
+                      className="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
 
-                {/* Flag */}
-                <div className="absolute top-3 right-3 flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 shadow backdrop-blur">
-                  <img
-                    src="https://flagcdn.com/w20/it.png"
-                    alt="Italy Flag"
-                    className="h-4 w-6 rounded-sm object-cover"
-                  />
-                  <span className="text-sm font-medium text-slate-800">
-                    Italy
-                  </span>
+                    {/* Flag */}
+                    <div className="absolute right-3 top-3 flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 shadow backdrop-blur">
+                      <img
+                        src={item.flag}
+                        alt={`${item.country} Flag`}
+                        className="h-4 w-6 rounded-sm object-cover"
+                      />
+                      <span className="text-sm font-medium text-slate-800">
+                        {item.country}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="pt-5 text-center">
+                    <h3 className="text-xl font-semibold text-slate-900">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-slate-600">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-
-              {/* Content */}
-              <div className="pt-5 text-center">
-                <h3 className="text-xl font-semibold text-slate-900">
-                  Study in Italy
-                </h3>
-                <p className="mt-2 text-sm text-slate-600">
-                  Admissions, visas, scholarships & university guidance
-                </p>
-              </div>
-            </div>
-
-            {/* THAILAND CARD */}
-            <div className="group rounded-3xl bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-xl">
-              <div className="relative overflow-hidden rounded-2xl">
-                <img
-                  src={Thailand}
-                  alt="Study in Thailand"
-                  className="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-
-                {/* Flag */}
-                <div className="absolute top-3 right-3 flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 shadow backdrop-blur">
-                  <img
-                    src="https://flagcdn.com/w20/th.png"
-                    alt="Thailand Flag"
-                    className="h-4 w-6 rounded-sm object-cover"
-                  />
-                  <span className="text-sm font-medium text-slate-800">
-                    Thailand
-                  </span>
-                </div>
-              </div>
-
-              <div className="pt-5 text-center">
-                <h3 className="text-xl font-semibold text-slate-900">
-                  Study in Thailand
-                </h3>
-                <p className="mt-2 text-sm text-slate-600">
-                  Affordable education, fast processing & full support
-                </p>
-              </div>
-            </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

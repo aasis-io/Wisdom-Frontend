@@ -14,6 +14,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import Research from "./pages/Research";
 import Services from "./pages/Services";
 import Team from "./pages/Team";
+import Thailand from "./pages/study/Thailand";
 
 // Admin
 
@@ -33,6 +34,7 @@ export const router = createBrowserRouter([
       { path: "/journals", element: <Journals /> },
       { path: "/team", element: <Team /> },
       { path: "/gallery", element: <Gallery /> },
+      { path: "/study/thailand", element: <Thailand /> },
 
       // Admin Sign In (PUBLIC)
       // { path: "/waarcadmin/signin", element: <SignInForm /> },

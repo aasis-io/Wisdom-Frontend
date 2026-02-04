@@ -46,11 +46,11 @@ const TeamCard = ({ member }) => {
   return (
     <div className="group">
       {/* Image */}
-      <div className="overflow-hidden rounded-2xl">
+      <div className="overflow-hidden rounded-full w-64 h-64">
         <img
           src={member.image}
           alt={member.name}
-          className="h-96 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
 
@@ -95,7 +95,7 @@ const Team = () => {
               Home
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-900">Who We Are</span>
+            <span className="text-slate-900">Our Team</span>
           </div>
         </div>
       </section>
