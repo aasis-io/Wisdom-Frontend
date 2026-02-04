@@ -105,7 +105,7 @@ export default function Thailand() {
           </div>
 
           {/* CTA */}
-          <div className="mt-20 rounded-3xl bg-slate-50 p-10 text-center">
+          {/* <div className="mt-20 rounded-3xl bg-slate-50 p-10 text-center">
             <h3 className="text-2xl font-semibold text-slate-900">
               Ready to Study in Thailand?
             </h3>
@@ -117,7 +117,7 @@ export default function Thailand() {
             <button className="mt-6 rounded-xl bg-slate-900 px-8 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
               Talk to an Advisor
             </button>
-          </div>
+          </div> */}
         </div>
       </section>
     </>
