@@ -1,9 +1,9 @@
 import { ChevronDown, ChevronRight, ChevronUp } from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "react-router";
-import Bijay from "/team/bijay.jpg";
-import Hari from "/team/hari.jpg";
-import Prem from "/team/prem.jpg";
+import Bijay from "/team/bijay1.jpg";
+import Hari from "/team/hari1.jpg";
+import Prem from "/team/prem1.jpg";
 
 /* Example team data */
 const teamMembers = [
