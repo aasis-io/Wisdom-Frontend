@@ -1,14 +1,37 @@
 import { ChevronRight, Download, FileText } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
+import JournalImg6 from "/journals/images/digital.jpg";
+import JournalImg5 from "/journals/images/electrol.jpg";
 import JournalImg1 from "/journals/images/governance.jpg";
 import JournalImg4 from "/journals/images/household.jpg";
 import JournalImg3 from "/journals/images/spatial.jpg";
 import JournalImg2 from "/journals/images/sustainable.jpg";
-
-const journals = [
+const publications = [
   {
     id: 1,
+    title:
+      "Digital Transformation and Smart Tourism Development in Nepal's Heritage Cities",
+    authors:
+      "Prem Bahadur Giri, Hari Prasad Ghimire, Bidur Jung Giri, Bijay Raj Giri, Ajay Giri",
+    published: "February 2026",
+    pdfUrl:
+      "/journals/Digital Transformation and Smart Tourism Development in Nepal's Heritage Cities.pdf",
+    image: JournalImg6,
+  },{
+    id: 2,
+    title:
+      "Nepal’s Electoral System Challenges, Democratic Implications, and Reform Priorities",
+    authors:
+      "Prem Bahadur Giri, Hari Prasad Ghimire, Madhav Bhattrai, Ajay Giri",
+    published: "February 2026",
+    pdfUrl:
+      "/journals/Nepal’s Electoral System Challenges, Democratic Implications, and Reform Priorities.pdf",
+    image: JournalImg5,
+  },
+
+  {
+    id: 3,
     title:
       "E Governance And Service Delivery In Nepal Evidence From Nagarjun Municipality",
     authors:
@@ -18,18 +41,9 @@ const journals = [
       "/journals/E-Governance_and_Service_Delivery_in_Nepal_Evidence_from_Nagarjun_Municipality.pdf",
     image: JournalImg1,
   },
+ 
   {
-    id: 2,
-    title:
-      "Sustainable Energy Development Through Community Forestry In Nepal: Insights From Siranchowk Rural Municipality, Gorkha",
-    authors: "GIRI, P. B., YUCHAROEN, GHIMIRE, H. P.",
-    published: "August 2025",
-    pdfUrl:
-      "/journals/Sustainable_Energy_Development_Through_Community_Forest_in_Nepal_Insights_From_Siranchowk_Rural_Municipality_Gorkha.pdf",
-    image: JournalImg2,
-  },
-  {
-    id: 3,
+    id: 4,
     title:
       "Spatial Heterogeneity in Clean Cooking Adoption in Kathmandu Valley, Evidence from Multiscale Geographically Weighted Regression",
     authors: "Hari Prasad Ghimire, Prem Bahadur Giri",
@@ -39,7 +53,7 @@ const journals = [
     image: JournalImg3,
   },
   {
-    id: 4,
+    id: 5,
     title:
       "Meeting Household Energy Needs through Community Forestry: A Systematic Review of Evidence from Nepal",
     authors:
@@ -49,6 +63,17 @@ const journals = [
       "/journals/Meeting_Household_Energy_Needs_through_Community_Forestry_A_Systematic_Review_of_Evidence_from_Nepal.pdf",
     image: JournalImg4,
   },
+  {
+    id: 6,
+    title:
+      "Sustainable Energy Development Through Community Forestry In Nepal: Insights From Siranchowk Rural Municipality, Gorkha",
+    authors: "GIRI, P. B., YUCHAROEN, GHIMIRE, H. P.",
+    published: "August 2025",
+    pdfUrl:
+      "/journals/Sustainable_Energy_Development_Through_Community_Forest_in_Nepal_Insights_From_Siranchowk_Rural_Municipality_Gorkha.pdf",
+    image: JournalImg2,
+  },
+  
 ];
 
 const Journals = () => {
@@ -124,7 +149,7 @@ const Journals = () => {
 
         {/* Journal Cards */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {journals.map((journal) => (
+          {publications.map((journal) => (
             <div
               key={journal.id}
               className="group flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white transition hover:border-slate-300 hover:shadow-sm"
