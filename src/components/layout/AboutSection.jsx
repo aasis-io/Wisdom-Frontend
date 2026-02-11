@@ -4,7 +4,6 @@ import About from "./../../assets/images/about.png";
 import LogoIn from "./../../assets/images/logoIn.svg";
 import LogoOut from "./../../assets/images/logoOut.svg";
 
-
 export default function AboutSection() {
   return (
     <section className="relative bg-[#f5f6fb] py-20 overflow-hidden">
@@ -22,10 +21,9 @@ export default function AboutSection() {
           </p>
 
           <p className="mt-6 text-gray-700 leading-relaxed">
-            If you're thirsty, you search for water. But if you're hungry for
-            worldwide education, inspiration, and growth, search for us and get
-            connected. We bring the world of education, research and sports to
-            your fingertips. Empower your mind, enrich your skills.
+            Wisdom Academy and Research Center empowers scholars and guides
+            students to world-class opportunities, shaping the future of
+            research and global education.
           </p>
 
           <button className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#f4b740] px-8 py-3 font-semibold lg:font-medium text-white shadow-md transition hover:scale-105 hover:bg-[#e6aa33]">
@@ -73,29 +71,29 @@ export default function AboutSection() {
             <div className="grid gap-x-12 gap-y-12 sm:grid-cols-2">
               <FeatureCard
                 icon={<FaCalendarAlt className="h-16" />}
-                title="Tailored Consulting Solutions"
-                text="Customized strategies designed to meet your unique goals and challenges."
+                title="Research Excellence"
+                text="PhD-level research fellows with extensive publications in high-impact international journals."
                 color="bg-[#1e2a4a]"
               />
 
               <FeatureCard
                 icon={<FaFileAlt className="h-16" />}
-                title="Evidence-Based Approach"
-                text="Rigorous research methods that ensure credible, reliable, and actionable insights."
+                title="Publication Support"
+                text="End-to-end guidance in research writing and international journal publication."
                 color="bg-[#f4b740]"
               />
 
               <FeatureCard
                 icon={<FaUsers className="h-16" />}
-                title="Multidisciplinary Expertise"
-                text="A diverse team bridging academia, policy, and industry perspectives."
+                title="Global Education Consultancy"
+                text="Expert guidance for university admissions in Italy and Thailand from Nepal."
                 color="bg-[#f4b740]"
               />
 
               <FeatureCard
                 icon={<FaChartLine className="h-16" />}
-                title="Impact-Oriented Outcomes"
-                text="Focused on real-world results that inform decisions and drive meaningful change."
+                title="Italy-Based Student Support"
+                text="Dedicated team members in Italy ensuring a smooth academic and living transition."
                 color="bg-[#1e2a4a]"
               />
             </div>
@@ -116,7 +114,9 @@ function FeatureCard({ icon, title, text, color }) {
         {icon}
       </div>
 
-      <h4 className="mt-6 text-center text-lg font-bold text-[#1e2a4a]">{title}</h4>
+      <h4 className="mt-6 text-center text-lg font-bold text-[#1e2a4a]">
+        {title}
+      </h4>
       <p className="mt-3 text-center text-base leading-relaxed text-gray-600">
         {text}
       </p>

@@ -28,6 +28,15 @@ const SITE_SETTINGS = {
 
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  {
+    label: "Work With Us",
+    children: [
+      { label: "Careers", href: "/" },
+      { label: "Collaboration", href: "/" },
+    ],
+  },
+
   {
     label: "About Us",
     children: [
@@ -35,51 +44,47 @@ const NAV_ITEMS = [
       { label: "Our Team", href: "/team" },
     ],
   },
-  { label: "Services", href: "/services" },
+  {
+    label: "Media",
+    children: [{ label: "Gallery", href: "/gallery" }],
+  },
   { label: "Journal Database", href: "/journals" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Blogs", href: "/blogs" },
 ];
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [desktopAboutOpen, setDesktopAboutOpen] = useState(false);
-  const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
+  const [desktopOpenMenu, setDesktopOpenMenu] = useState(null);
+  const [mobileOpenMenu, setMobileOpenMenu] = useState(null);
 
-  const desktopRef = useRef(null); // Desktop dropdown reference
-  const mobileRef = useRef(null); // Mobile dropdown reference
+  const desktopRef = useRef(null);
+  const mobileRef = useRef(null);
 
-  // Close desktop dropdown when clicked outside
+  /* Close desktop dropdown on outside click */
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (desktopRef.current && !desktopRef.current.contains(event.target)) {
-        setDesktopAboutOpen(false);
+    function handleClickOutside(e) {
+      if (desktopRef.current && !desktopRef.current.contains(e.target)) {
+        setDesktopOpenMenu(null);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Close mobile dropdown when clicked outside
+  /* Close mobile dropdown on outside click */
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (mobileRef.current && !mobileRef.current.contains(event.target)) {
-        setMobileAboutOpen(false);
+    function handleClickOutside(e) {
+      if (mobileRef.current && !mobileRef.current.contains(e.target)) {
+        setMobileOpenMenu(null);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
     <>
-      {/* ================= Header ================= */}
       <header className="relative z-30 w-full bg-white shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
-        {/* Top info bar (Desktop) */}
+        {/* ================= Top Bar (Desktop) ================= */}
         <div className="hidden md:block bg-[#0E1B3D] text-white text-sm">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
             <div className="flex items-center gap-6">
@@ -98,43 +103,27 @@ export default function Navbar() {
             </div>
 
             <div className="flex items-center gap-2">
-              <a
-                href={SITE_SETTINGS.facebook}
-                target="_blank"
-                rel="noreferrer"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F4B740] text-[#0E1B3D]"
-              >
-                <Facebook size={14} />
-              </a>
-              <a
-                href={SITE_SETTINGS.youtube}
-                target="_blank"
-                rel="noreferrer"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F4B740] text-[#0E1B3D]"
-              >
-                <Youtube size={14} />
-              </a>
-              <a
-                href={SITE_SETTINGS.twitter}
-                target="_blank"
-                rel="noreferrer"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F4B740] text-[#0E1B3D]"
-              >
-                <Twitter size={14} />
-              </a>
-              <a
-                href={SITE_SETTINGS.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F4B740] text-[#0E1B3D]"
-              >
-                <Linkedin size={14} />
-              </a>
+              {[
+                { icon: Facebook, link: SITE_SETTINGS.facebook },
+                { icon: Youtube, link: SITE_SETTINGS.youtube },
+                { icon: Twitter, link: SITE_SETTINGS.twitter },
+                { icon: Linkedin, link: SITE_SETTINGS.linkedin },
+              ].map(({ icon: Icon, link }, i) => (
+                <a
+                  key={i}
+                  href={link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F4B740] text-[#0E1B3D] hover:opacity-80 transition"
+                >
+                  <Icon size={14} />
+                </a>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Mobile top bar */}
+        {/* ================= Mobile Top Bar ================= */}
         <div className="block md:hidden bg-[#0E1B3D] text-white text-sm">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
             <div className="flex items-center gap-2">
@@ -150,38 +139,45 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Main Navbar */}
+        {/* ================= Main Navbar ================= */}
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
           <Link to="/">
             <img src={Logo} alt="WAARC Logo" className="h-16 w-auto" />
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-8 text-base font-medium text-gray-800 relative">
+          {/* ========== Desktop Navigation ========== */}
+          <nav
+            ref={desktopRef}
+            className="hidden lg:flex items-center gap-8 text-base font-medium text-gray-800"
+          >
             {NAV_ITEMS.map((item) =>
               item.children ? (
-                <div key={item.label} ref={desktopRef} className="relative">
+                <div key={item.label} className="relative">
                   <button
-                    className="flex items-center gap-1 hover:text-[#F4B740] transition-colors"
-                    onClick={() => setDesktopAboutOpen((prev) => !prev)}
+                    onClick={() =>
+                      setDesktopOpenMenu(
+                        desktopOpenMenu === item.label ? null : item.label
+                      )
+                    }
+                    className="flex items-center gap-1 hover:text-[#F4B740]"
                   >
                     {item.label}
                     <ChevronDown
                       size={16}
-                      className={`transition-transform duration-300 ${
-                        desktopAboutOpen ? "rotate-180" : "rotate-0"
+                      className={`transition-transform ${
+                        desktopOpenMenu === item.label ? "rotate-180" : ""
                       }`}
                     />
                   </button>
 
-                  {desktopAboutOpen && (
+                  {desktopOpenMenu === item.label && (
                     <div className="absolute top-full left-0 mt-2 w-48 rounded-lg bg-white shadow-lg py-2">
                       {item.children.map((child) => (
                         <Link
                           key={child.label}
                           to={child.href}
-                          className="block px-4 py-2 hover:bg-gray-100 transition-colors"
-                          onClick={() => setDesktopAboutOpen(false)}
+                          onClick={() => setDesktopOpenMenu(null)}
+                          className="block px-4 py-2 hover:bg-gray-100"
                         >
                           {child.label}
                         </Link>
@@ -193,7 +189,7 @@ export default function Navbar() {
                 <Link
                   key={item.label}
                   to={item.href}
-                  className="hover:text-[#F4B740] transition-colors"
+                  className="hover:text-[#F4B740]"
                 >
                   {item.label}
                 </Link>
@@ -201,16 +197,15 @@ export default function Navbar() {
             )}
           </nav>
 
+          {/* ========== Right Actions ========== */}
           <div className="flex items-center gap-4">
-            <button className="text-gray-700 hover:text-[#0E1B3D] transition-colors">
-              <Search size={16} />
-            </button>
+            <Search size={16} className="text-gray-700" />
 
             <Link
               to="/contact"
-              className="hidden md:inline-flex items-center gap-2 bg-[#0E1B3D] px-5 py-3 rounded-lg text-sm font-medium text-white"
+              className="hidden md:inline-flex items-center gap-2 bg-[#0E1B3D] px-5 py-3 rounded-lg text-sm text-white"
             >
-              <Mail size={20} />
+              <Mail size={18} />
               Contact Us
             </Link>
 
@@ -227,35 +222,43 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* ================= Mobile Menu ================= */}
         <div
-          className={`absolute left-0 top-full w-full bg-white shadow-md transition-all lg:hidden ${
+          className={`absolute left-0 top-full w-full bg-white shadow-md lg:hidden transition-all ${
             mobileOpen ? "opacity-100 visible" : "opacity-0 invisible"
           }`}
         >
-          <nav className="flex flex-col gap-4 px-6 py-6 font-medium text-gray-700">
+          <nav
+            ref={mobileRef}
+            className="flex flex-col gap-4 px-6 py-6 font-medium text-gray-700"
+          >
             {NAV_ITEMS.map((item) =>
               item.children ? (
-                <div key={item.label} ref={mobileRef}>
+                <div key={item.label}>
                   <button
-                    className="flex w-full items-center justify-between px-2 py-2 hover:text-[#0E1B3D] transition-colors"
-                    onClick={() => setMobileAboutOpen((prev) => !prev)}
+                    onClick={() =>
+                      setMobileOpenMenu(
+                        mobileOpenMenu === item.label ? null : item.label
+                      )
+                    }
+                    className="flex w-full items-center justify-between py-2"
                   >
                     {item.label}
                     <ChevronDown
                       size={16}
-                      className={`transition-transform duration-300 ${
-                        mobileAboutOpen ? "rotate-180" : "rotate-0"
+                      className={`transition-transform ${
+                        mobileOpenMenu === item.label ? "rotate-180" : ""
                       }`}
                     />
                   </button>
-                  {mobileAboutOpen &&
+
+                  {mobileOpenMenu === item.label &&
                     item.children.map((child) => (
                       <Link
                         key={child.label}
                         to={child.href}
                         onClick={() => setMobileOpen(false)}
-                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
+                        className="block px-4 py-2 rounded hover:bg-gray-100"
                       >
                         {child.label}
                       </Link>
@@ -266,7 +269,7 @@ export default function Navbar() {
                   key={item.label}
                   to={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className="hover:text-[#0E1B3D] px-2 py-2 transition-colors"
+                  className="py-2"
                 >
                   {item.label}
                 </Link>
@@ -275,7 +278,7 @@ export default function Navbar() {
 
             <Link
               to="/contact"
-              className="mt-4 flex items-center gap-2 rounded-lg bg-[#F4B740] px-4 py-2 text-sm font-medium text-[#0E1B3D] transition-colors"
+              className="mt-4 flex items-center gap-2 rounded-lg bg-[#F4B740] px-4 py-2 text-[#0E1B3D]"
             >
               <Mail size={18} />
               Contact Us

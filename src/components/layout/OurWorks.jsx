@@ -49,13 +49,13 @@ export default function OurWorks() {
           </span>
 
           <h2 className="mt-3 text-3xl font-extrabold text-[#1e2a4a] md:text-4xl">
-            From Evidence to Action
+            Where Research Meets Global Education
           </h2>
 
-          <p className="mt-4 text-base text-gray-600">
+          {/* <p className="mt-4 text-base text-gray-600">
             Delivering research, analysis, and consultancy that inform decisions
             and drive impact.
-          </p>
+          </p> */}
         </div>
 
         {/* Swiper */}

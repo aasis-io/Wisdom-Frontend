@@ -161,10 +161,9 @@ export default function About() {
                 capacity.
               </p>
               <p className="text-lg text-gray-700 leading-relaxed">
-                If you're thirsty, you search for water. But if you're hungry
-                for worldwide education, inspiration, and growth, you search for
-                us. WAARC brings education, research, and consulting expertise
-                to your fingertips — empowering minds and enriching skills.
+                Wisdom Academy and Research Center empowers scholars and guides
+                students to world-class opportunities, shaping the future of
+                research and global education.
               </p>
               {/* <a
                 href="#"
@@ -371,29 +370,29 @@ export default function About() {
             <div className="grid gap-x-12 gap-y-12 sm:grid-cols-2">
               <FeatureCard
                 icon={<FaCalendarAlt className="h-16" />}
-                title="Tailored Consulting Solutions"
-                text="Customized strategies designed to meet your unique goals and challenges."
+                title="Research Excellence"
+                text="PhD-level research fellows with extensive publications in high-impact international journals."
                 color="bg-[#1e2a4a]"
               />
 
               <FeatureCard
                 icon={<FaFileAlt className="h-16" />}
-                title="Evidence-Based Approach"
-                text="Rigorous research methods that ensure credible, reliable, and actionable insights."
+                title="Publication Support"
+                text="End-to-end guidance in research writing and international journal publication."
                 color="bg-[#f4b740]"
               />
 
               <FeatureCard
                 icon={<FaUsers className="h-16" />}
-                title="Multidisciplinary Expertise"
-                text="A diverse team bridging academia, policy, and industry perspectives."
+                title="Global Education Consultancy"
+                text="Expert guidance for university admissions in Italy and Thailand from Nepal."
                 color="bg-[#f4b740]"
               />
 
               <FeatureCard
                 icon={<FaChartLine className="h-16" />}
-                title="Impact-Oriented Outcomes"
-                text="Focused on real-world results that inform decisions and drive meaningful change."
+                title="Italy-Based Student Support"
+                text="Dedicated team members in Italy ensuring a smooth academic and living transition."
                 color="bg-[#1e2a4a]"
               />
             </div>
