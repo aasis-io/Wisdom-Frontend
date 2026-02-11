@@ -7,17 +7,17 @@ const contactInfo = [
   {
     icon: MapPin,
     label: "Address",
-    value: "Kathmandu, Nepal",
+    value: "Chandragiri-6, Kathmandu",
   },
   {
     icon: Mail,
     label: "Email",
-    value: "contact@waarc.org",
+    value: "waarc2022@gmail.com",
   },
   {
     icon: Phone,
     label: "Phone",
-    value: "+977 1 2345678",
+    value: "+977 984-7947004",
   },
 ];
 
