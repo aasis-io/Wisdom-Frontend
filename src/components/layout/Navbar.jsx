@@ -6,7 +6,6 @@ import {
   MapPin,
   Menu,
   Phone,
-  Search,
   Twitter,
   X,
   Youtube,
@@ -199,7 +198,7 @@ export default function Navbar() {
 
           {/* ========== Right Actions ========== */}
           <div className="flex items-center gap-4">
-            <Search size={16} className="text-gray-700" />
+            {/* <Search size={16} className="text-gray-700" /> */}
 
             <Link
               to="/contact"
@@ -210,9 +209,10 @@ export default function Navbar() {
             </Link>
 
             <button
-              className="lg:hidden"
+              className="lg:hidden flex items-center gap-1 font-medium"
               onClick={() => setMobileOpen(!mobileOpen)}
             >
+              <span>MENU</span>
               {mobileOpen ? (
                 <X size={26} className="text-[#0E1B3D]" />
               ) : (
