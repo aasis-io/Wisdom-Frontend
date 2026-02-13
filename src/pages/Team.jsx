@@ -5,7 +5,7 @@ import Aashish from "/team/aashish.jpg";
 import Bijay from "/team/bijay1.jpg";
 import Hari from "/team/hari1.jpg";
 import Prem from "/team/prem1.jpg";
-
+import Ujjwal from "/team/team4.jpg";
 
 /* Example team data */
 const teamMembers = [
@@ -30,12 +30,19 @@ const teamMembers = [
     image: Prem,
     description: "",
   },
-  
+
   {
     id: 4,
     name: "Aashish Subedi",
     role: "International Student Counselor",
     image: Aashish,
+    description: "",
+  },
+  {
+    id: 5,
+    name: "Ujjwal Giri",
+    role: "Student Support Offcer",
+    image: Ujjwal,
     description: "",
   },
 ];
