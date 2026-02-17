@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 
-// Frontend Layout
 import Layout from "./components/layout/Layout";
 import About from "./pages/About";
 import BlogDetail from "./pages/BlogDetail";
 import Blogs from "./pages/Blogs";
+import Career from "./pages/Career";
 import Consulting from "./pages/Consulting";
 import ContactUs from "./pages/ContactUs";
 import Gallery from "./pages/Gallery";
@@ -16,10 +16,8 @@ import Services from "./pages/Services";
 import Team from "./pages/Team";
 import Thailand from "./pages/study/Thailand";
 
-// Admin
 
 export const router = createBrowserRouter([
-  // FRONTEND ROUTES
   {
     element: <Layout />,
     children: [
@@ -35,23 +33,10 @@ export const router = createBrowserRouter([
       { path: "/team", element: <Team /> },
       { path: "/gallery", element: <Gallery /> },
       { path: "/study/thailand", element: <Thailand /> },
-
-      // Admin Sign In (PUBLIC)
-      // { path: "/waarcadmin/signin", element: <SignInForm /> },
-
+      { path: "/career", element: <Career /> },
       { path: "*", element: <NotFoundPage /> },
     ],
   },
 
-  // PROTECTED ADMIN ROUTES
-  // {
-  //   element: <AdminProtectedRoute />,
-  //   children: [
-  //     {
-  //       path: "/admin/*",
-  //       element: <AppLayout />,
-  //       children: adminRoutes,
-  //     },
-  //   ],
-  // },
+
 ]);
