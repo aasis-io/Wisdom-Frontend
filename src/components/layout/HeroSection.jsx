@@ -19,16 +19,14 @@ export default function HeroSection() {
           {/* Left Content */}
           <div className="lg:text-left">
             <h1 className="text-4xl font-extrabold leading-snug text-[#17254e] sm:text-4xl md:text-5xl xl:text-5xl">
-              Where Research
+              Empowering
               <br />
-              Meets Real-World
-              <br />
-              Impact
+              Academic Minds
+            
             </h1>
 
             <p className="mt-6 max-w-lg mx-auto text-base text-gray-700 sm:mx-0 sm:text-md md:text-lg">
-              A knowledge-driven academy delivering research, advisory, and
-              development consultancy services.
+              Empowering minds through quality research and education
             </p>
 
             <div className="mt-8 flex">
