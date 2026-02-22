@@ -32,7 +32,7 @@ const NAV_ITEMS = [
     label: "Work With Us",
     children: [
       { label: "Careers", href: "/career" },
-      { label: "Collaboration", href: "/" },
+      { label: "Collaboration", href: "/collaborate" },
     ],
   },
 

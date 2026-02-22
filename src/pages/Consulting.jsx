@@ -7,7 +7,7 @@ import {
   LineChart,
   Scale,
   Target,
-  Users
+  Users,
 } from "lucide-react";
 import { Link } from "react-router";
 import Italy from "./../assets/images/italy.jpg";
@@ -256,22 +256,22 @@ export default function Consulting() {
           </div>
           <div className="relative z-10 max-w-2xl">
             <h2 className="text-2xl font-bold">
-              Ready to Transform Your Strategy into Impact?
+              Expert Guidance for Studying Abroad
             </h2>
             <p className="mt-4 text-base text-white/90">
-              Let's collaborate to design solutions that drive meaningful,
-              sustainable change in your organization and the communities you
-              serve.
+              Get expert guidance on international education opportunities,
+              admissions, scholarships, and visa procedures. Book your
+              consultation today.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <button
+              <Link to="/contact"
                 style={{ backgroundColor: secondaryColor }}
                 className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold text-slate-900 hover:opacity-90 transition"
               >
                 Schedule a Consultation
                 <ArrowRight className="h-5 w-5" />
-              </button>
+              </Link>
             </div>
           </div>
         </div>

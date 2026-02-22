@@ -34,7 +34,7 @@ const plans = [
 
 export default function FuturePlans() {
   return (
-    <section className="bg-white pt-8">
+    <section className="bg-white pt-8 pb-16">
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <div className="mb-12 max-w-3xl">

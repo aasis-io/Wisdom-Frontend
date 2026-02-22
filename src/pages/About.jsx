@@ -1,13 +1,12 @@
 import {
   ChevronRight,
-  GraduationCap,
   Lightbulb,
-  Target,
-  Users,
+  Target
 } from "lucide-react";
 import React from "react";
 import { FaCalendarAlt, FaChartLine, FaFileAlt, FaUsers } from "react-icons/fa";
 import { Link } from "react-router";
+import Services from "../components/layout/Services";
 import AboutImg from "./../assets/images/about.png";
 import LogoIn from "./../assets/images/logoIn.svg";
 import LogoOut from "./../assets/images/logoOut.svg";
@@ -53,26 +52,6 @@ const KnowledgePattern = () => (
   </svg>
 );
 
-const services = [
-  {
-    id: 1,
-    title: "Research Services",
-    description:
-      "Academic research, policy studies, data analysis, and evidence-based reporting tailored to real-world needs.",
-    image: "https://images.unsplash.com/photo-1551434678-e076c223a692",
-    icon: GraduationCap,
-    alt: "Research",
-  },
-  {
-    id: 2,
-    title: "Consultancy Services",
-    description:
-      "Strategic advisory, capacity building, monitoring & evaluation, and institutional development.",
-    image: "https://images.unsplash.com/photo-1556761175-4b46a572b786",
-    icon: Users,
-    alt: "Consulting",
-  },
-];
 
 export default function About() {
   return (
@@ -277,59 +256,9 @@ export default function About() {
         </div>
       </section>
 
-      {/* SERVICES with visual depth */}
-      <section className="relative bg-white py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-[#1e2a4a]">What We Do</h2>
-            <p className="mx-auto mt-4 max-w-2xl text-gray-700">
-              We help institutions and professionals navigate complexity with
-              clarity and confidence.
-            </p>
-          </div>
-
-          <div className="mt-16 grid gap-10 md:grid-cols-2">
-            {services.map((service) => {
-              const Icon = service.icon;
-
-              return (
-                <div
-                  key={service.id}
-                  className="group relative h-105 overflow-hidden rounded-2xl shadow-2xl"
-                >
-                  {/* Background Image */}
-                  <img
-                    src={service.image}
-                    alt={service.alt}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-linear-to-r from-[#0f172a]/90 via-[#0f172a]/70 to-transparent" />
-
-                  {/* Content */}
-                  <div className="relative z-10 flex h-full flex-col justify-end p-8 text-white">
-                    <Icon className="h-9 w-9 text-yellow-400" />
-
-                    <h3 className="mt-4 text-2xl font-semibold leading-tight">
-                      {service.title}
-                    </h3>
-
-                    <p className="mt-3 max-w-sm text-base text-gray-200">
-                      {service.description}
-                    </p>
-
-                    {/* CTA */}
-                    <button className="mt-6 w-fit rounded-lg bg-yellow-400 px-6 py-3 text-sm font-semibold text-[#1e2a4a] transition hover:bg-yellow-300">
-                      Learn more
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <div className="py-8 bg-white">
+        <Services />
+      </div>
 
       {/* =================== WHY CHOOSE WAARC =================== */}
       <section className="relative bg-[#f5f6fb] py-20 overflow-hidden">

@@ -2,10 +2,7 @@ import AboutSection from "../components/layout/AboutSection";
 import EventRegistrationSection from "../components/layout/EventRegistrationSection";
 import FuturePlans from "../components/layout/FuturePlans";
 import HeroSection from "../components/layout/HeroSection";
-import { NewsletterCTA } from "../components/layout/NewsletterCTA";
 import OurWorks from "../components/layout/OurWorks";
-import { RecentBlogs } from "../components/layout/RecentBlogs";
-import ReviewsSection from "../components/layout/ReviewsSection";
 import Services from "../components/layout/Services";
 
 // src/pages/Home.jsx
@@ -49,10 +46,10 @@ export default function Home() {
       <AboutSection />
       <OurWorks />
       <EventRegistrationSection />
-      <ReviewsSection />
+      {/* <ReviewsSection /> */}
       <FuturePlans />
-      <NewsletterCTA />
-      <RecentBlogs />
+      {/* <NewsletterCTA />
+      <RecentBlogs /> */}
     </section>
   );
 }
