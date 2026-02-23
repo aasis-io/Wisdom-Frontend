@@ -1,18 +1,18 @@
 import {
-    BookOpen,
-    Brain,
-    Building2,
-    CalendarDays,
-    CheckCircle2,
-    ChevronRight,
-    FileText,
-    FlaskConical,
-    Globe,
-    GraduationCap,
-    Mail,
-    PenTool,
-    Plane,
-    School,
+  BookOpen,
+  Brain,
+  Building2,
+  CalendarDays,
+  CheckCircle2,
+  ChevronRight,
+  FileText,
+  FlaskConical,
+  Globe,
+  GraduationCap,
+  Mail,
+  PenTool,
+  Plane,
+  School,
 } from "lucide-react";
 import { Link } from "react-router";
 
@@ -75,13 +75,17 @@ export default function Collaborate() {
     <div className="bg-white">
       {/* Breadcrumb */}
       <section className="border-b border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-5">
-          <div className="flex items-center gap-2 text-sm text-slate-500">
-            <Link to="/" className="hover:text-slate-900 transition-colors">
+        <div className="mx-auto max-w-7xl px-6 py-6">
+          <div className="flex items-center gap-2 text-sm text-slate-600">
+            <Link to={"/"} className="hover:text-slate-900">
               Home
             </Link>
-            <ChevronRight className="h-3.5 w-3.5" />
-            <span className="text-slate-900 font-medium">Collaborate</span>
+            <ChevronRight className="h-4 w-4" />
+            <p className="hover:text-slate-900">
+              Work With Us
+            </p>
+            <ChevronRight className="h-4 w-4" />
+            <span className="text-slate-900">Collaborate</span>
           </div>
         </div>
       </section>
@@ -126,12 +130,12 @@ export default function Collaborate() {
           {whoCanCollaborate.map((item, i) => (
             <div
               key={i}
-              className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 hover:shadow-md hover:border-slate-300 transition-all duration-300"
+              className="flex items-center gap-4 cursor-pointer  rounded-2xl border border-slate-200 bg-white p-5 hover:shadow-md hover:border-slate-300 transition-all duration-300"
             >
-              <div className="flex-shrink-0 rounded-xl bg-blue-950/5 p-3">
+              <div className="shrink-0 rounded-xl bg-blue-950/5 p-4">
                 <item.icon className="h-5 w-5 text-[#17254e]" />
               </div>
-              <p className="text-sm font-medium text-slate-700">{item.label}</p>
+              <p className="font-medium text-slate-700">{item.label}</p>
             </div>
           ))}
         </div>
@@ -156,7 +160,7 @@ export default function Collaborate() {
             {areas.map((area, i) => (
               <div
                 key={i}
-                className="rounded-2xl bg-white border border-slate-200 p-7 hover:shadow-lg hover:border-slate-300 transition-all duration-300"
+                className="rounded-2xl cursor-pointer bg-white border border-slate-200 p-7 hover:shadow-lg hover:border-slate-300 transition-all duration-300"
               >
                 <div className="rounded-xl bg-blue-950/5 p-3 w-fit mb-5">
                   <area.icon className="h-5 w-5 text-[#17254e]" />
@@ -183,17 +187,17 @@ export default function Collaborate() {
             <h2 className="text-3xl font-bold text-slate-900 mb-4">
               Why Collaborate With Us
             </h2>
-            <p className="text-slate-500 text-sm leading-relaxed">
+            <p className="text-slate-500 leading-relaxed">
               We bring together academic expertise, a global network, and a
-              commitment to meaningful impact — making every partnership a step
+              commitment to meaningful impact, making every partnership a step
               toward lasting change.
             </p>
           </div>
           <div className="space-y-4">
             {whyUs.map((point, i) => (
               <div key={i} className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-yellow-500 flex-shrink-0 mt-0.5" />
-                <p className="text-slate-700 text-sm">{point}</p>
+                <CheckCircle2 className="h-5 w-5 text-yellow-500 shrink-0 mt-0.5" />
+                <p className="text-slate-700">{point}</p>
               </div>
             ))}
           </div>
@@ -208,7 +212,7 @@ export default function Collaborate() {
             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
               Interested in collaborating with us?
             </h2>
-            <p className="text-slate-500 text-sm leading-relaxed mb-6">
+            <p className="text-slate-500 leading-relaxed mb-6">
               We would love to explore partnership opportunities that create
               meaningful academic and educational impact. Reach out and let's
               start the conversation.

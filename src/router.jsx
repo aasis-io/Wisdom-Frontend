@@ -13,7 +13,7 @@ import Home from "./pages/Home";
 import Journals from "./pages/Journals";
 import NotFoundPage from "./pages/NotFoundPage";
 import Research from "./pages/Research";
-import Services from "./pages/Services";
+import ServicesPage from "./pages/ServicesPage";
 import Team from "./pages/Team";
 import Thailand from "./pages/study/Thailand";
 
@@ -23,7 +23,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/about", element: <About /> },
-      { path: "/services", element: <Services /> },
+      { path: "/services", element: <ServicesPage /> },
       { path: "/services/research", element: <Research /> },
       { path: "/services/consulting", element: <Consulting /> },
       { path: "/blogs", element: <Blogs /> },

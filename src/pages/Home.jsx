@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import AboutSection from "../components/layout/AboutSection";
 import EventRegistrationSection from "../components/layout/EventRegistrationSection";
 import FuturePlans from "../components/layout/FuturePlans";
@@ -42,7 +43,17 @@ export default function Home() {
       </Reveal> */}
 
       <HeroSection />
-      <Services />
+      <div className="bg-white py-12 lg:py-8">
+        <Services />
+        <div className="mt-8 text-center">
+          <Link
+            to="/services"
+            className="inline-block rounded-xl border border-gray-300 px-8 py-3 text-sm font-semibold text-[#1e2a4a] transition hover:bg-gray-100"
+          >
+            Explore All Services
+          </Link>
+        </div>
+      </div>
       <AboutSection />
       <OurWorks />
       <EventRegistrationSection />

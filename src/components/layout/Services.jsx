@@ -2,19 +2,12 @@ import { ArrowRight } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
-import ConsultingImg from "./../../assets/images/consulting.jpg";
+import ConsultingImg from "./../../assets/images/education.jpg";
 import ResearchImg from "./../../assets/images/research.jpg";
 
 /* ---------------- SERVICES DATA ---------------- */
 
 const services = [
-  {
-    title: "Research",
-    description:
-      "Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor Incididunt Ut",
-    image: ResearchImg,
-    path: "/services/research",
-  },
   {
     title: "Education and Study Abroad Advisory",
     description:
@@ -22,11 +15,18 @@ const services = [
     image: ConsultingImg,
     path: "/services/consulting",
   },
+  {
+    title: "Research",
+    description:
+      "Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor Incididunt Ut",
+    image: ResearchImg,
+    path: "/services/research",
+  },
 ];
 
 export default function Services() {
   return (
-    <section className="bg-white py-12 lg:py-8">
+    <section>
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center">
@@ -81,16 +81,6 @@ export default function Services() {
           <span className="h-2 w-10 rounded-full bg-[#f2b84b]" />
           <span className="h-2 w-2 rounded-full bg-gray-300" />
           <span className="h-2 w-2 rounded-full bg-gray-300" />
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="mt-12 text-center">
-          <Link
-            to="/services"
-            className="inline-block rounded-xl border border-gray-300 px-8 py-3 text-sm font-semibold text-[#1e2a4a] transition hover:bg-gray-100"
-          >
-            Explore All Services
-          </Link>
         </div>
       </div>
     </section>

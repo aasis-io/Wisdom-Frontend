@@ -1,14 +1,15 @@
 import {
-    ArrowRight,
-    BarChart3,
-    BookOpen,
-    ChevronRight,
-    FlaskConical,
-    Globe,
-    GraduationCap,
-    MonitorPlay,
+  ArrowRight,
+  BarChart3,
+  BookOpen,
+  ChevronRight,
+  FlaskConical,
+  Globe,
+  GraduationCap,
+  MonitorPlay,
 } from "lucide-react";
 import { Link } from "react-router";
+import ResearchImg from "./../assets/images/research.jpg";
 
 const services = [
   {
@@ -47,33 +48,43 @@ const services = [
     tags: ["Thesis Planning", "Dissertation Writing", "University Standards"],
   },
 ];
+const primaryColor = "#17254e";
+const secondaryColor = "#fbbf24";
 
 export default function Research() {
   return (
     <div className="bg-white">
       {/* Breadcrumb */}
       <section className="border-b border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-5">
-          <div className="flex items-center gap-2 text-sm text-slate-500">
-            <Link to="/" className="hover:text-slate-900 transition-colors">
+        <div className="mx-auto max-w-7xl px-6 py-6">
+          <div className="flex items-center gap-2 text-sm text-slate-600">
+            <Link to={"/"} className="hover:text-slate-900">
               Home
             </Link>
-            <ChevronRight className="h-3.5 w-3.5" />
-            <Link
-              to="/services"
-              className="hover:text-slate-900 transition-colors"
-            >
+            <ChevronRight className="h-4 w-4" />
+            <Link to={"/services"} className="hover:text-slate-900">
               Services
             </Link>
-            <ChevronRight className="h-3.5 w-3.5" />
-            <span className="text-slate-900 font-medium">Research</span>
+            <ChevronRight className="h-4 w-4" />
+            <span className="text-slate-900">Research</span>
           </div>
         </div>
       </section>
 
       {/* Hero */}
-      <section className="bg-[#17254e]">
-        <div className="mx-auto max-w-7xl px-6 py-20">
+      <section className="bg-[#17254e] relative">
+        <img
+          src={ResearchImg}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(to right, ${primaryColor}ee, ${primaryColor}99)`,
+          }}
+        />
+        <div className="mx-auto max-w-7xl px-6 py-20 relative z-10">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold tracking-widest uppercase mb-4 text-yellow-400">
               Academic & Research Services
@@ -107,8 +118,8 @@ export default function Research() {
           <h2 className="text-3xl font-bold text-slate-900">
             Our Research Services
           </h2>
-          <p className="mt-3 text-slate-500 max-w-xl">
-            From initial concept to international publication — end-to-end
+          <p className="mt-3 text-slate-500 max-w-3xl">
+            From initial concept to international publication, end-to-end
             support tailored to your academic goals.
           </p>
         </div>
@@ -120,15 +131,15 @@ export default function Research() {
               className="group rounded-2xl border border-slate-200 bg-white p-7 hover:shadow-lg hover:border-slate-300 transition-all duration-300"
             >
               <div className="flex flex-col md:flex-row md:items-start gap-5">
-                <div className="flex-shrink-0 rounded-xl bg-blue-950/5 p-3 w-fit">
+                <div className="shrink-0 rounded-xl bg-blue-950/5 p-3 w-fit">
                   <service.icon className="h-5 w-5 text-[#17254e]" />
                 </div>
 
                 <div className="flex-1">
-                  <h3 className="text-base font-semibold text-slate-900 mb-2">
+                  <h3 className="text-lg font-semibold text-slate-900 mb-2">
                     {service.title}
                   </h3>
-                  <p className="text-slate-500 text-sm leading-relaxed mb-4">
+                  <p className="text-slate-500 leading-relaxed mb-4">
                     {service.description}
                   </p>
                   <div className="flex flex-wrap gap-2">
