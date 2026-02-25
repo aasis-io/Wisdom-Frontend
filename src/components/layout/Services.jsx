@@ -13,12 +13,12 @@ const services = [
     description:
       "Guiding students towards the right education and global opportunities",
     image: ConsultingImg,
-    path: "/services/consulting",
+    path: "/services/study-advisory",
   },
   {
     title: "Research",
     description:
-      "Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor Incididunt Ut",
+      "Research-Driven Insights for Policy, Education, and Development",
     image: ResearchImg,
     path: "/services/research",
   },
@@ -53,20 +53,20 @@ export default function Services() {
               />
 
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/40 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/50 to-transparent" />
 
               {/* Content */}
               <div className="absolute inset-0 flex flex-col justify-end p-8">
-                <h3 className="text-2xl font-bold text-white">
+                <h3 className=" text-xl md:text-2xl  font-bold text-white">
                   {service.title}
                 </h3>
-                <p className="mt-3 max-w-md text-sm text-gray-200">
+                <p className="mt-2 max-w-md text-gray-200">
                   {service.description}
                 </p>
 
                 <Link
                   to={service.path}
-                  className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-[#f2b84b] px-6 py-3 text-sm font-semibold text-[#1e2a4a] transition hover:bg-[#e6ac3f]"
+                  className="mt-3 md:mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-[#f2b84b] px-6 py-3 text-sm font-semibold text-[#1e2a4a] transition hover:bg-[#e6ac3f]"
                 >
                   Learn More
                   <ArrowRight size={16} />

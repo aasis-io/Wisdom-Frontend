@@ -1,75 +1,41 @@
-import {
-  ChevronRight,
-  Lightbulb,
-  Target
-} from "lucide-react";
+import { Lightbulb, Target } from "lucide-react";
 import React from "react";
-import { FaCalendarAlt, FaChartLine, FaFileAlt, FaUsers } from "react-icons/fa";
 import { Link } from "react-router";
+import Breadcrumbs from "../components/Breadcrumbs";
 import Services from "../components/layout/Services";
-import AboutImg from "./../assets/images/about.png";
-import LogoIn from "./../assets/images/logoIn.svg";
-import LogoOut from "./../assets/images/logoOut.svg";
+import WhyChooseUs from "../components/layout/WhyChooseUs";
 
-const KnowledgePattern = () => (
-  <svg
-    className="absolute inset-0 h-full w-full"
-    xmlns="http://www.w3.org/2000/svg"
-    preserveAspectRatio="xMidYMid slice"
-  >
-    <defs>
-      <pattern
-        id="knowledge-pattern"
-        width="80"
-        height="80"
-        patternUnits="userSpaceOnUse"
-      >
-        <circle cx="10" cy="10" r="1.5" fill="#1e2a4a" opacity="0.15" />
-        <circle cx="60" cy="20" r="1.5" fill="#1e2a4a" opacity="0.12" />
-        <circle cx="30" cy="50" r="1.5" fill="#1e2a4a" opacity="0.1" />
-        <line
-          x1="10"
-          y1="10"
-          x2="60"
-          y2="20"
-          stroke="#1e2a4a"
-          strokeWidth="0.5"
-          opacity="0.08"
-        />
-        <line
-          x1="30"
-          y1="50"
-          x2="60"
-          y2="20"
-          stroke="#1e2a4a"
-          strokeWidth="0.5"
-          opacity="0.08"
-        />
-      </pattern>
-    </defs>
+// =================== DATA OBJECTS ===================
+const breadcrumbsData = [
+  { name: "Home", link: "/" },
+  { name: "About Us", link: "/about" },
+];
 
-    <rect width="100%" height="100%" fill="url(#knowledge-pattern)" />
-  </svg>
-);
+const missionVision = [
+  {
+    icon: <Target className="h-10 w-10 text-yellow-400" />,
+    title: "Our Mission",
+    text: "To generate impactful research and educational solutions that advance knowledge and empower academic communities.",
+    image: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d",
+    delayClass: "",
+  },
+  {
+    icon: <Lightbulb className="h-10 w-10 text-yellow-400" />,
+    title: "Our Vision",
+    text: "To advance evidence-based research, policy, and educational excellence in Nepal.",
+    image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f",
+    delayClass: "lg:mt-20",
+  },
+];
 
-
+// =================== MAIN ABOUT PAGE ===================
 export default function About() {
   return (
     <main className="w-full overflow-hidden text-gray-800">
-      <section className="border-b border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-6">
-          <div className="flex items-center gap-2 text-sm text-slate-600">
-            <Link to={"/"} className="hover:text-slate-900">
-              Home
-            </Link>
-            <ChevronRight className="h-4 w-4" />
-            <Link to={"/about"} className="hover:text-slate-900">
-              About Us
-            </Link>
-          </div>
-        </div>
-      </section>
-      {/* HERO with image + gradient */}
+      {/* Breadcrumb */}
+      <Breadcrumbs breadcrumbs={breadcrumbsData} />
+
+      {/* Hero Section */}
       <section className="relative min-h-[50vh]">
         <img
           src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b"
@@ -88,74 +54,32 @@ export default function About() {
             </p>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-          <svg
-            className="block h-20 w-full"
-            viewBox="0 0 1440 100"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M0,30 C240,45 480,25 720,30 960,35 1200,45 1440,30 L1440,100 L0,100 Z"
-              fill="white"
-            />
-          </svg>
-        </div>
       </section>
 
-      {/* STORY SECTION with textured background */}
-      <section className="relative bg-white pb-24 pt-12 overflow-hidden">
-        {/* Subtle SVG Pattern Background */}
-
-        <svg
-          className="absolute inset-0 w-full h-full opacity-20"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="xMidYMid slice"
-        >
-          <defs>
-            <pattern
-              id="dots"
-              x="0"
-              y="0"
-              width="40"
-              height="40"
-              patternUnits="userSpaceOnUse"
-            >
-              <circle cx="2" cy="2" r="2" fill="#b7c0cb" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#dots)" />
-        </svg>
-
+      {/* Story Section */}
+      <section className="relative bg-white pb-24 pt-16 overflow-hidden">
         <div className="relative mx-auto max-w-7xl px-6">
           <div className="grid gap-14 lg:grid-cols-2 items-center">
-            {/* Text Content */}
+            {/* Text */}
             <div className="space-y-6">
               <h2 className="text-4xl font-extrabold text-[#1e2a4a] leading-tight">
                 Who We Are
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed">
-                Wisdom Academy & Research Center (WAARC) is a professional
-                research and consultancy organization based in Nepal, committed
-                to advancing knowledge, policy insight, and institutional
-                capacity.
+                Wisdom Academy & Research Center (WAARC) is a Nepal-based
+                professional research and consultancy organization committed to
+                advancing knowledge, policy insight, and institutional capacity.
               </p>
               <p className="text-lg text-gray-700 leading-relaxed">
                 Wisdom Academy and Research Center empowers scholars and guides
                 students to world-class opportunities, shaping the future of
                 research and global education.
               </p>
-              {/* <a
-                href="#"
-                className="inline-block mt-4 rounded-lg bg-gradient-to-r from-[#17254e] to-[#2e3b60] px-6 py-3 text-white font-semibold shadow-lg hover:scale-105 transition-transform duration-300"
-              >
-                Learn More
-              </a> */}
             </div>
 
-            {/* Image Content */}
+            {/* Images */}
             <div className="relative flex justify-center items-center">
               <div className="absolute -top-8 -right-2 h-20 w-20 rounded-full bg-linear-to-tr from-[#17254e] to-[#455171] opacity-50 animate-pulse"></div>
-
               <div className="relative w-full max-w-md lg:max-w-lg">
                 <img
                   src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
@@ -167,15 +91,14 @@ export default function About() {
                   alt="Research planning"
                   className="absolute -bottom-12 md:-left-12 left-1/5 w-64 rounded-xl shadow-xl transform transition-transform duration-500 hover:rotate-3 hover:scale-105 md:block"
                 />
-                {/* Optional floating accent circle */}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* MISSION & VISION with image cards */}
-      <section className="relative overflow-hidden bg-[#d1d3dc] py-16">
+      {/* Mission & Vision Cards */}
+      <section className="relative overflow-hidden bg-[#e8e9ed] py-16">
         <div className="absolute z-30 top-0 left-0 w-full overflow-hidden leading-none">
           <svg
             className="block h-20 w-full"
@@ -188,11 +111,8 @@ export default function About() {
             />
           </svg>
         </div>
-        {/* SVG Pattern Background */}
-        <KnowledgePattern />
 
         <div className="relative mx-auto max-w-6xl px-6">
-          {/* Heading */}
           <div className="mb-12 max-w-3xl">
             <span className="text-base font-semibold uppercase tracking-wider text-yellow-500">
               Our Foundation
@@ -201,57 +121,30 @@ export default function About() {
               Purpose That Guides Our Work
             </h2>
             <p className="mt-5 text-base text-gray-600">
-              Our mission and vision shape how we research, advise, and
-              collaborate — ensuring knowledge leads to meaningful impact.
+              Guided by our vision and mission, we conduct research and provide
+              advisory services that turn knowledge into measurable impact.
             </p>
           </div>
 
-          {/* Cards */}
           <div className="grid gap-16 lg:grid-cols-2">
-            {/* Mission Card */}
-            <div className="group relative h-90 overflow-hidden rounded-3xl shadow-2xl">
-              <img
-                src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d"
-                alt="Our Mission"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-linear-to-r from-[#0f172a]/90 via-[#0f172a]/70 to-transparent" />
-
-              {/* Content */}
-              <div className="relative z-10 flex h-full flex-col justify-end p-10 text-white">
-                <Target className="h-10 w-10 text-yellow-400" />
-                <h3 className="mt-4 text-2xl font-semibold">Our Mission</h3>
-                <p className="mt-4 max-w-md text-sm text-gray-200">
-                  To deliver rigorous research and strategic consultancy that
-                  enables evidence-based decision-making, strengthens
-                  institutions, and supports sustainable development.
-                </p>
+            {missionVision.map((card, i) => (
+              <div
+                key={i}
+                className={`group relative h-90 overflow-hidden rounded-3xl shadow-2xl ${card.delayClass}`}
+              >
+                <img
+                  src={card.image}
+                  alt={card.title}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-linear-to-r from-[#0f172a]/90 via-[#0f172a]/70 to-transparent" />
+                <div className="relative z-10 flex h-full flex-col justify-end p-10 text-white">
+                  {card.icon}
+                  <h3 className="mt-4 text-2xl font-semibold">{card.title}</h3>
+                  <p className="mt-4 max-w-md text-gray-200">{card.text}</p>
+                </div>
               </div>
-            </div>
-
-            {/* Vision Card */}
-            <div className="group relative h-90 overflow-hidden rounded-3xl shadow-2xl lg:mt-20">
-              <img
-                src="https://images.unsplash.com/photo-1516321497487-e288fb19713f"
-                alt="Our Vision"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-linear-to-r from-[#0f172a]/90 via-[#0f172a]/70 to-transparent" />
-
-              {/* Content */}
-              <div className="relative z-10 flex h-full flex-col justify-end p-10 text-white">
-                <Lightbulb className="h-10 w-10 text-yellow-400" />
-                <h3 className="mt-4 text-2xl font-semibold">Our Vision</h3>
-                <p className="mt-4 max-w-md text-sm text-gray-200">
-                  To be a globally respected research and consulting center that
-                  connects Nepal’s insights with global knowledge systems.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -260,78 +153,18 @@ export default function About() {
         <Services />
       </div>
 
-      {/* =================== WHY CHOOSE WAARC =================== */}
+      {/* Features */}
       <section className="relative bg-[#f5f6fb] py-20 overflow-hidden">
         <div className="absolute inset-0 opacity-[0.08] bg-[radial-gradient(#000_1px,transparent_1px)] bg-size-[24px_24px]" />
 
-        <div className="relative mx-auto max-w-7xl px-6">
-          <h3 className="mb-12 text-center text-3xl font-extrabold text-[#1e2a4a]">
-            Why Choose Us
-          </h3>
-
-          <div className="grid gap-16 lg:grid-cols-[40%_60%] items-center">
-            {/* LEFT IMAGES */}
-            <div className="relative mx-auto flex w-full max-w-md items-center justify-center">
-              {/* Main Image */}
-              <img src={AboutImg} alt="Research work" className="w-full" />
-
-              {/* Centered Logo Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative flex h-32 w-32 items-center justify-center rounded-full bg-white shadow-xl">
-                  {/* Rotating Outer Logo */}
-                  <img
-                    src={LogoOut}
-                    alt="Rotating outer logo"
-                    className="absolute inset-0 h-full w-full animate-spin-slow"
-                  />
-
-                  {/* Static Inner Logo */}
-                  <img
-                    src={LogoIn}
-                    alt="Inner logo"
-                    className="relative z-10 h-18 w-18"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* RIGHT CARDS */}
-            <div className="grid gap-x-12 gap-y-12 sm:grid-cols-2">
-              <FeatureCard
-                icon={<FaCalendarAlt className="h-16" />}
-                title="Research Excellence"
-                text="PhD-level research fellows with extensive publications in high-impact international journals."
-                color="bg-[#1e2a4a]"
-              />
-
-              <FeatureCard
-                icon={<FaFileAlt className="h-16" />}
-                title="Publication Support"
-                text="End-to-end guidance in research writing and international journal publication."
-                color="bg-[#f4b740]"
-              />
-
-              <FeatureCard
-                icon={<FaUsers className="h-16" />}
-                title="Global Education Consultancy"
-                text="Expert guidance for university admissions in Italy and Thailand from Nepal."
-                color="bg-[#f4b740]"
-              />
-
-              <FeatureCard
-                icon={<FaChartLine className="h-16" />}
-                title="Italy-Based Student Support"
-                text="Dedicated team members in Italy ensuring a smooth academic and living transition."
-                color="bg-[#1e2a4a]"
-              />
-            </div>
-          </div>
+        <div className="mx-auto max-w-7xl px-6">
+          <WhyChooseUs />
         </div>
       </section>
 
-      {/* =================== CTA / LET’S BUILD KNOWLEDGE =================== */}
-      <section className="relative py-32 bg-white  overflow-hidden">
-        <div className="relative max-w-4xl mx-auto px-6 text-center">
+      {/* CTA */}
+      <section className="py-32 bg-white overflow-hidden">
+        <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-2xl md:text-4xl font-extrabold text-[#1e2a4a] leading-tight">
             Let’s Build Knowledge That Matters
           </h2>
@@ -340,30 +173,16 @@ export default function About() {
             insights, creating solutions that empower, educate, and inspire
             meaningful impact.
           </p>
-          <button className="mt-12 rounded-xl bg-linear-to-r from-[#17254e] to-[#455171] px-14 py-5 font-semibold text-white shadow-2xl transition-transform hover:scale-105 hover:shadow-3xl">
-            Contact Us
-          </button>
+          <p className="mt-12">
+            <Link
+              to="/contact"
+              className="rounded-xl bg-[#17254e] px-14 py-5 font-semibold text-white shadow-2xl hover:bg-[#17254eee] duration-300"
+            >
+              Contact Us
+            </Link>
+          </p>
         </div>
       </section>
     </main>
-  );
-}
-/* FEATURE CARD COMPONENT */
-function FeatureCard({ icon, title, text, color }) {
-  return (
-    <div className="relative rounded-3xl bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-xl">
-      <div
-        className={`absolute -top-6 left-1/2 -translate-x-1/2 flex h-14 w-14 items-center justify-center rounded-full text-white ${color}`}
-      >
-        {icon}
-      </div>
-
-      <h4 className="mt-6 text-center text-lg font-bold text-[#1e2a4a]">
-        {title}
-      </h4>
-      <p className="mt-3 text-center text-base leading-relaxed text-gray-600">
-        {text}
-      </p>
-    </div>
   );
 }

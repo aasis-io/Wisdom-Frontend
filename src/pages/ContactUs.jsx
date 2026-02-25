@@ -1,7 +1,10 @@
-import { ChevronRight, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import React from "react";
-import { Link } from "react-router-dom";
-
+import Breadcrumbs from "../components/Breadcrumbs";
+const breadcrumbsData = [
+  { name: "Home", link: "/" },
+  { name: "Contact Us", link: "/contact" },
+];
 
 const contactInfo = [
   {
@@ -24,19 +27,8 @@ const contactInfo = [
 const ContactUs = () => {
   return (
     <section className="bg-white">
-      <section className="border-b border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-6">
-          <div className="flex items-center gap-2 text-sm text-slate-600">
-            <Link to={"/"} className="hover:text-slate-900">
-              Home
-            </Link>
-            <ChevronRight className="h-4 w-4" />
-            <Link to={"/contact"} className="hover:text-slate-900">
-              Contact Us
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Breadcrumb */}
+      <Breadcrumbs breadcrumbs={breadcrumbsData} />
       <div className="py-20">
         <div className="max-w-6xl mx-auto px-6">
           {/* Header */}

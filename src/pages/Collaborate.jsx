@@ -4,7 +4,6 @@ import {
   Building2,
   CalendarDays,
   CheckCircle2,
-  ChevronRight,
   FileText,
   FlaskConical,
   Globe,
@@ -14,8 +13,13 @@ import {
   Plane,
   School,
 } from "lucide-react";
-import { Link } from "react-router";
+import Breadcrumbs from "../components/Breadcrumbs";
 
+const breadcrumbsData = [
+  { name: "Home", link: "/" },
+  { name: "Work with us", link: "" },
+  { name: "Collaborate", link: "/collaborate" },
+];
 const heroImage =
   "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1600";
 
@@ -74,21 +78,7 @@ export default function Collaborate() {
   return (
     <div className="bg-white">
       {/* Breadcrumb */}
-      <section className="border-b border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-6">
-          <div className="flex items-center gap-2 text-sm text-slate-600">
-            <Link to={"/"} className="hover:text-slate-900">
-              Home
-            </Link>
-            <ChevronRight className="h-4 w-4" />
-            <p className="hover:text-slate-900">
-              Work With Us
-            </p>
-            <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-900">Collaborate</span>
-          </div>
-        </div>
-      </section>
+      <Breadcrumbs breadcrumbs={breadcrumbsData} />
 
       {/* Hero */}
       <section className="relative h-[55vh]">
@@ -97,7 +87,7 @@ export default function Collaborate() {
           alt="Collaboration"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-[#17254e]/80" />
+        <div className="absolute inset-0 bg-linear-to-r from-[#17254e]/80 via-[#17254e]/50 to-transparent" />
         <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6">
           <div className="max-w-3xl text-white">
             <p className="text-xs font-semibold tracking-widest uppercase mb-4 text-yellow-400">

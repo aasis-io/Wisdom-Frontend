@@ -2,15 +2,19 @@ import {
   ArrowRight,
   BarChart3,
   BookOpen,
-  ChevronRight,
   FlaskConical,
   Globe,
   GraduationCap,
   MonitorPlay,
 } from "lucide-react";
 import { Link } from "react-router";
+import Breadcrumbs from "../components/Breadcrumbs";
 import ResearchImg from "./../assets/images/research.jpg";
-
+const breadcrumbsData = [
+  { name: "Home", link: "/" },
+  { name: "Services", link: "/services" },
+  { name: "Research", link: "/research" },
+];
 const services = [
   {
     icon: FlaskConical,
@@ -49,27 +53,12 @@ const services = [
   },
 ];
 const primaryColor = "#17254e";
-const secondaryColor = "#fbbf24";
 
 export default function Research() {
   return (
     <div className="bg-white">
       {/* Breadcrumb */}
-      <section className="border-b border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-6">
-          <div className="flex items-center gap-2 text-sm text-slate-600">
-            <Link to={"/"} className="hover:text-slate-900">
-              Home
-            </Link>
-            <ChevronRight className="h-4 w-4" />
-            <Link to={"/services"} className="hover:text-slate-900">
-              Services
-            </Link>
-            <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-900">Research</span>
-          </div>
-        </div>
-      </section>
+      <Breadcrumbs breadcrumbs={breadcrumbsData} />
 
       {/* Hero */}
       <section className="bg-[#17254e] relative">
@@ -78,12 +67,7 @@ export default function Research() {
           alt=""
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `linear-gradient(to right, ${primaryColor}ee, ${primaryColor}99)`,
-          }}
-        />
+        <div className="absolute inset-0 bg-linear-to-r from-[#17254e]/80 via-[#17254e]/50 to-transparent" />
         <div className="mx-auto max-w-7xl px-6 py-20 relative z-10">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold tracking-widest uppercase mb-4 text-yellow-400">

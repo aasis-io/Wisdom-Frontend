@@ -2,7 +2,6 @@ import {
   ArrowRight,
   Award,
   Briefcase,
-  ChevronRight,
   FileText,
   LineChart,
   Scale,
@@ -10,9 +9,14 @@ import {
   Users,
 } from "lucide-react";
 import { Link } from "react-router";
+import Breadcrumbs from "../components/Breadcrumbs";
 import Italy from "./../assets/images/italy.jpg";
 import Thailand from "./../assets/images/thailand.jpg";
-
+const breadcrumbsData = [
+  { name: "Home", link: "/" },
+  { name: "Services", link: "/services" },
+  { name: "Study Advisory", link: "/study-advisory" },
+];
 const hero = {
   title: "Strategic Consulting for Development Impact",
   subtitle:
@@ -92,21 +96,8 @@ const secondaryColor = "#fbbf24"; // yellow-400
 export default function Consulting() {
   return (
     <div className="bg-white">
-      <section className="border-b border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-6">
-          <div className="flex items-center gap-2 text-sm text-slate-600">
-            <Link to={"/"} className="hover:text-slate-900">
-              Home
-            </Link>
-            <ChevronRight className="h-4 w-4" />
-            <Link to={"/services"} className="hover:text-slate-900">
-              Services
-            </Link>
-            <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-900">Consulting</span>
-          </div>
-        </div>
-      </section>
+      {/* Breadcrumb */}
+      <Breadcrumbs breadcrumbs={breadcrumbsData} />
       {/* HERO */}
       <section className="relative h-[60vh] lg:h-[50vh]">
         <img
@@ -265,7 +256,8 @@ export default function Consulting() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link to="/contact"
+              <Link
+                to="/contact"
                 style={{ backgroundColor: secondaryColor }}
                 className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold text-slate-900 hover:opacity-90 transition"
               >

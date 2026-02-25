@@ -1,12 +1,17 @@
-import { ChevronRight, Download, FileText } from "lucide-react";
+import { Download, FileText } from "lucide-react";
 import React from "react";
-import { Link } from "react-router-dom";
+import Breadcrumbs from "../components/Breadcrumbs";
 import JournalImg6 from "/journals/images/digital.jpg";
 import JournalImg5 from "/journals/images/electrol.jpg";
 import JournalImg1 from "/journals/images/governance.jpg";
 import JournalImg4 from "/journals/images/household.jpg";
 import JournalImg3 from "/journals/images/spatial.jpg";
 import JournalImg2 from "/journals/images/sustainable.jpg";
+const breadcrumbsData = [
+  { name: "Home", link: "/" },
+  { name: "Journal Database", link: "/journals" },
+];
+
 const publications = [
   {
     id: 1,
@@ -18,7 +23,8 @@ const publications = [
     pdfUrl:
       "/journals/Digital Transformation and Smart Tourism Development in Nepal's Heritage Cities.pdf",
     image: JournalImg6,
-  },{
+  },
+  {
     id: 2,
     title:
       "Nepal’s Electoral System Challenges, Democratic Implications, and Reform Priorities",
@@ -41,7 +47,7 @@ const publications = [
       "/journals/E-Governance_and_Service_Delivery_in_Nepal_Evidence_from_Nagarjun_Municipality.pdf",
     image: JournalImg1,
   },
- 
+
   {
     id: 4,
     title:
@@ -73,7 +79,6 @@ const publications = [
       "/journals/Sustainable_Energy_Development_Through_Community_Forest_in_Nepal_Insights_From_Siranchowk_Rural_Municipality_Gorkha.pdf",
     image: JournalImg2,
   },
-  
 ];
 
 const Journals = () => {
@@ -104,17 +109,7 @@ const Journals = () => {
   return (
     <section className="bg-white">
       {/* Breadcrumb */}
-      <section className="border-b border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-6">
-          <div className="flex items-center gap-2 text-sm text-slate-600">
-            <Link to="/" className="hover:text-slate-900">
-              Home
-            </Link>
-            <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-900 font-medium">Journal Database</span>
-          </div>
-        </div>
-      </section>
+      <Breadcrumbs breadcrumbs={breadcrumbsData} />
       <section className="mx-auto max-w-7xl px-6 py-12">
         <div className="mb-8">
           <h1 className="text-3xl font-semibold text-slate-900">
