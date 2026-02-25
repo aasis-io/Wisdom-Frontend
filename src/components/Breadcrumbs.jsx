@@ -1,4 +1,4 @@
-import { ChevronRight } from "lucide-react"; // or your preferred icon
+import { ChevronRight } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 

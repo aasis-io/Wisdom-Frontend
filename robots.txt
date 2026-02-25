@@ -1,0 +1,12 @@
+# Allow all search engines to crawl the main site
+User-agent: *
+Disallow: /private/
+Disallow: /config/
+Allow: /
+
+# Sitemap location
+Sitemap: https://waarc.com.np/sitemap.xml
+
+# Example: block a specific bad bot
+User-agent: BadBot
+Disallow: /
