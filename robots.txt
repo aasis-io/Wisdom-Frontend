@@ -5,7 +5,7 @@ Disallow: /config/
 Allow: /
 
 # Sitemap location
-Sitemap: https://waarc.com.np/sitemap.xml
+Sitemap: https://waarc.edu.np/sitemap.xml
 
 # Example: block a specific bad bot
 User-agent: BadBot
