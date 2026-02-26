@@ -39,6 +39,7 @@ const ContactUs = () => {
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         formRef.current,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        //check
       );
       toast.success("Message sent successfully!");
       setFormData({ fullName: "", email: "", subject: "", message: "" });
