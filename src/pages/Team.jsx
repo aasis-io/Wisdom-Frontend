@@ -1,5 +1,6 @@
 import React from "react";
 import Breadcrumbs from "../components/Breadcrumbs";
+import SEO from "./../components/SEO";
 import Aashish from "/team/aashish.jpg";
 import Bijay from "/team/bijay1.jpg";
 import Hari from "/team/hari1.jpg";
@@ -18,35 +19,35 @@ const teamMembers = [
     id: 1,
     name: "Bijay Raj Giri",
     role: "Managing Director",
-    location: "",
+    location: "Rome, Italy",
     image: Bijay,
   },
   {
     id: 2,
     name: "Er. Hari Parsad Ghimire",
     role: "Senior Research Fellow",
-    location: "",
+    location: "Kathmandu, Nepal",
     image: Hari,
   },
   {
     id: 3,
     name: "Prem Bahadur Giri",
     role: "Senior Research Fellow",
-    location: "",
+    location: "Kathmandu, Nepal",
     image: Prem,
   },
   {
     id: 4,
     name: "Aashish Subedi",
     role: "International Student Counselor",
-    location: "",
+    location: "Rome, Italy",
     image: Aashish,
   },
   {
     id: 5,
     name: "Ujjwal Giri",
     role: "Student Support Officer",
-    location: "",
+    location: "Cassino, Italy",
     image: Ujjwal,
   },
 ];
@@ -72,32 +73,41 @@ const TeamCard = ({ member }) => (
 
 /** Team Section */
 const Team = () => (
-  <section className="bg-white">
-    {/* Breadcrumb */}
-    <Breadcrumbs breadcrumbs={breadcrumbsData} />
+  <>
+    <SEO
+      title="Our Team | Wisdom Academy & Research Center (WAARC)"
+      description="Meet the researchers, advisors, and professionals behind Wisdom Academy & Research Center (WAARC), advancing research, policy, and education in Nepal."
+      canonical="https://waarc.edu.np/team"
+      keywords="WAARC team, Wisdom Academy team, research scholars Nepal, academic professionals Nepal, policy researchers Nepal"
+      ogImage=""
+    />
+    <section className="bg-white">
+      {/* Breadcrumb */}
+      <Breadcrumbs breadcrumbs={breadcrumbsData} />
 
-    {/* Header */}
-    <div className="py-14">
-      <div className="mx-auto max-w-3xl px-6 text-center">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-[#1e2a4a]">
-          Our Team
-        </h2>
-        <p className="mt-2 text-base text-slate-600">
-          Meet the Minds Behind WAARC — Dedicated to Knowledge, Research, and
-          Innovation.
-        </p>
+      {/* Header */}
+      <div className="py-14">
+        <div className="mx-auto max-w-3xl px-6 text-center">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-[#1e2a4a]">
+            Our Team
+          </h2>
+          <p className="mt-2 text-base text-slate-600">
+            Meet the Minds Behind WAARC — Dedicated to Knowledge, Research, and
+            Innovation.
+          </p>
+        </div>
       </div>
-    </div>
 
-    {/* Team Grid */}
-    <div className="mx-auto max-w-5xl px-6 pb-20">
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {teamMembers.map((member) => (
-          <TeamCard key={member.id} member={member} />
-        ))}
+      {/* Team Grid */}
+      <div className="mx-auto max-w-5xl px-6 pb-20">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {teamMembers.map((member) => (
+            <TeamCard key={member.id} member={member} />
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </>
 );
 
 export default Team;

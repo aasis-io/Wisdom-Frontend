@@ -93,7 +93,7 @@ const approach = {
 const primaryColor = "#17254e";
 const secondaryColor = "#fbbf24"; // yellow-400
 
-export default function Consulting() {
+export default function StudyAdvisory() {
   return (
     <div className="bg-white">
       {/* Breadcrumb */}

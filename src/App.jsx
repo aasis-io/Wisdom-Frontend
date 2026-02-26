@@ -1,16 +1,21 @@
-import { Helmet, HelmetProvider } from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
 
 export default function App() {
   return (
-    
-    <HelmetProvider>
+    <>
+      {/* Fallback / default SEO */}
       <Helmet>
-        <title>Wisdom</title>
-        <meta name="description" content="Default description for Wisdom" />
+        <title>Wisdom Academy & Research Center</title>
+        <meta
+          name="description"
+          content="A Nepal-based research and consulting institution connecting local
+          insight with global knowledge."
+        />
       </Helmet>
+
       <RouterProvider router={router} />
-    </HelmetProvider>
+    </>
   );
 }
