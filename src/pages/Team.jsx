@@ -6,6 +6,7 @@ import Bijay from "/team/bijay1.jpg";
 import Hari from "/team/hari1.jpg";
 import Prem from "/team/prem1.jpg";
 import Ujjwal from "/team/team4.jpg";
+import Anup from "/team/anup.jpg"
 
 /** Breadcrumb data */
 const breadcrumbsData = [
@@ -45,6 +46,13 @@ const teamMembers = [
   },
   {
     id: 5,
+    name: "Dr. Anup K.C",
+    role: "Senior Editor",
+    location: "Arkanas, USA",
+    image: Anup,
+  },
+  {
+    id: 6,
     name: "Ujjwal Giri",
     role: "Student Support Officer",
     location: "Cassino, Italy",
