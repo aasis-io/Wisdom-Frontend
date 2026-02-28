@@ -2,11 +2,11 @@ import React from "react";
 import Breadcrumbs from "../components/Breadcrumbs";
 import SEO from "./../components/SEO";
 import Aashish from "/team/aashish.jpg";
+import Anup from "/team/anup.jpg";
 import Bijay from "/team/bijay1.jpg";
 import Hari from "/team/hari1.jpg";
 import Prem from "/team/prem1.jpg";
 import Ujjwal from "/team/team4.jpg";
-import Anup from "/team/anup.jpg"
 
 /** Breadcrumb data */
 const breadcrumbsData = [
@@ -25,32 +25,33 @@ const teamMembers = [
   },
   {
     id: 2,
+    name: "Dr. Anup K.C",
+    role: "Senior Editor",
+    location: "Arkanas, USA",
+    image: Anup,
+  },
+  {
+    id: 3,
     name: "Er. Hari Parsad Ghimire",
     role: "Senior Research Fellow",
     location: "Kathmandu, Nepal",
     image: Hari,
   },
   {
-    id: 3,
+    id: 4,
     name: "Prem Bahadur Giri",
     role: "Senior Research Fellow",
     location: "Kathmandu, Nepal",
     image: Prem,
   },
   {
-    id: 4,
+    id: 5,
     name: "Aashish Subedi",
     role: "International Student Counselor",
     location: "Rome, Italy",
     image: Aashish,
   },
-  {
-    id: 5,
-    name: "Dr. Anup K.C",
-    role: "Senior Editor",
-    location: "Arkanas, USA",
-    image: Anup,
-  },
+
   {
     id: 6,
     name: "Ujjwal Giri",
