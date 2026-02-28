@@ -12,11 +12,13 @@ import { Link } from "react-router";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Italy from "./../assets/images/italy.jpg";
 import Thailand from "./../assets/images/thailand.jpg";
+
 const breadcrumbsData = [
   { name: "Home", link: "/" },
   { name: "Services", link: "/services" },
   { name: "Study Advisory", link: "/study-advisory" },
 ];
+
 const hero = {
   title: "Strategic Consulting for Development Impact",
   subtitle:
@@ -49,55 +51,75 @@ const studyDestinations = [
 const approach = {
   title: "Our Consulting Approach",
   subtitle:
-    "We combine global expertise with local insights to deliver solutions that work in real-world contexts.",
+    "Student-focused, transparent, and result-driven guidance for studying abroad, with specialized support for Italy and Thailand.",
   principles: [
     {
-      icon: Target,
-      title: "Results-Focused",
-      description:
-        "Every engagement is designed to deliver tangible, measurable outcomes that advance your organizational goals.",
-    },
-    {
       icon: Users,
-      title: "Collaborative Partnership",
+      title: "Italy: Hybrid & Expert-Led Consulting",
       description:
-        "We work alongside your team, building capacity and ownership rather than imposing external solutions.",
-    },
-    {
-      icon: Briefcase,
-      title: "Practical Expertise",
-      description:
-        "Our consultants bring hands-on experience from diverse development contexts and proven track records.",
-    },
-    {
-      icon: Scale,
-      title: "Context-Sensitive",
-      description:
-        "We adapt international best practices to fit local realities, ensuring sustainable and culturally appropriate solutions.",
+        "Students receive online counselling directly from our official representatives based in Italy, providing first-hand insights into universities, courses, scholarships, visa procedures, and student life.",
     },
     {
       icon: FileText,
-      title: "Evidence-Informed",
+      title: "Local Documentation & Nepal-Based Support",
       description:
-        "Our recommendations are grounded in rigorous research, data analysis, and documented best practices.",
+        "Our Nepal office handles admissions processing, documentation, scholarship applications, visa guidance, and pre-departure preparation—ensuring transparency and strong local support for students and parents.",
+    },
+    {
+      icon: Briefcase,
+      title: "Thailand: End-to-End Support from Nepal",
+      description:
+        "All counselling for Thailand is provided directly from our Nepal office, with personalized guidance on universities, programs, affordability, and career pathways.",
+    },
+    {
+      icon: Target,
+      title: "Step-by-Step Process Management",
+      description:
+        "From initial counselling to admissions, visas, and travel preparation, we guide students through each stage with clarity and efficiency.",
+    },
+  ],
+};
+
+const whyChooseUs = {
+  title: "Why Choose Us",
+  subtitle:
+    "Trusted guidance built on expertise, transparency, and a student-first approach.",
+  points: [
+    {
+      icon: Scale,
+      title: "Country-Specific Expertise",
+      description:
+        "Specialized knowledge for Italy and Thailand ensures accurate, up-to-date, and relevant guidance.",
     },
     {
       icon: Award,
-      title: "Quality-Driven",
+      title: "Transparent & Ethical Counselling",
       description:
-        "We maintain the highest standards of professionalism, delivering work that meets international quality benchmarks.",
+        "We believe in honest advice, realistic options, and clear communication at every stage.",
+    },
+    {
+      icon: Users,
+      title: "Strong International & Local Coordination",
+      description:
+        "Direct coordination between international representatives and our Nepal team ensures smooth and faster processing.",
+    },
+    {
+      icon: Target,
+      title: "Student-Centric Support",
+      description:
+        "We support students from application to arrival, helping them make informed decisions with confidence.",
     },
   ],
 };
 
 const primaryColor = "#17254e";
-const secondaryColor = "#fbbf24"; // yellow-400
+const secondaryColor = "#fbbf24";
 
 export default function StudyAdvisory() {
   return (
     <div className="bg-white">
-      {/* Breadcrumb */}
       <Breadcrumbs breadcrumbs={breadcrumbsData} />
+
       {/* HERO */}
       <section className="relative h-[60vh] lg:h-[50vh]">
         <img
@@ -111,16 +133,15 @@ export default function StudyAdvisory() {
             background: `linear-gradient(to right, ${primaryColor}ee, ${primaryColor}99)`,
           }}
         />
-
         <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6">
           <div className="max-w-3xl text-white">
-            <h1 className="text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
+            <h1 className="text-3xl font-bold md:text-4xl lg:text-5xl">
               {hero.title}
             </h1>
             <p className="mt-6 text-lg text-slate-200">{hero.subtitle}</p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8">
               <Link
-                to={"/services"}
+                to="/services"
                 style={{ backgroundColor: secondaryColor }}
                 className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold text-slate-900 hover:opacity-90 transition"
               >
@@ -132,49 +153,40 @@ export default function StudyAdvisory() {
         </div>
       </section>
 
+      {/* STUDY DESTINATIONS */}
       <section className="bg-slate-50 py-14">
         <div className="mx-auto max-w-7xl px-6">
-          {/* Heading */}
           <div className="text-center">
             <h2 className="text-4xl font-bold text-slate-900">
               Study Destinations
             </h2>
-            <p className="mx-auto mt-4 max-w-3xl text-lg text-slate-600">
+            <p className="mt-4 max-w-3xl mx-auto text-lg text-slate-600">
               Expert guidance for Nepali students planning to study in Italy and
               Thailand
             </p>
           </div>
 
-          {/* Cards */}
           <div className="mt-14 grid gap-10 md:grid-cols-2">
             {studyDestinations.map((item, index) => (
-              <Link to={item.path}>
-                <div
-                  key={index}
-                  className="group rounded-3xl bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-xl"
-                >
-                  {/* Image */}
+              <Link key={index} to={item.path}>
+                <div className="group rounded-3xl bg-white p-5 shadow-md hover:shadow-xl transition">
                   <div className="relative overflow-hidden rounded-2xl">
                     <img
                       src={item.image}
                       alt={item.alt}
-                      className="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="h-72 w-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-
-                    {/* Flag */}
-                    <div className="absolute right-3 top-3 flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 shadow backdrop-blur">
+                    <div className="absolute right-3 top-3 flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 shadow">
                       <img
                         src={item.flag}
                         alt={`${item.country} Flag`}
-                        className="h-4 w-6 rounded-sm object-cover"
+                        className="h-4 w-6 rounded-sm"
                       />
                       <span className="text-sm font-medium text-slate-800">
                         {item.country}
                       </span>
                     </div>
                   </div>
-
-                  {/* Content */}
                   <div className="pt-5 text-center">
                     <h3 className="text-xl font-semibold text-slate-900">
                       {item.title}
@@ -190,47 +202,79 @@ export default function StudyAdvisory() {
         </div>
       </section>
 
-      {/* APPROACH */}
+      {/* CONSULTING APPROACH */}
       <section className="mx-auto max-w-7xl px-6 py-12">
         <div className="text-center">
           <h2 className="text-4xl font-bold text-slate-900">
             {approach.title}
           </h2>
-          <p className="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+          <p className="mt-4 max-w-3xl mx-auto text-lg text-slate-600">
             {approach.subtitle}
           </p>
         </div>
 
-        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {approach.principles.map((principle, i) => (
+        <div className="mt-16 grid gap-8 md:grid-cols-2">
+          {approach.principles.map((item, i) => (
             <div
               key={i}
-              className="rounded-2xl border border-slate-200 bg-white p-8 hover:shadow-lg shadow-sm transition-all duration-300"
-              style={{ borderColor: "transparent" }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.borderColor = primaryColor + "40")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.borderColor = "transparent")
-              }
+              className="rounded-2xl bg-white p-8 shadow-sm hover:shadow-lg transition"
             >
               <div
-                className="rounded-xl p-3 w-fit"
+                className="w-fit rounded-xl p-3"
                 style={{ backgroundColor: `${primaryColor}10` }}
               >
-                <principle.icon
+                <item.icon
                   className="h-6 w-6"
                   style={{ color: primaryColor }}
                 />
               </div>
               <h3 className="mt-5 text-lg font-semibold text-slate-900">
-                {principle.title}
+                {item.title}
               </h3>
               <p className="mt-3 text-slate-600 leading-relaxed">
-                {principle.description}
+                {item.description}
               </p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* WHY CHOOSE US */}
+      <section className="bg-slate-50 py-14">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold text-slate-900">
+              {whyChooseUs.title}
+            </h2>
+            <p className="mt-4 max-w-3xl mx-auto text-lg text-slate-600">
+              {whyChooseUs.subtitle}
+            </p>
+          </div>
+
+          <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {whyChooseUs.points.map((item, i) => (
+              <div
+                key={i}
+                className="rounded-2xl bg-white p-6 text-center shadow-sm hover:shadow-lg transition"
+              >
+                <div
+                  className="mx-auto w-fit rounded-xl p-3"
+                  style={{ backgroundColor: `${primaryColor}10` }}
+                >
+                  <item.icon
+                    className="h-6 w-6"
+                    style={{ color: primaryColor }}
+                  />
+                </div>
+                <h3 className="mt-4 font-semibold text-slate-900">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-sm text-slate-600">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -239,23 +283,21 @@ export default function StudyAdvisory() {
         <div
           className="relative overflow-hidden rounded-3xl p-16 text-white"
           style={{
-            background: `linear-gradient(135deg, ${primaryColor} 0%, ${primaryColor}dd 100%)`,
+            background: `linear-gradient(135deg, ${primaryColor}, ${primaryColor}dd)`,
           }}
         >
-          <div className="absolute right-0 top-1/6 h-full w-1/3 opacity-10">
-            <LineChart className="h-2/3 w-2/3" />
+          <div className="absolute right-0 top-1/6 opacity-10">
+            <LineChart className="h-48 w-48" />
           </div>
           <div className="relative z-10 max-w-2xl">
             <h2 className="text-2xl font-bold">
               Expert Guidance for Studying Abroad
             </h2>
-            <p className="mt-4 text-base text-white/90">
-              Get expert guidance on international education opportunities,
-              admissions, scholarships, and visa procedures. Book your
-              consultation today.
+            <p className="mt-4 text-white/90">
+              Book a consultation to explore international education
+              opportunities with confidence.
             </p>
-
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8">
               <Link
                 to="/contact"
                 style={{ backgroundColor: secondaryColor }}
