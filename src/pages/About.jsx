@@ -101,7 +101,14 @@ export default function About() {
                 </h2>
                 <div
                   className="text-lg text-gray-700 leading-relaxed space-y-4"
-                  dangerouslySetInnerHTML={{ __html: aboutData.description }}
+                  dangerouslySetInnerHTML={{
+                    __html: (() => {
+                      // Decode HTML if it's escaped
+                      const txt = document.createElement("textarea");
+                      txt.innerHTML = aboutData.description || "";
+                      return txt.value;
+                    })(),
+                  }}
                 />
               </div>
 
