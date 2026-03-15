@@ -1,9 +1,42 @@
 import { Facebook, Github, Globe, Linkedin, Twitter } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getUsefulLinks } from "../../services/api"; // adjust path
+import Logo from "./../../assets/images/logo-light.svg";
 
-import Logo from "./../../assets/images/logo-light.svg"; // adjust path
+/* -----------------------------
+STATIC LINKS (OBJECT BASED)
+----------------------------- */
+
+const quickLinks = [
+  { name: "Home", href: "/" },
+  { name: "Services", href: "/services" },
+  { name: "Our Work", href: "/work" },
+  { name: "Future Plans", href: "/future-plans" },
+  { name: "Contact Us", href: "/contact" },
+];
+
+const companyLinks = [
+  { name: "About Us", href: "/about" },
+  { name: "Careers", href: "/careers" },
+  { name: "News", href: "/news" },
+];
 
 export default function Footer() {
+  const [usefulLinks, setUsefulLinks] = useState([]);
+
+  useEffect(() => {
+    const fetchLinks = async () => {
+      try {
+        const data = await getUsefulLinks();
+        setUsefulLinks(data);
+      } catch (error) {
+        console.error("Failed to load useful links", error);
+      }
+    };
+
+    fetchLinks();
+  }, []);
+
   return (
     <footer className="relative bg-[#0E1B3D] text-white">
       {/* WAVE TOP */}
@@ -15,16 +48,14 @@ export default function Footer() {
         >
           <path
             d="M0,30 C240,45 480,25 720,30 960,35 1200,45 1440,30 L1440,0 L0,0 Z"
-            fill="#ffffff" // wave color
+            fill="#ffffff"
           />
         </svg>
       </div>
 
-      {/* CONTENT */}
       <div className="relative mx-auto max-w-7xl px-6 pb-10 pt-28">
-        {/* OUTER GRID */}
         <div className="grid gap-12 lg:grid-cols-5">
-          {/* BRANDING — 40% */}
+          {/* BRAND */}
           <div className="lg:col-span-2">
             <div className="mb-4 w-56">
               <img
@@ -39,70 +70,44 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* LINKS — 60% */}
+          {/* LINKS */}
           <div className="grid gap-10 grid-cols-2 lg:col-span-3 lg:grid-cols-3">
-            {/* QUICK LINKS */}
+            {/* USEFUL LINKS (API) */}
             <div>
               <h4 className="mb-4 text-sm font-semibold text-white/90">
                 Useful Links
               </h4>
+
               <ul className="space-y-3 text-sm text-white/70">
-                <li>
-                  <a
-                    href="https://europass.europa.eu/en/create-europass-cv"
-                    className="hover:text-white"
-                  >
-                    Create your Europass CV
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://noc.moest.gov.np/"
-                    className="hover:text-white"
-                  >
-                    Apply for NOC
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://opcr.nepalpolice.gov.np/#/login"
-                    className="hover:text-white"
-                  >
-                    Online Police Clearance Report
-                  </a>
-                </li>
+                {usefulLinks.map((link) => (
+                  <li key={link.id}>
+                    <a
+                      href={link.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-white"
+                    >
+                      {link.title}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
+
+            {/* QUICK LINKS */}
             <div>
               <h4 className="mb-4 text-sm font-semibold text-white/90">
                 Quick Links
               </h4>
+
               <ul className="space-y-3 text-sm text-white/70">
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Services
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Our Work
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Future Plans
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Contact Us
-                  </a>
-                </li>
+                {quickLinks.map((link) => (
+                  <li key={link.name}>
+                    <a href={link.href} className="hover:text-white">
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -111,50 +116,17 @@ export default function Footer() {
               <h4 className="mb-4 text-sm font-semibold text-white/90">
                 Company
               </h4>
+
               <ul className="space-y-3 text-sm text-white/70">
-                <li>
-                  <a href="#" className="hover:text-white">
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Careers
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    News
-                  </a>
-                </li>
+                {companyLinks.map((link) => (
+                  <li key={link.name}>
+                    <a href={link.href} className="hover:text-white">
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
-
-            {/* SOCIAL */}
-            {/* <div>
-              <h4 className="mb-4 text-sm font-semibold text-white/90">
-                Social
-              </h4>
-              <ul className="space-y-3 text-sm text-white/70">
-                <li>
-                  <a href="#" className="hover:text-white">
-                    YouTube
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Facebook
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    LinkedIn
-                  </a>
-                </li>
-              </ul>
-            </div> */}
-
-            {/* LEGAL */}
           </div>
         </div>
 
@@ -168,19 +140,19 @@ export default function Footer() {
           </p>
 
           <div className="flex items-center gap-5 text-white/70">
-            <a href="#" className="hover:text-white">
+            <a href="#">
               <Twitter size={18} />
             </a>
-            <a href="#" className="hover:text-white">
+            <a href="#">
               <Linkedin size={18} />
             </a>
-            <a href="#" className="hover:text-white">
+            <a href="#">
               <Facebook size={18} />
             </a>
-            <a href="#" className="hover:text-white">
+            <a href="#">
               <Github size={18} />
             </a>
-            <a href="#" className="hover:text-white">
+            <a href="#">
               <Globe size={18} />
             </a>
           </div>

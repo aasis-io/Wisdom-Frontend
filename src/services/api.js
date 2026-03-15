@@ -41,4 +41,81 @@ export const registerForEvent = async (data) => {
   }
 };
 
+/* ------------------------------------------------------------------
+   HOME PAGE
+------------------------------------------------------------------- */
+
+export const getHomePage = async () => {
+  const response = await api.get("/getHome");
+  return response.data;
+};
+
+/* ------------------------------------------------------------------
+   ABOUT PAGE
+------------------------------------------------------------------- */
+
+export const getAboutPage = async () => {
+  const response = await api.get("/getAbout");
+  return response.data;
+};
+
+/* ------------------------------------------------------------------
+   TEAM MEMBERS
+------------------------------------------------------------------- */
+
+export const getTeamMembers = async () => {
+  const response = await api.get("/getTeam");
+  return response.data;
+};
+
+/* ------------------------------------------------------------------
+   JOURNALS
+------------------------------------------------------------------- */
+
+export const getJournals = async () => {
+  const response = await api.get("/getJournals");
+  return response.data;
+};
+
+export const getJournalById = async (id) => {
+  const response = await api.get(`/journal/${id}`);
+  return response.data;
+};
+
+/* ------------------------------------------------------------------
+   USEFUL LINKS
+------------------------------------------------------------------- */
+
+export const getUsefulLinks = async () => {
+  const response = await api.get("/getLink");
+  return response.data;
+};
+
+/* ------------------------------------------------------------------
+   MEDIA IMAGES
+------------------------------------------------------------------- */
+
+export const getMediaImages = async () => {
+  const response = await api.get("/getMediaImages");
+  return response.data;
+};
+
+/* ------------------------------------------------------------------
+   MEDIA VIDEOS
+------------------------------------------------------------------- */
+
+export const getMediaVideos = async () => {
+  const response = await api.get("/getMediaVideos");
+  return response.data;
+};
+
+/* ------------------------------------------------------------------
+   SITE SETTINGS
+------------------------------------------------------------------- */
+
+export const getSiteSettings = async () => {
+  const response = await api.get("/getSiteSettings");
+  return response.data;
+};
+
 export default api;

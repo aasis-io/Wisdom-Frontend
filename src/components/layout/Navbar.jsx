@@ -12,17 +12,18 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
+import { getSiteSettings } from "../../services/api";
 import Logo from "./../../assets/images/logo-dark.svg";
 
-/* ================= Static Site Settings ================= */
-const SITE_SETTINGS = {
-  phone: "984-7947004",
-  email: "waarc2022@gmail.com",
-  location: "Chandragiri-6, Kathmandu",
-  facebook: "https://www.facebook.com/profile.php?id=100083376210991",
-  twitter: "/",
-  linkedin: "/",
-  youtube: "https://www.youtube.com/@wisdomacademyandresearchce4071",
+/* ================= Default Settings ================= */
+const DEFAULT_SETTINGS = {
+  phone: "",
+  email: "",
+  location: "",
+  facebook: "",
+  twitter: "",
+  linkedin: "",
+  youtube: "",
 };
 
 const NAV_ITEMS = [
@@ -35,7 +36,6 @@ const NAV_ITEMS = [
       { label: "Collaboration", href: "/collaborate" },
     ],
   },
-
   {
     label: "About Us",
     children: [
@@ -54,11 +54,26 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [desktopOpenMenu, setDesktopOpenMenu] = useState(null);
   const [mobileOpenMenu, setMobileOpenMenu] = useState(null);
+  const [siteSettings, setSiteSettings] = useState(DEFAULT_SETTINGS);
 
   const desktopRef = useRef(null);
   const mobileRef = useRef(null);
 
-  /* Close desktop dropdown on outside click */
+  /* ================= Fetch Site Settings ================= */
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const data = await getSiteSettings();
+        setSiteSettings(data);
+      } catch (error) {
+        console.error("Failed to fetch site settings", error);
+      }
+    };
+
+    fetchSettings();
+  }, []);
+
+  /* ================= Close desktop dropdown ================= */
   useEffect(() => {
     function handleClickOutside(e) {
       if (desktopRef.current && !desktopRef.current.contains(e.target)) {
@@ -69,7 +84,7 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  /* Close mobile dropdown on outside click */
+  /* ================= Close mobile dropdown ================= */
   useEffect(() => {
     function handleClickOutside(e) {
       if (mobileRef.current && !mobileRef.current.contains(e.target)) {
@@ -87,37 +102,47 @@ export default function Navbar() {
         <div className="hidden md:block bg-[#0E1B3D] text-white text-sm">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
             <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2">
-                <Phone className="text-[#F4B740]" size={14} />
-                <span>+977-{SITE_SETTINGS.phone}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="text-[#F4B740]" size={14} />
-                <span>{SITE_SETTINGS.email}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="text-[#F4B740]" size={14} />
-                <span>{SITE_SETTINGS.location}</span>
-              </div>
+              {siteSettings.phone && (
+                <div className="flex items-center gap-2">
+                  <Phone className="text-[#F4B740]" size={14} />
+                  <span>{siteSettings.phone}</span>
+                </div>
+              )}
+
+              {siteSettings.email && (
+                <div className="flex items-center gap-2">
+                  <Mail className="text-[#F4B740]" size={14} />
+                  <span>{siteSettings.email}</span>
+                </div>
+              )}
+
+              {siteSettings.location && (
+                <div className="flex items-center gap-2">
+                  <MapPin className="text-[#F4B740]" size={14} />
+                  <span>{siteSettings.location}</span>
+                </div>
+              )}
             </div>
 
             <div className="flex items-center gap-2">
               {[
-                { icon: Facebook, link: SITE_SETTINGS.facebook },
-                { icon: Youtube, link: SITE_SETTINGS.youtube },
-                { icon: Twitter, link: SITE_SETTINGS.twitter },
-                { icon: Linkedin, link: SITE_SETTINGS.linkedin },
-              ].map(({ icon: Icon, link }, i) => (
-                <a
-                  key={i}
-                  href={link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F4B740] text-[#0E1B3D] hover:opacity-80 transition"
-                >
-                  <Icon size={14} />
-                </a>
-              ))}
+                { icon: Facebook, link: siteSettings.facebook },
+                { icon: Youtube, link: siteSettings.youtube },
+                { icon: Twitter, link: siteSettings.twitter },
+                { icon: Linkedin, link: siteSettings.linkedin },
+              ].map(({ icon: Icon, link }, i) =>
+                link ? (
+                  <a
+                    key={i}
+                    href={link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F4B740] text-[#0E1B3D] hover:opacity-80 transition"
+                  >
+                    <Icon size={14} />
+                  </a>
+                ) : null
+              )}
             </div>
           </div>
         </div>
@@ -125,16 +150,21 @@ export default function Navbar() {
         {/* ================= Mobile Top Bar ================= */}
         <div className="block md:hidden bg-[#0E1B3D] text-white text-sm">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
-            <div className="flex items-center gap-2">
-              <Phone className="text-[#F4B740]" size={14} />
-              <span>+977-{SITE_SETTINGS.phone}</span>
-            </div>
-            <a
-              href={`tel:+977${SITE_SETTINGS.phone}`}
-              className="rounded bg-[#F4B740] px-3 py-1 text-[#0E1B3D] font-medium"
-            >
-              Call Now
-            </a>
+            {siteSettings.phone && (
+              <div className="flex items-center gap-2">
+                <Phone className="text-[#F4B740]" size={14} />
+                <span>{siteSettings.phone}</span>
+              </div>
+            )}
+
+            {siteSettings.phone && (
+              <a
+                href={`tel:${siteSettings.phone}`}
+                className="rounded bg-[#F4B740] px-3 py-1 text-[#0E1B3D] font-medium"
+              >
+                Call Now
+              </a>
+            )}
           </div>
         </div>
 
@@ -144,7 +174,7 @@ export default function Navbar() {
             <img src={Logo} alt="WAARC Logo" className="h-16 w-auto" />
           </Link>
 
-          {/* ========== Desktop Navigation ========== */}
+          {/* ================= Desktop Navigation ================= */}
           <nav
             ref={desktopRef}
             className="hidden lg:flex items-center gap-8 text-base font-medium text-gray-800"
@@ -196,10 +226,8 @@ export default function Navbar() {
             )}
           </nav>
 
-          {/* ========== Right Actions ========== */}
+          {/* ================= Right Actions ================= */}
           <div className="flex items-center gap-4">
-            {/* <Search size={16} className="text-gray-700" /> */}
-
             <Link
               to="/contact"
               className="hidden md:inline-flex items-center gap-2 bg-[#0E1B3D] px-5 py-3 rounded-lg text-sm text-white"
@@ -287,7 +315,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Background Overlay */}
+      {/* ================= Background Overlay ================= */}
       {mobileOpen && (
         <div
           className="fixed inset-0 z-20 bg-black/20 backdrop-blur-sm lg:hidden"

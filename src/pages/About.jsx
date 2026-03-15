@@ -1,10 +1,11 @@
 import { Lightbulb, Target } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import Breadcrumbs from "../components/Breadcrumbs";
 import SEO from "../components/SEO";
 import Services from "../components/layout/Services";
 import WhyChooseUs from "../components/layout/WhyChooseUs";
+import { getAboutPage } from "../services/api"; // <-- backend API
 
 // =================== DATA OBJECTS ===================
 const breadcrumbsData = [
@@ -29,17 +30,41 @@ const missionVision = [
   },
 ];
 
-// =================== MAIN ABOUT PAGE ===================
 export default function About() {
+  const [aboutData, setAboutData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getAboutPage();
+        setAboutData(data);
+      } catch (err) {
+        console.error("Failed to fetch About data", err);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (!aboutData) return null; // could show loading spinner
+
   return (
     <>
       <SEO
-        title="About WAARC | Wisdom Academy & Research Center Nepal"
-        description="Learn about Wisdom Academy & Research Center (WAARC), a Nepal-based research and consultancy organization advancing policy insight, scholarship, and global education."
+        title={
+          aboutData.metaTitle ||
+          "About WAARC | Wisdom Academy & Research Center Nepal"
+        }
+        description={
+          aboutData.metaDescription ||
+          "Learn about WAARC, a Nepal-based research and consultancy organization advancing policy insight, scholarship, and global education."
+        }
         canonical="https://waarc.edu.np/about"
-        keywords="WAARC, Wisdom Academy and Research Center, research center Nepal, academic consultancy Nepal, policy research Nepal"
-        ogImage="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d"
+        keywords={
+          aboutData.metaKeywords ||
+          "WAARC, Wisdom Academy and Research Center, research center Nepal, academic consultancy Nepal, policy research Nepal"
+        }
       />
+
       <main className="w-full overflow-hidden text-gray-800">
         {/* Breadcrumb */}
         <Breadcrumbs breadcrumbs={breadcrumbsData} />
@@ -55,7 +80,7 @@ export default function About() {
           <div className="relative mx-auto flex min-h-[50vh] max-w-7xl items-center px-6">
             <div className="max-w-3xl text-white">
               <h1 className="text-3xl font-extrabold leading-tight md:text-4xl xl:text-5xl">
-                About Wisdom Academy & Research Center
+                {aboutData.title}
               </h1>
               <p className="mt-6 text-lg text-gray-200">
                 A Nepal-based research and consulting institution connecting
@@ -74,30 +99,23 @@ export default function About() {
                 <h2 className="text-4xl font-extrabold text-[#1e2a4a] leading-tight">
                   Who We Are
                 </h2>
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  Wisdom Academy & Research Center (WAARC) is a Nepal-based
-                  professional research and consultancy organization committed
-                  to advancing knowledge, policy insight, and institutional
-                  capacity.
-                </p>
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  Wisdom Academy and Research Center empowers scholars and
-                  guides students to world-class opportunities, shaping the
-                  future of research and global education.
-                </p>
+                <div
+                  className="text-lg text-gray-700 leading-relaxed space-y-4"
+                  dangerouslySetInnerHTML={{ __html: aboutData.description }}
+                />
               </div>
 
-              {/* Images */}
+              {/* Static Images */}
               <div className="relative flex justify-center items-center">
                 <div className="absolute -top-8 -right-2 h-20 w-20 rounded-full bg-linear-to-tr from-[#17254e] to-[#455171] opacity-50 animate-pulse"></div>
                 <div className="relative w-full max-w-md lg:max-w-lg">
                   <img
-                    src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+                    src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d"
                     alt="Team collaboration"
                     className="rounded-xl shadow-2xl transform transition-transform duration-500 hover:scale-105"
                   />
                   <img
-                    src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d"
+                    src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
                     alt="Research planning"
                     className="absolute -bottom-12 md:-left-12 left-1/5 w-64 rounded-xl shadow-xl transform transition-transform duration-500 hover:rotate-3 hover:scale-105 md:block"
                   />
@@ -109,19 +127,6 @@ export default function About() {
 
         {/* Mission & Vision Cards */}
         <section className="relative overflow-hidden bg-[#e8e9ed] py-16">
-          <div className="absolute z-30 top-0 left-0 w-full overflow-hidden leading-none">
-            <svg
-              className="block h-20 w-full"
-              viewBox="0 0 1440 100"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M0,30 C240,45 480,25 720,30 960,35 1200,45 1440,30 L1440,0 L0,0 Z"
-                fill="#ffffff"
-              />
-            </svg>
-          </div>
-
           <div className="relative mx-auto max-w-6xl px-6">
             <div className="mb-12 max-w-3xl">
               <span className="text-base font-semibold uppercase tracking-wider text-yellow-500">
@@ -136,7 +141,6 @@ export default function About() {
                 impact.
               </p>
             </div>
-
             <div className="grid gap-16 lg:grid-cols-2">
               {missionVision.map((card, i) => (
                 <div
@@ -168,8 +172,6 @@ export default function About() {
 
         {/* Features */}
         <section className="relative bg-[#f5f6fb] py-20 overflow-hidden">
-          <div className="absolute inset-0 opacity-[0.08] bg-[radial-gradient(#000_1px,transparent_1px)] bg-size-[24px_24px]" />
-
           <div className="mx-auto max-w-7xl px-6">
             <WhyChooseUs />
           </div>

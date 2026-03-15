@@ -1,30 +1,28 @@
 import { Calendar, FileText, TrendingUp, Users } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getAboutPage } from "../../services/api"; // <-- backend API
 import About from "./../../assets/images/about.png";
 import LogoIn from "./../../assets/images/logoIn.svg";
 import LogoOut from "./../../assets/images/logoOut.svg";
 
-// Mock backend data
-const mockCardsData = [
-  {
-    title: "Research Excellence",
-    text: "PhD-level research fellows with extensive publications in high-impact international journals.",
-  },
-  {
-    title: "Publication Support",
-    text: "End-to-end guidance in research writing and international journal publication.",
-  },
-  {
-    title: "Global Education Consultancy",
-    text: "Expert guidance for university admissions in Italy and Thailand from Nepal.",
-  },
-  {
-    title: "Italy-Based Student Support",
-    text: "Dedicated team members in Italy ensuring a smooth academic and living transition.",
-  },
-];
-
 export default function WhyChooseUs() {
+
+  const [aboutData, setAboutData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getAboutPage();
+        setAboutData(data);
+      } catch (err) {
+        console.error("Failed to fetch About data", err);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (!aboutData) return null; // could show loading spinner
+
   const cardsConfig = [
     { icon: <Calendar className="h-6 w-6" />, color: "bg-[#1e2a4a]" },
     { icon: <FileText className="h-6 w-6" />, color: "bg-[#f4b740]" },
@@ -61,11 +59,11 @@ export default function WhyChooseUs() {
 
         {/* RIGHT FEATURE CARDS */}
         <div className="grid gap-x-12 gap-y-12 sm:grid-cols-2">
-          {mockCardsData.map((card, index) => {
-            const config = cardsConfig[index]; // fixed icon & color
+          {aboutData.whyUs.map((card, index) => {
+            const config = cardsConfig[index % cardsConfig.length]; // cycle icons/colors if > 4
             return (
               <div
-                key={index}
+                key={card.id}
                 className="relative rounded-3xl bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-xl"
               >
                 <div
@@ -77,7 +75,7 @@ export default function WhyChooseUs() {
                   {card.title}
                 </h4>
                 <p className="mt-3 text-center text-base leading-relaxed text-gray-600">
-                  {card.text}
+                  {card.description}
                 </p>
               </div>
             );
