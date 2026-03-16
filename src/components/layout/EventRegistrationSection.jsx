@@ -89,7 +89,7 @@ export default function EventRegistrationSection() {
                   <img
                     src={eventImage}
                     alt={event.title}
-                    className="mx-auto mb-4 h-40 w-full max-w-sm rounded-2xl object-cover"
+                    className="mx-auto mb-4 h-72 w-full max-w-105 rounded-2xl object-cover"
                   />
                 )}
 
