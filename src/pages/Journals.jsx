@@ -21,7 +21,9 @@ const Journals = () => {
         const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
 
         const processed = data.map((item) => {
-          // Process image URL
+          const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
+
+          // Image URL (already works)
           if (item.image) {
             const rawImageUrl = item.image.startsWith("http")
               ? item.image
@@ -31,11 +33,17 @@ const Journals = () => {
             item.image = encodeURI(rawImageUrl);
           }
 
-          // Process PDF URL
+          // PDF URL: use the same base path as images
           if (item.pdf) {
-            const rawPdfUrl = item.pdf.startsWith("http")
-              ? item.pdf
-              : `${baseUrl}${item.pdf.startsWith("/") ? "" : "/"}${item.pdf}`;
+            // replace "/uploads/" with "/waarc-uploads/" if it exists
+            let pdfPath = item.pdf.startsWith("/uploads/")
+              ? item.pdf.replace("/uploads/", "/waarc-uploads/")
+              : item.pdf;
+
+            const rawPdfUrl = pdfPath.startsWith("http")
+              ? pdfPath
+              : `${baseUrl}${pdfPath.startsWith("/") ? "" : "/"}${pdfPath}`;
+
             item.pdf = encodeURI(rawPdfUrl);
           }
 
