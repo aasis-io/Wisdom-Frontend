@@ -89,14 +89,14 @@ export default function HeroSection() {
           {/* Right Image */}
           <div className="relative mx-auto w-full max-w-md lg:max-w-4xl">
             <img
-              src={homeData.image}
+              src={homeData.image} // LCP hero image
               alt={`Hero image for ${homeData.title}`}
               className="w-full rounded-3xl object-cover"
-              loading="lazy"
-              width={1200} // Set width & height to help CLS
+              width={1200}
               height={800}
               decoding="async"
               fetchpriority="high"
+              loading="eager" // <-- load immediately
             />
           </div>
         </div>
