@@ -73,9 +73,9 @@ const ContactUs = () => {
     <section className="bg-white">
       <Breadcrumbs breadcrumbs={breadcrumbsData} />
 
-      <div className="py-20">
+      <div className="py-8">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="mb-14">
+          <div className="mb-8">
             <h1 className="text-3xl md:text-4xl font-semibold text-gray-900">
               Contact Us
             </h1>
