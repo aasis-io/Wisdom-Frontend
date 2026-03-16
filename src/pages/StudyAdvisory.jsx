@@ -168,7 +168,7 @@ export default function StudyAdvisory() {
 
           <div className="mt-14 grid gap-10 md:grid-cols-2">
             {studyDestinations.map((item, index) => (
-              <a key={index} href={item.path}>
+              <div key={index}>
                 <div className="group rounded-3xl bg-white p-5 shadow-md hover:shadow-xl transition">
                   <div className="relative overflow-hidden rounded-2xl">
                     <img
@@ -187,6 +187,7 @@ export default function StudyAdvisory() {
                       </span>
                     </div>
                   </div>
+
                   <div className="pt-5 text-center">
                     <h3 className="text-xl font-semibold text-slate-900">
                       {item.title}
@@ -196,7 +197,7 @@ export default function StudyAdvisory() {
                     </p>
                   </div>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         </div>
