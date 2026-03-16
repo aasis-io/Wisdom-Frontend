@@ -80,7 +80,7 @@ const Journals = () => {
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </h2>
 
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 {groupedJournals[category].map((journal) => {
                   return (
                     <div
@@ -92,7 +92,7 @@ const Journals = () => {
                           <img
                             src={journal.image}
                             alt={journal.title}
-                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            className="h-full w-full object-cover transition-transform duration-300 cursor-pointer group-hover:scale-105"
                           />
                         )}
                       </div>
