@@ -1,4 +1,3 @@
-import { ArrowRight } from "lucide-react";
 import React from "react";
 import { Link } from "react-router";
 
@@ -46,31 +45,25 @@ export default function Services() {
               key={idx}
               className="group relative overflow-hidden rounded-3xl"
             >
-              <img
-                src={service.image}
-                alt={service.title}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-
+              <Link to={service.path}>
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </Link>
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/50 to-transparent" />
-
               {/* Content */}
               <div className="absolute inset-0 flex flex-col justify-end p-8">
-                <h3 className=" text-xl md:text-2xl  font-bold text-white">
-                  {service.title}
-                </h3>
+                <Link to={service.path}>
+                  <h3 className=" text-xl md:text-2xl  font-bold text-white">
+                    {service.title}
+                  </h3>{" "}
+                </Link>
                 <p className="mt-2 max-w-md text-gray-200">
                   {service.description}
                 </p>
-
-                <Link
-                  to={service.path}
-                  className="mt-3 md:mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-[#f2b84b] px-6 py-3 text-sm font-semibold text-[#1e2a4a] transition hover:bg-[#e6ac3f]"
-                >
-                  Learn More
-                  <ArrowRight size={16} />
-                </Link>
               </div>
             </div>
           ))}
