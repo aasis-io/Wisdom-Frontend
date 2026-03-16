@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -9,8 +7,18 @@
 html,
 body {
   font-family: var(--font-sans);
+  font-size: 16px; /* fixes layout shift */
+  line-height: 1.5; /* fixes layout shift */
 }
 
+/* Custom font */
+@font-face {
+  font-family: "MyFont";
+  src: url("myfont.woff2") format("woff2");
+  font-display: swap; /* swap prevents invisible text & CLS */
+}
+
+/* ===================== TAILWIND UTILITIES ===================== */
 @layer utilities {
   /* Backgrounds */
   .bg-dark {
@@ -52,7 +60,7 @@ body {
     color: #cbd5e1;
   }
 
-  /* Accent hover (for buttons/links) */
+  /* Accent hover */
   .hover\:bg-accent-hover:hover {
     background-color: #e6b800;
   }
@@ -62,6 +70,8 @@ button,
 a {
   cursor: pointer;
 }
+
+/* ===================== ANIMATIONS ===================== */
 @keyframes float {
   0%,
   100% {
@@ -83,110 +93,73 @@ a {
     transform: rotate(360deg);
   }
 }
-
 .animate-spin-slow {
   animation: spinSlow 12s linear infinite;
 }
 
-.custom-pagination .swiper-pagination-bullet {
-  width: 10px;
-  height: 10px;
-  background: #d1d5db;
-  opacity: 1;
+/* ===================== SWIPER CAROUSEL ===================== */
+.swiper {
+  padding-bottom: 1.5rem;
+  min-height: 300px; /* reserve space to prevent CLS */
 }
 
-.custom-pagination .swiper-pagination-bullet-active {
-  width: 28px;
-  border-radius: 9999px;
-  background: #f4b740;
-}
+.custom-pagination .swiper-pagination-bullet,
 .custom-pagination2 .swiper-pagination-bullet {
   width: 10px;
   height: 10px;
   background: #d1d5db;
   opacity: 1;
 }
-
+.custom-pagination .swiper-pagination-bullet-active,
 .custom-pagination2 .swiper-pagination-bullet-active {
   width: 28px;
   border-radius: 9999px;
   background: #f4b740;
 }
-.swiper {
-  padding-bottom: 1.5rem;
-}
-
-
 
 /* ===================== MENU COMPONENTS ===================== */
-.menu-item {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: 0.75rem; /* gap-3 */
-  padding: 0.5rem 0.75rem; /* py-2 px-3 */
-  font-weight: 500; /* font-medium */
-  border-radius: 0.5rem; /* rounded-lg */
-  font-size: 0.875rem; /* text-theme-sm */
-  line-height: 1.25rem;
-}
-.menu-item-active {
-  background-color: #ECF3FF; /* brand-50 */
-  color: #465FFF; /* brand-500 */
-}
-.menu-item-inactive {
-  color: #344054; /* gray-700 */
-  cursor: pointer;
-}
-.menu-item-inactive:hover {
-  background-color: #F9FAFB; /* gray-100 */
-}
-.menu-item-icon {
-  color: #667085; /* gray-500 */
-}
-.menu-item-icon-active {
-  color: #465FFF; /* brand-500 */
-}
-.menu-item-icon-size svg {
-  height: 1.5rem;
-  width: 1.5rem;
-}
-.menu-item-icon-inactive {
-  color: #667085;
-}
-.menu-item-arrow {
-  position: relative;
-}
-.menu-item-arrow-active {
-  transform: rotate(180deg);
-  color: #465FFF;
-}
-.menu-item-arrow-inactive {
-  color: #667085;
-}
-
-/* Dropdown Menu */
+.menu-item,
 .menu-dropdown-item {
   position: relative;
   display: flex;
   align-items: center;
   gap: 0.75rem;
   border-radius: 0.5rem;
-  padding: 0.625rem 0.75rem;
-  font-size: 0.875rem;
   font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 0.5rem 0.75rem;
 }
+.menu-item-active,
 .menu-dropdown-item-active {
-  background-color: #ECF3FF;
-  color: #465FFF;
+  background-color: #ecf3ff;
+  color: #465fff;
 }
+.menu-item-inactive,
 .menu-dropdown-item-inactive {
   color: #344054;
+  cursor: pointer;
 }
+.menu-item-inactive:hover,
 .menu-dropdown-item-inactive:hover {
-  background-color: #F9FAFB;
+  background-color: #f9fafb;
 }
+
+.menu-item-icon,
+.menu-item-icon-inactive {
+  color: #667085;
+}
+.menu-item-icon-active {
+  color: #465fff;
+}
+.menu-item-arrow-active {
+  transform: rotate(180deg);
+  color: #465fff;
+}
+.menu-item-arrow-inactive {
+  color: #667085;
+}
+
 .menu-dropdown-badge {
   display: block;
   border-radius: 9999px;
@@ -194,17 +167,16 @@ a {
   font-size: 0.75rem;
   font-weight: 500;
   text-transform: uppercase;
-  color: #465FFF;
+  color: #465fff;
 }
 .menu-dropdown-badge-active {
-  background-color: #DDE9FF;
+  background-color: #dde9ff;
 }
 .menu-dropdown-badge-inactive {
-  background-color: #ECF3FF;
+  background-color: #ecf3ff;
 }
 
-/* ===================== UTILITIES ===================== */
-/* Scrollbars */
+/* ===================== SCROLLBARS ===================== */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -216,15 +188,12 @@ a {
   height: 0.375rem;
   width: 0.375rem;
 }
-.custom-scrollbar::-webkit-scrollbar-track {
-  border-radius: 9999px;
-}
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #E4E7EC;
+  background-color: #e4e7ec;
   border-radius: 9999px;
 }
 
-/* Remove date/time arrows */
+/* ===================== INPUTS ===================== */
 input[type="date"]::-webkit-inner-spin-button,
 input[type="time"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator,
@@ -233,129 +202,23 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   -webkit-appearance: none;
 }
 
-/* Table Checkbox */
-.tableCheckbox:checked ~ span span {
-  opacity: 1;
-}
-.tableCheckbox:checked ~ span {
-  border-color: #465FFF;
-  background-color: #465FFF;
-}
-
-/* ===================== APEXCHARTS ===================== */
-.apexcharts-legend-text {
-  color: #344054 !important;
-  padding-left: 1.25rem !important;
-}
-.apexcharts-text {
-  fill: #344054 !important;
-}
-.apexcharts-tooltip.apexcharts-theme-light {
-  display: flex;
-  gap: 0.25rem;
-  border-radius: 0.5rem;
-  border: 1px solid #E4E7EC;
-  padding: 0.75rem;
-  box-shadow: 0px 4px 8px -2px rgba(16,24,40,0.1), 0px 2px 4px -2px rgba(16,24,40,0.06);
-  background-color: #FFFFFF;
-}
-.apexcharts-tooltip-marker {
-  margin-right: 0.375rem;
-  height: 0.375rem;
-  width: 0.375rem;
-}
-.apexcharts-tooltip-title {
-  margin-bottom: 0;
-  border-bottom: 0;
-  background: transparent;
-  padding: 0;
-  font-size: 10px;
-  line-height: 1rem;
-  color: #344054;
-}
-.apexcharts-tooltip-text {
-  font-size: 0.875rem;
-  color: #344054;
-}
-.apexcharts-tooltip-text-y-value {
-  font-weight: 500;
-}
-.apexcharts-gridline {
-  stroke: #F2F4F7;
-}
-#chartTwo .apexcharts-datalabels-group {
-  transform: translateY(-6rem);
-}
-#chartTwo .apexcharts-datalabels-group .apexcharts-text,
-#chartDarkStyle .apexcharts-datalabels-group .apexcharts-text {
-  fill: #101828;
-  font-weight: 600;
-}
-
-/* ===================== JVECTOR MAP ===================== */
-.jvectormap-container {
-  background-color: #F9FAFB;
-}
-.jvectormap-region.jvectormap-element {
-  fill: #D0D5DD;
-  cursor: pointer;
-}
-.jvectormap-region.jvectormap-element:hover {
-  fill: #465FFF;
-}
-.jvectormap-marker.jvectormap-element {
-  stroke: #E4E7EC;
-}
-.jvectormap-tip {
-  background-color: #465FFF;
-  border: none;
-  padding: 0.25rem 0.5rem;
-}
-.jvectormap-zoomin,
-.jvectormap-zoomout {
-  display: none;
-}
-
-/* ===================== SWIPER CAROUSEL ===================== */
-.stocks-slider-outer .swiper-button-next,
-.stocks-slider-outer .swiper-button-prev {
-  position: static;
-  margin-top: 0;
-  height: 2rem;
-  width: 2.25rem;
-  border-radius: 9999px;
-  border: 1px solid #E4E7EC;
-  background-color: #F9FAFB;
-  color: #344054;
-  transition: background-color 0.2s, color 0.2s;
-}
-.stocks-slider-outer .swiper-button-next.swiper-button-disabled,
-.stocks-slider-outer .swiper-button-prev.swiper-button-disabled {
-  background-color: #FFFFFF;
-  opacity: 0.5;
-}
-.stocks-slider-outer .swiper-button-next svg,
-.stocks-slider-outer .swiper-button-prev svg {
-  width: auto;
-  height: auto;
-}
-
 /* ===================== TASKS / CHECKBOXES ===================== */
 .taskCheckbox:checked ~ .box span {
   opacity: 1;
-  background-color: #465FFF;
+  background-color: #465fff;
 }
 .taskCheckbox:checked ~ p {
   color: #667085;
   text-decoration: line-through;
 }
 .taskCheckbox:checked ~ .box {
-  border-color: #465FFF;
-  background-color: #465FFF;
+  border-color: #465fff;
+  background-color: #465fff;
 }
 .task {
   border-radius: 0.75rem;
-  box-shadow: 0px 1px 3px rgba(16,24,40,0.1), 0px 1px 2px rgba(16,24,40,0.06);
+  box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1),
+    0px 1px 2px rgba(16, 24, 40, 0.06);
   opacity: 0.8;
   cursor: grabbing;
   transition: all 0.2s ease;
@@ -372,13 +235,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 .fc-dayGridMonth-view.fc-view.fc-daygrid {
   min-width: 718px;
 }
-.fc .fc-scrollgrid-section > * {
-  border-right-width: 0;
-  border-bottom-width: 0;
-}
-.fc .fc-scrollgrid {
-  border-left-width: 0;
-}
 .fc .fc-toolbar.fc-header-toolbar {
   display: flex;
   flex-direction: column;
@@ -390,59 +246,74 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     flex-direction: row;
   }
 }
-.fc-button-group {
-  display: flex;
-  gap: 0.5rem;
-}
-.fc-button-group .fc-button {
+.fc .fc-button-group .fc-button {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 2.5rem;
   width: 2.5rem;
   border-radius: 0.5rem;
-  border: 1px solid #E4E7EC;
+  border: 1px solid #e4e7ec;
   background-color: transparent;
   color: #344054;
   font-weight: 500;
 }
-.fc-button-group .fc-button:hover {
-  border-color: #E4E7EC;
-  background-color: #F9FAFB;
+.fc .fc-button-group .fc-button:hover {
+  background-color: #f9fafb;
 }
-.fc-button-group .fc-button:active {
-  border-color: #E4E7EC;
-  background-color: transparent;
-  box-shadow: none;
+
+/* ===================== APEXCHARTS ===================== */
+.apexcharts-legend-text {
+  color: #344054 !important;
+  padding-left: 1.25rem !important;
 }
-.fc-button-group .fc-button.fc-prev-button:before {
-  content: url("data:image/svg+xml,%3Csvg width='25' height='24' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.0068 6L9.75684 12.25L16.0068 18.5' stroke='%23344054' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+.apexcharts-text {
+  fill: #344054 !important;
 }
-.fc-button-group .fc-button.fc-next-button:before {
-  content: url("data:image/svg+xml,%3Csvg width='25' height='24' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.50684 19L15.7568 12.75L9.50684 6.5' stroke='%23344054' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+.apexcharts-tooltip.apexcharts-theme-light {
+  display: flex;
+  gap: 0.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e4e7ec;
+  padding: 0.75rem;
+  box-shadow: 0px 4px 8px -2px rgba(16, 24, 40, 0.1),
+    0px 2px 4px -2px rgba(16, 24, 40, 0.06);
+  background-color: #ffffff;
+}
+#chartTwo .apexcharts-datalabels-group {
+  transform: translateY(-6rem);
+}
+
+/* ===================== JVECTOR MAP ===================== */
+.jvectormap-container {
+  background-color: #f9fafb;
+}
+.jvectormap-region.jvectormap-element {
+  fill: #d0d5dd;
+  cursor: pointer;
+}
+.jvectormap-region.jvectormap-element:hover {
+  fill: #465fff;
 }
 
 /* ===================== DARK MODE ===================== */
 .dark body {
   background-color: #101828;
-  color: #F9FAFB;
+  color: #f9fafb;
 }
 .dark .menu-item-inactive {
-  color: #D1D5DB;
+  color: #d1d5db;
 }
 .dark .menu-item-inactive:hover {
-  background-color: rgba(255,255,255,0.05);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 .dark .menu-item-active {
-  background-color: rgba(70,95,255,0.12);
-  color: #7592FF;
+  background-color: rgba(70, 95, 255, 0.12);
+  color: #7592ff;
 }
 .dark .menu-item-icon {
-  color: #9CA3AF;
+  color: #9ca3af;
 }
 .dark .menu-item-icon-active {
-  color: #7592FF;
+  color: #7592ff;
 }
-
-/* Additional dark mode overrides follow same logic for calendar, charts, scrollbars, etc. */
-
