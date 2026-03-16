@@ -8,7 +8,7 @@ import {
   MonitorPlay,
 } from "lucide-react";
 import Breadcrumbs from "../components/Breadcrumbs";
-import ResearchImg from "./../assets/images/research.jpg";
+import ResearchImg from "./../assets/images/research.webp";
 const breadcrumbsData = [
   { name: "Home", link: "/" },
   { name: "Services", link: "/services" },
