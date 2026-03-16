@@ -1,13 +1,41 @@
+import { useEffect, useState } from "react";
 import { FaBullseye, FaLightbulb } from "react-icons/fa";
 import { Link } from "react-router";
+import { getHomePage } from "../../services/api";
+
 import Bg from "./../../assets/images/bg.png";
-import Hero from "./../../assets/images/hero.png";
 import Wave from "./../../assets/images/wave.svg";
 
 export default function HeroSection() {
+  const [homeData, setHomeData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getHomePage();
+
+        // Fix image path from backend
+        if (data.image) {
+          const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
+          data.image = data.image.startsWith("http")
+            ? data.image
+            : `${baseUrl}${data.image.startsWith("/") ? "" : "/"}${data.image}`;
+        }
+
+        setHomeData(data);
+      } catch (error) {
+        console.error("Failed to fetch home data", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (!homeData) return null;
+
   return (
     <section className="relative w-full overflow-hidden border-l-indigo-950/10">
-      {/* Background with subtle dark overlay */}
+      {/* Background */}
       <div className="absolute inset-0 opacity-20">
         <img src={Bg} alt="Background" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/10"></div>
@@ -15,27 +43,27 @@ export default function HeroSection() {
 
       {/* Main Content */}
       <div className="relative mx-auto max-w-7xl px-6 py-12 lg:pt-16 lg:pb-24">
-      <div className="grid gap-12 lg:grid-cols-[40%_60%] items-center">
+        <div className="grid gap-12 lg:grid-cols-[40%_60%] items-center">
           {/* Left Content */}
           <div className="lg:text-left">
             <h1 className="text-4xl font-extrabold leading-snug text-[#17254e] sm:text-4xl md:text-5xl xl:text-5xl">
-              Empowering
-              <br />
-              Academic Minds
-            
+              {homeData.title}
             </h1>
 
             <p className="mt-6 max-w-lg mx-auto text-base text-gray-700 sm:mx-0 sm:text-md md:text-lg">
-              Empowering minds through quality research and education
+              {homeData.description}
             </p>
 
             <div className="mt-8 flex">
-              <Link to={"/contact"} className="rounded-xl bg-[#1e2a4a] px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-[#16203a]">
+              <Link
+                to="/contact"
+                className="rounded-xl bg-[#1e2a4a] px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-[#16203a]"
+              >
                 Get in touch
               </Link>
             </div>
 
-            {/* Icons Row */}
+            {/* Icons */}
             <div className="mt-10 flex gap-8">
               <div className="flex items-center gap-2 text-sm text-gray-700">
                 <FaLightbulb className="text-xl text-[#1e2a4a]" />
@@ -52,8 +80,8 @@ export default function HeroSection() {
           {/* Right Image */}
           <div className="relative mx-auto w-full max-w-md lg:max-w-4xl">
             <img
-              src={Hero}
-              alt="Team discussion"
+              src={homeData.image}
+              alt={homeData.title}
               className="w-full rounded-3xl object-cover"
             />
           </div>

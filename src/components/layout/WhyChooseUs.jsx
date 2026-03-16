@@ -1,27 +1,35 @@
 import { Calendar, FileText, TrendingUp, Users } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { getAboutPage } from "../../services/api"; // <-- backend API
-import About from "./../../assets/images/about.png";
+import { getAboutPage } from "../../services/api";
 import LogoIn from "./../../assets/images/logoIn.svg";
 import LogoOut from "./../../assets/images/logoOut.svg";
 
 export default function WhyChooseUs() {
-
   const [aboutData, setAboutData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getAboutPage();
+
+        // Fix image URL coming from backend
+        if (data.image) {
+          const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
+          data.image = data.image.startsWith("http")
+            ? data.image
+            : `${baseUrl}${data.image.startsWith("/") ? "" : "/"}${data.image}`;
+        }
+
         setAboutData(data);
       } catch (err) {
         console.error("Failed to fetch About data", err);
       }
     };
+
     fetchData();
   }, []);
 
-  if (!aboutData) return null; // could show loading spinner
+  if (!aboutData) return null;
 
   const cardsConfig = [
     { icon: <Calendar className="h-6 w-6" />, color: "bg-[#1e2a4a]" },
@@ -39,7 +47,11 @@ export default function WhyChooseUs() {
       <div className="grid gap-16 lg:grid-cols-[40%_60%] items-center">
         {/* LEFT IMAGE WITH LOGOS */}
         <div className="relative mx-auto flex w-full max-w-md items-center justify-center">
-          <img src={About} alt="Research work" className="w-full rounded-3xl" />
+          <img
+            src={aboutData.image}
+            alt="Research work"
+            className="w-full rounded-3xl"
+          />
 
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="relative flex h-32 w-32 items-center justify-center rounded-full bg-white shadow-xl">
@@ -60,7 +72,7 @@ export default function WhyChooseUs() {
         {/* RIGHT FEATURE CARDS */}
         <div className="grid gap-x-12 gap-y-12 sm:grid-cols-2">
           {aboutData.whyUs.map((card, index) => {
-            const config = cardsConfig[index % cardsConfig.length]; // cycle icons/colors if > 4
+            const config = cardsConfig[index % cardsConfig.length];
             return (
               <div
                 key={card.id}
@@ -71,9 +83,11 @@ export default function WhyChooseUs() {
                 >
                   {config.icon}
                 </div>
+
                 <h4 className="mt-6 text-center text-lg font-bold text-[#1e2a4a]">
                   {card.title}
                 </h4>
+
                 <p className="mt-3 text-center text-base leading-relaxed text-gray-600">
                   {card.description}
                 </p>
