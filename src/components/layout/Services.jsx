@@ -1,6 +1,5 @@
 import { ArrowRight } from "lucide-react";
 import React from "react";
-import { Link } from "react-router-dom";
 
 import ConsultingImg from "./../../assets/images/education.jpg";
 import ResearchImg from "./../../assets/images/research.jpg";
@@ -13,14 +12,14 @@ const services = [
     description:
       "Guiding students towards the right education and global opportunities",
     image: ConsultingImg,
-    path: "/services/study-advisory",
+    path: "https://waarc.edu.np/services/study-advisory",
   },
   {
     title: "Research",
     description:
       "Research-Driven Insights for Policy, Education, and Development",
     image: ResearchImg,
-    path: "/services/research",
+    path: "https://waarc.edu.np/services/research",
   },
 ];
 
@@ -64,13 +63,13 @@ export default function Services() {
                   {service.description}
                 </p>
 
-                <Link
-                  to={service.path}
+                <a
+                  href={service.path}
                   className="mt-3 md:mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-[#f2b84b] px-6 py-3 text-sm font-semibold text-[#1e2a4a] transition hover:bg-[#e6ac3f]"
                 >
                   Learn More
                   <ArrowRight size={16} />
-                </Link>
+                </a>
               </div>
             </div>
           ))}
