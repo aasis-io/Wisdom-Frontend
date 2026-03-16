@@ -44,7 +44,6 @@ export default function EventRegistrationSection() {
           setEventImage(null);
         }
       } catch (error) {
-        console.error("Failed to fetch event", error);
         setEvent(null);
         setEventImage(null);
       }
