@@ -1,11 +1,13 @@
-import { Facebook, Github, Globe, Linkedin, Twitter } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Twitter,
+  Youtube
+} from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { getUsefulLinks } from "../../services/api"; // adjust path
+import { getSiteSettings, getUsefulLinks } from "../../services/api"; // adjust path
 import Logo from "./../../assets/images/logo-light.svg";
-
-/* -----------------------------
-STATIC LINKS (OBJECT BASED)
------------------------------ */
 
 const quickLinks = [
   { name: "Home", href: "/" },
@@ -23,6 +25,7 @@ const companyLinks = [
 
 export default function Footer() {
   const [usefulLinks, setUsefulLinks] = useState([]);
+  const [socials, setSocials] = useState({});
 
   useEffect(() => {
     const fetchLinks = async () => {
@@ -34,8 +37,26 @@ export default function Footer() {
       }
     };
 
+    const fetchSettings = async () => {
+      try {
+        const data = await getSiteSettings();
+        setSocials(data); // contains facebook, twitter, instagram, linkedin, youtube
+      } catch (error) {
+        console.error("Failed to load site settings", error);
+      }
+    };
+
     fetchLinks();
+    fetchSettings();
   }, []);
+
+  const socialIconsMap = [
+    { name: "facebook", icon: Facebook },
+    { name: "twitter", icon: Twitter },
+    { name: "linkedin", icon: Linkedin },
+    { name: "instagram", icon: Instagram },
+    { name: "youtube", icon: Youtube },
+  ];
 
   return (
     <footer className="relative bg-[#0E1B3D] text-white">
@@ -72,7 +93,7 @@ export default function Footer() {
 
           {/* LINKS */}
           <div className="grid gap-10 grid-cols-2 lg:col-span-3 lg:grid-cols-3">
-            {/* USEFUL LINKS (API) */}
+            {/* USEFUL LINKS */}
             <div>
               <h4 className="mb-4 text-sm font-semibold text-white/90">
                 Useful Links
@@ -140,21 +161,21 @@ export default function Footer() {
           </p>
 
           <div className="flex items-center gap-5 text-white/70">
-            <a href="#">
-              <Twitter size={18} />
-            </a>
-            <a href="#">
-              <Linkedin size={18} />
-            </a>
-            <a href="#">
-              <Facebook size={18} />
-            </a>
-            <a href="#">
-              <Github size={18} />
-            </a>
-            <a href="#">
-              <Globe size={18} />
-            </a>
+            {socialIconsMap.map(({ name, icon: Icon }) => {
+              const link = socials[name];
+              if (!link) return null;
+              return (
+                <a
+                  key={name}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white"
+                >
+                  <Icon size={18} />
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>

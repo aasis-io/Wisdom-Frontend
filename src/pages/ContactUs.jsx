@@ -1,29 +1,47 @@
 import emailjs from "@emailjs/browser";
 import { Mail, MapPin, Phone } from "lucide-react";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import Breadcrumbs from "../components/Breadcrumbs";
+import { getSiteSettings } from "../services/api";
 
 const breadcrumbsData = [
   { name: "Home", link: "/" },
   { name: "Contact Us", link: "/contact" },
 ];
 
-const contactInfo = [
-  { icon: MapPin, label: "Address", value: "Chandragiri-6, Kathmandu" },
-  { icon: Mail, label: "Email", value: "waarc2022@gmail.com" },
-  { icon: Phone, label: "Phone", value: "+977 984-7947004" },
-];
-
 const ContactUs = () => {
   const formRef = useRef();
   const [loading, setLoading] = useState(false);
+  const [settings, setSettings] = useState(null);
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     subject: "",
     message: "",
   });
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const data = await getSiteSettings();
+        setSettings(data);
+      } catch (error) {
+        console.error("Failed to load site settings", error);
+      }
+    };
+
+    fetchSettings();
+  }, []);
+
+  const contactInfo = settings
+    ? [
+        { icon: MapPin, label: "Address", value: settings.location },
+        { icon: Mail, label: "Email", value: settings.email },
+        { icon: Phone, label: "Phone", value: settings.phone },
+      ]
+    : [];
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -39,8 +57,8 @@ const ContactUs = () => {
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         formRef.current,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-        //check
       );
+
       toast.success("Message sent successfully!");
       setFormData({ fullName: "", email: "", subject: "", message: "" });
     } catch (error) {
@@ -54,12 +72,14 @@ const ContactUs = () => {
   return (
     <section className="bg-white">
       <Breadcrumbs breadcrumbs={breadcrumbsData} />
+
       <div className="py-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="mb-14">
             <h1 className="text-3xl md:text-4xl font-semibold text-gray-900">
               Contact Us
             </h1>
+
             <p className="mt-4 max-w-3xl text-gray-600 leading-relaxed">
               Reach out to Wisdom Academy & Research Center (WAARC) to discuss
               research, collaboration, or professional consultation tailored to
@@ -72,8 +92,9 @@ const ContactUs = () => {
             <div className="text-white p-10 md:p-12 flex justify-center place-items-center">
               <div>
                 <h2 className="text-2xl font-semibold mb-8">
-                  Wisdom Academy & Research Center
+                  {settings?.siteName || "Contact"}
                 </h2>
+
                 <div className="space-y-6">
                   {contactInfo.map((item, idx) => {
                     const Icon = item.icon;
