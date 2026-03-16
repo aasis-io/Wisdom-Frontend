@@ -104,21 +104,33 @@ export default function Navbar() {
             <div className="flex items-center gap-6">
               {siteSettings.phone && (
                 <div className="flex items-center gap-2">
-                  <Phone className="text-[#F4B740]" size={14} />
+                  <Phone
+                    className="text-[#F4B740]"
+                    size={14}
+                    aria-hidden="true"
+                  />
                   <span>{siteSettings.phone}</span>
                 </div>
               )}
 
               {siteSettings.email && (
                 <div className="flex items-center gap-2">
-                  <Mail className="text-[#F4B740]" size={14} />
+                  <Mail
+                    className="text-[#F4B740]"
+                    size={14}
+                    aria-hidden="true"
+                  />
                   <span>{siteSettings.email}</span>
                 </div>
               )}
 
               {siteSettings.location && (
                 <div className="flex items-center gap-2">
-                  <MapPin className="text-[#F4B740]" size={14} />
+                  <MapPin
+                    className="text-[#F4B740]"
+                    size={14}
+                    aria-hidden="true"
+                  />
                   <span>{siteSettings.location}</span>
                 </div>
               )}
@@ -126,20 +138,33 @@ export default function Navbar() {
 
             <div className="flex items-center gap-2">
               {[
-                { icon: Facebook, link: siteSettings.facebook },
-                { icon: Youtube, link: siteSettings.youtube },
-                { icon: Twitter, link: siteSettings.twitter },
-                { icon: Linkedin, link: siteSettings.linkedin },
-              ].map(({ icon: Icon, link }, i) =>
+                {
+                  icon: Facebook,
+                  link: siteSettings.facebook,
+                  name: "Facebook",
+                },
+                { icon: Youtube, link: siteSettings.youtube, name: "YouTube" },
+                {
+                  icon: Twitter,
+                  link: siteSettings.twitter,
+                  name: "X (Twitter)",
+                },
+                {
+                  icon: Linkedin,
+                  link: siteSettings.linkedin,
+                  name: "LinkedIn",
+                },
+              ].map(({ icon: Icon, link, name }, i) =>
                 link ? (
                   <a
                     key={i}
                     href={link}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
+                    aria-label={`Visit our ${name} page`}
                     className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F4B740] text-[#0E1B3D] hover:opacity-80 transition"
                   >
-                    <Icon size={14} />
+                    <Icon size={14} aria-hidden="true" />
                   </a>
                 ) : null
               )}
@@ -152,7 +177,11 @@ export default function Navbar() {
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
             {siteSettings.phone && (
               <div className="flex items-center gap-2">
-                <Phone className="text-[#F4B740]" size={14} />
+                <Phone
+                  className="text-[#F4B740]"
+                  size={14}
+                  aria-hidden="true"
+                />
                 <span>{siteSettings.phone}</span>
               </div>
             )}
@@ -170,7 +199,7 @@ export default function Navbar() {
 
         {/* ================= Main Navbar ================= */}
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          <Link to="/">
+          <Link to="/" aria-label="Go to WAARC homepage">
             <img src={Logo} alt="WAARC Logo" className="h-16 w-auto" />
           </Link>
 
@@ -193,6 +222,7 @@ export default function Navbar() {
                     {item.label}
                     <ChevronDown
                       size={16}
+                      aria-hidden="true"
                       className={`transition-transform ${
                         desktopOpenMenu === item.label ? "rotate-180" : ""
                       }`}
@@ -228,15 +258,16 @@ export default function Navbar() {
 
           {/* ================= Right Actions ================= */}
           <div className="flex items-center gap-4">
-            <Link
-              to="/contact"
+            <a
+              href="https://waarc.edu.np/contact"
               className="hidden md:inline-flex items-center gap-2 bg-[#0E1B3D] px-5 py-3 rounded-lg text-sm text-white"
             >
-              <Mail size={18} />
+              <Mail size={18} aria-hidden="true" />
               Contact Us
-            </Link>
+            </a>
 
             <button
+              aria-label="Toggle menu"
               className="lg:hidden flex items-center gap-1 font-medium"
               onClick={() => setMobileOpen(!mobileOpen)}
             >
@@ -274,6 +305,7 @@ export default function Navbar() {
                     {item.label}
                     <ChevronDown
                       size={16}
+                      aria-hidden="true"
                       className={`transition-transform ${
                         mobileOpenMenu === item.label ? "rotate-180" : ""
                       }`}
@@ -304,13 +336,13 @@ export default function Navbar() {
               )
             )}
 
-            <Link
-              to="/contact"
+            <a
+              href="https://waarc.edu.np/contact"
               className="mt-4 flex items-center gap-2 rounded-lg bg-[#F4B740] px-4 py-2 text-[#0E1B3D]"
             >
-              <Mail size={18} />
+              <Mail size={18} aria-hidden="true" />
               Contact Us
-            </Link>
+            </a>
           </nav>
         </div>
       </header>

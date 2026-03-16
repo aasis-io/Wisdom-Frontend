@@ -1,10 +1,4 @@
-import {
-  Facebook,
-  Instagram,
-  Linkedin,
-  Twitter,
-  Youtube
-} from "lucide-react";
+import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { getSiteSettings, getUsefulLinks } from "../../services/api"; // adjust path
 import Logo from "./../../assets/images/logo-light.svg";
@@ -170,9 +164,10 @@ export default function Footer() {
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`Visit our ${name} page`}
                   className="hover:text-white"
                 >
-                  <Icon size={18} />
+                  <Icon size={18} aria-hidden="true" />
                 </a>
               );
             })}
