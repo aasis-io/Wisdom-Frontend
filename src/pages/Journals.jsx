@@ -21,21 +21,28 @@ const Journals = () => {
         const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
 
         const processed = data.map((item) => {
+          // Process image URL
           if (item.image) {
-            item.image = item.image.startsWith("http")
+            const rawImageUrl = item.image.startsWith("http")
               ? item.image
               : `${baseUrl}${item.image.startsWith("/") ? "" : "/"}${
                   item.image
                 }`;
+            item.image = encodeURI(rawImageUrl);
           }
+
+          // Process PDF URL
           if (item.pdf) {
-            item.pdf = item.pdf.startsWith("http")
+            const rawPdfUrl = item.pdf.startsWith("http")
               ? item.pdf
               : `${baseUrl}${item.pdf.startsWith("/") ? "" : "/"}${item.pdf}`;
+            item.pdf = encodeURI(rawPdfUrl);
           }
+
           return item;
         });
 
+        // Sort journals by publishedDate descending
         processed.sort(
           (a, b) => new Date(b.publishedDate) - new Date(a.publishedDate)
         );
@@ -52,6 +59,7 @@ const Journals = () => {
     fetchJournals();
   }, []);
 
+  // Group journals by category
   const groupedJournals = journals.reduce((acc, journal) => {
     const cat = journal.category || "Other";
     if (!acc[cat]) acc[cat] = [];
