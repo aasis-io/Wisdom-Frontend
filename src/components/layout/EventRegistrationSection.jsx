@@ -15,36 +15,31 @@ export default function EventRegistrationSection() {
 
   useEffect(() => {
     const fetchEvent = async () => {
-      try {
-        const data = await getUpcomingEvent();
+      const data = await getUpcomingEvent();
 
-        if (data && Object.keys(data).length) {
-          const mappedEvent = {
-            title: data.title,
-            eventDate: data.date,
-            registrationLink: data.link,
-            image: data.image,
-          };
-          setEvent(mappedEvent);
-
-          if (data.image) {
-            const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(
-              /\/$/,
-              ""
-            );
-            const fullUrl = /^https?:\/\//i.test(data.image)
-              ? data.image
-              : `${baseUrl}/${data.image.replace(/^\/+/, "")}`;
-            setEventImage(fullUrl);
-          } else {
-            setEventImage(null);
-          }
-        } else {
-          setEvent(null);
-          setEventImage(null);
-        }
-      } catch (error) {
+      if (!data) {
+        // No upcoming event — normal case, do not log error
         setEvent(null);
+        setEventImage(null);
+        return;
+      }
+
+      const mappedEvent = {
+        title: data.title,
+        eventDate: data.date,
+        registrationLink: data.link,
+        image: data.image,
+      };
+
+      setEvent(mappedEvent);
+
+      if (data.image) {
+        const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
+        const fullUrl = /^https?:\/\//i.test(data.image)
+          ? data.image
+          : `${baseUrl}/${data.image.replace(/^\/+/, "")}`;
+        setEventImage(fullUrl);
+      } else {
         setEventImage(null);
       }
     };
@@ -66,13 +61,13 @@ export default function EventRegistrationSection() {
     }
 
     setLoading(true);
-
     try {
       await registerForEvent({ fullName, email, phone });
       toast.success("Successfully registered for upcoming events!");
       setFormData({ fullName: "", email: "", phone: "" });
     } catch (error) {
       toast.error("Failed to register. Please try again.");
+      console.error("Registration error:", error.message);
     } finally {
       setLoading(false);
     }
