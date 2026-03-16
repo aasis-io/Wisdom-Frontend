@@ -21,7 +21,6 @@ const Journals = () => {
         const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
 
         const processed = data.map((item) => {
-          // Image URL
           if (item.image) {
             const rawImageUrl = item.image.startsWith("http")
               ? item.image
@@ -31,9 +30,7 @@ const Journals = () => {
             item.image = encodeURI(rawImageUrl);
           }
 
-          // PDF URL
           if (item.pdf) {
-            // replace /uploads/ with /waarc-uploads/ to match prod
             let pdfPath = item.pdf.startsWith("/uploads/")
               ? item.pdf.replace("/uploads/", "/waarc-uploads/")
               : item.pdf;
@@ -48,7 +45,6 @@ const Journals = () => {
           return item;
         });
 
-        // Sort by publishedDate descending
         processed.sort(
           (a, b) => new Date(b.publishedDate) - new Date(a.publishedDate)
         );
@@ -65,7 +61,6 @@ const Journals = () => {
     fetchJournals();
   }, []);
 
-  // Group journals by category
   const groupedJournals = journals.reduce((acc, journal) => {
     const cat = journal.category || "Other";
     if (!acc[cat]) acc[cat] = [];
@@ -73,7 +68,6 @@ const Journals = () => {
     return acc;
   }, {});
 
-  // Download handler using blob for proper filename
   const handleDownload = async (url, filename) => {
     try {
       const res = await fetch(url);
@@ -153,17 +147,17 @@ const Journals = () => {
                             {journal.authors}
                           </p>
 
+                          {/* Updated date format: Month Year */}
                           <p className="mt-2 text-sm text-slate-500">
                             <span className="font-medium">Published:</span>{" "}
                             {new Date(journal.publishedDate).toLocaleDateString(
                               undefined,
-                              { year: "numeric", month: "long", day: "numeric" }
+                              { year: "numeric", month: "long" }
                             )}
                           </p>
                         </div>
 
                         <div className="mt-6 flex items-center justify-between">
-                          {/* View Article */}
                           {journal.pdf || journal.link ? (
                             <a
                               href={journal.pdf || journal.link}
@@ -175,7 +169,6 @@ const Journals = () => {
                             </a>
                           ) : null}
 
-                          {/* Download PDF */}
                           {journal.pdf && (
                             <button
                               onClick={() =>
