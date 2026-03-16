@@ -34,10 +34,18 @@ export default function HeroSection() {
   if (!homeData) return null;
 
   return (
-    <section className="relative w-full overflow-hidden border-l-indigo-950/10">
+    <section
+      className="relative w-full overflow-hidden border-l-indigo-950/10"
+      aria-label="Hero Section"
+    >
       {/* Background */}
       <div className="absolute inset-0 opacity-20">
-        <img src={Bg} alt="Background" className="w-full h-full object-cover" />
+        <img
+          src={Bg}
+          alt="Decorative background pattern"
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
         <div className="absolute inset-0 bg-black/10"></div>
       </div>
 
@@ -46,6 +54,7 @@ export default function HeroSection() {
         <div className="grid gap-12 lg:grid-cols-[40%_60%] items-center">
           {/* Left Content */}
           <div className="lg:text-left">
+            {/* Use semantic h1 with clear keywords */}
             <h1 className="text-4xl font-extrabold leading-snug text-[#17254e] sm:text-4xl md:text-5xl xl:text-5xl">
               {homeData.title}
             </h1>
@@ -81,8 +90,13 @@ export default function HeroSection() {
           <div className="relative mx-auto w-full max-w-md lg:max-w-4xl">
             <img
               src={homeData.image}
-              alt={homeData.title}
+              alt={`Hero image for ${homeData.title}`}
               className="w-full rounded-3xl object-cover"
+              loading="lazy"
+              width={1200} // Set width & height to help CLS
+              height={800}
+              decoding="async"
+              fetchpriority="high"
             />
           </div>
         </div>
@@ -92,8 +106,9 @@ export default function HeroSection() {
       <div className="pointer-events-none absolute -bottom-1.5 left-0 w-full h-8 sm:h-10 md:h-12 lg:h-12 overflow-hidden">
         <img
           src={Wave}
-          alt="Decorative wave"
+          alt="Decorative wave divider"
           className="absolute inset-0 w-full h-full object-cover"
+          loading="lazy"
         />
       </div>
     </section>
