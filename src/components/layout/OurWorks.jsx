@@ -13,28 +13,28 @@ const works = [
     category: "",
     title: "Work 1...",
     description:
-      "This is work 1",
+      "Coming soon.....",
   },
   {
     image: Work2,
     category: "",
     title: "Work 2...",
     description:
-      "This is work 2",
+      "Coming soon.....",
   },
   {
     image: Work3,
     category: "",
     title: "Work 3...",
     description:
-      "This is work 3",
+      "Coming soon.....",
   },
   {
     image: Work3,
     category: "",
     title: "Work 4...",
     description:
-      "This is work 4",
+      "Coming soon.....",
   },
 ];
 
