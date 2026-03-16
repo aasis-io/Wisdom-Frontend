@@ -21,9 +21,7 @@ const Journals = () => {
         const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
 
         const processed = data.map((item) => {
-          const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
-
-          // Image URL (already works)
+          // Image URL
           if (item.image) {
             const rawImageUrl = item.image.startsWith("http")
               ? item.image
@@ -33,9 +31,9 @@ const Journals = () => {
             item.image = encodeURI(rawImageUrl);
           }
 
-          // PDF URL: use the same base path as images
+          // PDF URL
           if (item.pdf) {
-            // replace "/uploads/" with "/waarc-uploads/" if it exists
+            // replace /uploads/ with /waarc-uploads/ to match prod
             let pdfPath = item.pdf.startsWith("/uploads/")
               ? item.pdf.replace("/uploads/", "/waarc-uploads/")
               : item.pdf;
@@ -50,7 +48,7 @@ const Journals = () => {
           return item;
         });
 
-        // Sort journals by publishedDate descending
+        // Sort by publishedDate descending
         processed.sort(
           (a, b) => new Date(b.publishedDate) - new Date(a.publishedDate)
         );
@@ -75,6 +73,23 @@ const Journals = () => {
     return acc;
   }, {});
 
+  // Download handler using blob for proper filename
+  const handleDownload = async (url, filename) => {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Network response was not ok");
+      const blob = await res.blob();
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (err) {
+      console.error("Download failed", err);
+    }
+  };
+
   return (
     <section className="bg-white">
       <Breadcrumbs breadcrumbs={breadcrumbsData} />
@@ -98,17 +113,24 @@ const Journals = () => {
 
               <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 {groupedJournals[category].map((journal) => {
+                  const filename = journal.title.replace(/\s+/g, "_") + ".pdf";
+
                   return (
                     <div
                       key={journal.id}
                       className="group flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white transition hover:border-slate-300 hover:shadow-sm"
                     >
-                      <div className="relative h-48 w-full overflow-hidden bg-slate-100">
+                      <div
+                        className="relative h-48 w-full overflow-hidden bg-slate-100 cursor-pointer"
+                        onClick={() =>
+                          window.open(journal.pdf || journal.link, "_blank")
+                        }
+                      >
                         {journal.image && (
                           <img
                             src={journal.image}
                             alt={journal.title}
-                            className="h-full w-full object-cover transition-transform duration-300 cursor-pointer group-hover:scale-105"
+                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                           />
                         )}
                       </div>
@@ -141,7 +163,7 @@ const Journals = () => {
                         </div>
 
                         <div className="mt-6 flex items-center justify-between">
-                          {/* View Article: always use external link if available, else PDF */}
+                          {/* View Article */}
                           {journal.pdf || journal.link ? (
                             <a
                               href={journal.pdf || journal.link}
@@ -153,16 +175,17 @@ const Journals = () => {
                             </a>
                           ) : null}
 
-                          {/* Download: only if PDF exists */}
+                          {/* Download PDF */}
                           {journal.pdf && (
-                            <a
-                              href={journal.pdf}
-                              download
+                            <button
+                              onClick={() =>
+                                handleDownload(journal.pdf, filename)
+                              }
                               className="inline-flex items-center gap-1 rounded-md border border-slate-200 px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50"
                             >
                               <Download className="h-4 w-4" />
                               Download PDF
-                            </a>
+                            </button>
                           )}
                         </div>
                       </div>
