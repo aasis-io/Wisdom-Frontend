@@ -41,31 +41,31 @@ export default function Services() {
         {/* Cards */}
         <div className="mt-8 grid gap-8 lg:grid-cols-2">
           {services.map((service, idx) => (
-            <div
-              key={idx}
-              className="group relative overflow-hidden rounded-3xl"
-            >
-              <Link to={service.path}>
+            <Link to={service.path}>
+              <div
+                key={idx}
+                className="group relative overflow-hidden rounded-3xl"
+              >
                 <img
                   src={service.image}
                   alt={service.title}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-              </Link>
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/50 to-transparent" />
-              {/* Content */}
-              <div className="absolute inset-0 flex flex-col justify-end p-8">
-                <Link to={service.path}>
+
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/50 to-transparent" />
+                {/* Content */}
+                <div className="absolute inset-0 flex flex-col justify-end p-8 pb-10">
                   <h3 className=" text-xl md:text-2xl  font-bold text-white">
                     {service.title}
-                  </h3>{" "}
-                </Link>
-                <p className="mt-2 max-w-md text-gray-200">
-                  {service.description}
-                </p>
+                  </h3>
+
+                  <p className="mt-2 max-w-md text-gray-200">
+                    {service.description}
+                  </p>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
