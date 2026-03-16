@@ -29,7 +29,23 @@ export default function WhyChooseUs() {
     fetchData();
   }, []);
 
-  if (!aboutData) return null;
+  // Placeholder while data loads to prevent CLS
+  if (!aboutData)
+    return (
+      <div className="grid gap-16 lg:grid-cols-[40%_60%] items-center">
+        <div className="h-100 w-full max-w-md rounded-3xl bg-gray-200 animate-pulse" />
+        <div className="grid gap-x-12 gap-y-12 sm:grid-cols-2">
+          {Array(4)
+            .fill(0)
+            .map((_, idx) => (
+              <div
+                key={idx}
+                className="h-48 rounded-3xl bg-gray-100 animate-pulse"
+              />
+            ))}
+        </div>
+      </div>
+    );
 
   const cardsConfig = [
     { icon: <Calendar className="h-6 w-6" />, color: "bg-[#1e2a4a]" },
@@ -50,6 +66,8 @@ export default function WhyChooseUs() {
           <img
             src={aboutData.image}
             alt="Research work"
+            width={600} // reserve width
+            height={400} // reserve height
             className="w-full rounded-3xl"
           />
 
@@ -58,12 +76,16 @@ export default function WhyChooseUs() {
               <img
                 src={LogoOut}
                 alt="Rotating outer logo"
+                width={128} // reserve size
+                height={128}
                 className="absolute inset-0 h-full w-full animate-spin-slow"
               />
               <img
                 src={LogoIn}
                 alt="Inner logo"
-                className="relative z-10 h-18 w-18"
+                width={72} // reserve size
+                height={72}
+                className="relative z-10"
               />
             </div>
           </div>

@@ -1,6 +1,6 @@
 import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { getSiteSettings, getUsefulLinks } from "../../services/api"; // adjust path
+import { getSiteSettings, getUsefulLinks } from "../../services/api";
 import Logo from "./../../assets/images/logo-light.svg";
 
 const quickLinks = [
@@ -34,7 +34,7 @@ export default function Footer() {
     const fetchSettings = async () => {
       try {
         const data = await getSiteSettings();
-        setSocials(data); // contains facebook, twitter, instagram, linkedin, youtube
+        setSocials(data);
       } catch (error) {
         console.error("Failed to load site settings", error);
       }
@@ -55,9 +55,12 @@ export default function Footer() {
   return (
     <footer className="relative bg-[#0E1B3D] text-white">
       {/* WAVE TOP */}
-      <div className="absolute -top-1 left-0 w-full overflow-hidden leading-none z-10">
+      <div
+        className="absolute -top-1 left-0 w-full overflow-hidden leading-none z-10"
+        style={{ height: "80px" }}
+      >
         <svg
-          className="block h-20 w-full"
+          className="block h-full w-full"
           viewBox="0 0 1440 100"
           preserveAspectRatio="none"
         >
@@ -76,7 +79,9 @@ export default function Footer() {
               <img
                 src={Logo}
                 alt="Wisdom Academy & Research Center"
-                className="h-auto w-full"
+                width={224} // reserve width
+                height={56} // reserve height (maintain aspect ratio)
+                className="w-full h-auto"
               />
             </div>
 
@@ -94,18 +99,26 @@ export default function Footer() {
               </h4>
 
               <ul className="space-y-3 text-sm text-white/70">
-                {usefulLinks.map((link) => (
-                  <li key={link.id}>
-                    <a
-                      href={link.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-white"
-                    >
-                      {link.title}
-                    </a>
-                  </li>
-                ))}
+                {usefulLinks.length > 0
+                  ? usefulLinks.map((link) => (
+                      <li key={link.id}>
+                        <a
+                          href={link.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-white"
+                        >
+                          {link.title}
+                        </a>
+                      </li>
+                    ))
+                  : Array(3)
+                      .fill(0)
+                      .map((_, i) => (
+                        <li key={i}>
+                          <span className="inline-block h-4 w-24 bg-white/20 animate-pulse rounded"></span>
+                        </li>
+                      ))}
               </ul>
             </div>
 
@@ -157,15 +170,16 @@ export default function Footer() {
           <div className="flex items-center gap-5 text-white/70">
             {socialIconsMap.map(({ name, icon: Icon }) => {
               const link = socials[name];
-              if (!link) return null;
               return (
                 <a
                   key={name}
-                  href={link}
+                  href={link || "#"} // reserve space even if empty
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Visit our ${name} page`}
-                  className="hover:text-white"
+                  className={`hover:text-white ${
+                    !link ? "pointer-events-none opacity-0" : ""
+                  }`}
                 >
                   <Icon size={18} aria-hidden="true" />
                 </a>

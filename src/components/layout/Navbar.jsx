@@ -15,11 +15,10 @@ import { Link } from "react-router";
 import { getSiteSettings } from "../../services/api";
 import Logo from "./../../assets/images/logo-dark.svg";
 
-/* ================= Default Settings ================= */
 const DEFAULT_SETTINGS = {
-  phone: "",
-  email: "",
-  location: "",
+  phone: "----",
+  email: "----",
+  location: "----",
   facebook: "",
   twitter: "",
   linkedin: "",
@@ -59,21 +58,18 @@ export default function Navbar() {
   const desktopRef = useRef(null);
   const mobileRef = useRef(null);
 
-  /* ================= Fetch Site Settings ================= */
   useEffect(() => {
     const fetchSettings = async () => {
       try {
         const data = await getSiteSettings();
-        setSiteSettings(data);
+        setSiteSettings({ ...DEFAULT_SETTINGS, ...data });
       } catch (error) {
         console.error("Failed to fetch site settings", error);
       }
     };
-
     fetchSettings();
   }, []);
 
-  /* ================= Close desktop dropdown ================= */
   useEffect(() => {
     function handleClickOutside(e) {
       if (desktopRef.current && !desktopRef.current.contains(e.target)) {
@@ -84,7 +80,6 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  /* ================= Close mobile dropdown ================= */
   useEffect(() => {
     function handleClickOutside(e) {
       if (mobileRef.current && !mobileRef.current.contains(e.target)) {
@@ -100,40 +95,28 @@ export default function Navbar() {
       <header className="relative z-30 w-full bg-white shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
         {/* ================= Top Bar (Desktop) ================= */}
         <div className="hidden md:block bg-[#0E1B3D] text-white text-sm">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 min-h-8">
             <div className="flex items-center gap-6">
-              {siteSettings.phone && (
-                <div className="flex items-center gap-2">
-                  <Phone
-                    className="text-[#F4B740]"
-                    size={14}
-                    aria-hidden="true"
-                  />
-                  <span>{siteSettings.phone}</span>
-                </div>
-              )}
-
-              {siteSettings.email && (
-                <div className="flex items-center gap-2">
-                  <Mail
-                    className="text-[#F4B740]"
-                    size={14}
-                    aria-hidden="true"
-                  />
-                  <span>{siteSettings.email}</span>
-                </div>
-              )}
-
-              {siteSettings.location && (
-                <div className="flex items-center gap-2">
-                  <MapPin
-                    className="text-[#F4B740]"
-                    size={14}
-                    aria-hidden="true"
-                  />
-                  <span>{siteSettings.location}</span>
-                </div>
-              )}
+              <div className="flex items-center gap-2 min-w-25">
+                <Phone
+                  className="text-[#F4B740]"
+                  size={14}
+                  aria-hidden="true"
+                />
+                <span>{siteSettings.phone}</span>
+              </div>
+              <div className="flex items-center gap-2 min-w-35">
+                <Mail className="text-[#F4B740]" size={14} aria-hidden="true" />
+                <span>{siteSettings.email}</span>
+              </div>
+              <div className="flex items-center gap-2 min-w-35">
+                <MapPin
+                  className="text-[#F4B740]"
+                  size={14}
+                  aria-hidden="true"
+                />
+                <span>{siteSettings.location}</span>
+              </div>
             </div>
 
             <div className="flex items-center gap-2">
@@ -154,53 +137,51 @@ export default function Navbar() {
                   link: siteSettings.linkedin,
                   name: "LinkedIn",
                 },
-              ].map(({ icon: Icon, link, name }, i) =>
-                link ? (
-                  <a
-                    key={i}
-                    href={link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Visit our ${name} page`}
-                    className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F4B740] text-[#0E1B3D] hover:opacity-80 transition"
-                  >
-                    <Icon size={14} aria-hidden="true" />
-                  </a>
-                ) : null
-              )}
+              ].map(({ icon: Icon, link, name }, i) => (
+                <a
+                  key={i}
+                  href={link || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit our ${name} page`}
+                  className={`flex h-8 w-8 items-center justify-center rounded-full bg-[#F4B740] text-[#0E1B3D] hover:opacity-80 transition ${
+                    !link ? "pointer-events-none opacity-0" : ""
+                  }`}
+                >
+                  <Icon size={14} aria-hidden="true" />
+                </a>
+              ))}
             </div>
           </div>
         </div>
 
         {/* ================= Mobile Top Bar ================= */}
-        <div className="block md:hidden bg-[#0E1B3D] text-white text-sm">
+        <div className="block md:hidden bg-[#0E1B3D] text-white text-sm min-h-8">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
-            {siteSettings.phone && (
-              <div className="flex items-center gap-2">
-                <Phone
-                  className="text-[#F4B740]"
-                  size={14}
-                  aria-hidden="true"
-                />
-                <span>{siteSettings.phone}</span>
-              </div>
-            )}
+            <div className="flex items-center gap-2">
+              <Phone className="text-[#F4B740]" size={14} aria-hidden="true" />
+              <span>{siteSettings.phone}</span>
+            </div>
 
-            {siteSettings.phone && (
-              <a
-                href={`tel:${siteSettings.phone}`}
-                className="rounded bg-[#F4B740] px-3 py-1 text-[#0E1B3D] font-medium"
-              >
-                Call Now
-              </a>
-            )}
+            <a
+              href={`tel:${siteSettings.phone}`}
+              className="rounded bg-[#F4B740] px-3 py-1 text-[#0E1B3D] font-medium"
+            >
+              Call Now
+            </a>
           </div>
         </div>
 
         {/* ================= Main Navbar ================= */}
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
           <Link to="/" aria-label="Go to WAARC homepage">
-            <img src={Logo} alt="WAARC Logo" className="h-16 w-auto" />
+            <img
+              src={Logo}
+              alt="WAARC Logo"
+              width={64}
+              height={64}
+              className="h-16 w-auto"
+            />
           </Link>
 
           {/* ================= Desktop Navigation ================= */}
