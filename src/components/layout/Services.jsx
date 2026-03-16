@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router";
 
-import ConsultingImg from "./../../assets/images/education.jpg";
-import ResearchImg from "./../../assets/images/research.jpg";
+import ConsultingImg from "./../../assets/images/education.webp";
+import ResearchImg from "./../../assets/images/research.webp";
 
 /* ---------------- SERVICES DATA ---------------- */
 

@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import React from "react";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Work1 from "./../../assets/images/work1.jpg";
-import Work2 from "./../../assets/images/work2.jpg";
-import Work3 from "./../../assets/images/work3.jpg";
+import Work1 from "./../../assets/images/work1.webp";
+import Work2 from "./../../assets/images/work2.webp";
+import Work3 from "./../../assets/images/work3.webp";
 import WorkCard from "./WorkCard";
 
 const works = [

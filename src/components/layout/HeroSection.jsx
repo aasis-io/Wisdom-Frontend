@@ -3,7 +3,7 @@ import { FaBullseye, FaLightbulb } from "react-icons/fa";
 import { Link } from "react-router";
 import { getHomePage } from "../../services/api";
 
-import Bg from "./../../assets/images/bg.png";
+import Bg from "./../../assets/images/bg.webp";
 import Wave from "./../../assets/images/wave.svg";
 
 export default function HeroSection() {
