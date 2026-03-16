@@ -10,31 +10,31 @@ import WorkCard from "./WorkCard";
 const works = [
   {
     image: Work1,
-    category: "Design",
+    category: "",
     title: "Work 1...",
     description:
-      "Use Figma to get a job in UI Design, User Interface, User Experience design.",
+      "This is work 1",
   },
   {
     image: Work2,
-    category: "Design",
+    category: "",
     title: "Work 2...",
     description:
-      "Design Web Sites and Mobile Apps that Your Users Love and Return to Again.",
+      "This is work 2",
   },
   {
     image: Work3,
-    category: "Design",
+    category: "",
     title: "Work 3...",
     description:
-      "Learn how to apply User Experience (UX) principles to your website designs.",
+      "This is work 3",
   },
   {
     image: Work3,
-    category: "Design",
-    title: "Work 3...",
+    category: "",
+    title: "Work 4...",
     description:
-      "Learn how to apply User Experience (UX) principles to your website designs.",
+      "This is work 4",
   },
 ];
 
