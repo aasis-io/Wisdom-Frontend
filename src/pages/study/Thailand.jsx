@@ -1,6 +1,5 @@
 import { ChevronRight } from "lucide-react";
 import React from "react";
-import { Link } from "react-router";
 import ThailandBanner from "/thailand-banner.jpg";
 
 const sections = [
@@ -32,13 +31,16 @@ export default function Thailand() {
       <section className="border-b border-slate-200 bg-slate-50">
         <div className="mx-auto max-w-7xl px-6 py-6">
           <div className="flex items-center gap-2 text-sm text-slate-600">
-            <Link to={"/"} className="hover:text-slate-900">
+            <a to="https://waarc.edu.np" className="hover:text-slate-900">
               Home
-            </Link>
+            </a>
             <ChevronRight className="h-4 w-4" />
-            <Link to={"/consulting"} className="hover:text-slate-900">
+            <a
+              href="https://waarc.edu.np/services/study-advisory"
+              className="hover:text-slate-900"
+            >
               Study
-            </Link>
+            </a>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-900">Thailand</span>
           </div>

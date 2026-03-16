@@ -35,7 +35,7 @@ const studyDestinations = [
     image: Italy,
     flag: "https://flagcdn.com/w20/it.png",
     alt: "Study in Italy",
-    path: "/study/italy",
+    path: "https://waarc.edu.np/study/italy",
   },
   {
     country: "Thailand",
@@ -44,7 +44,7 @@ const studyDestinations = [
     image: Thailand,
     flag: "https://flagcdn.com/w20/th.png",
     alt: "Study in Thailand",
-    path: "/study/thailand",
+    path: "https://waarc.edu.np/study/thailand",
   },
 ];
 
@@ -168,7 +168,7 @@ export default function StudyAdvisory() {
 
           <div className="mt-14 grid gap-10 md:grid-cols-2">
             {studyDestinations.map((item, index) => (
-              <Link key={index} to={item.path}>
+              <a key={index} href={item.path}>
                 <div className="group rounded-3xl bg-white p-5 shadow-md hover:shadow-xl transition">
                   <div className="relative overflow-hidden rounded-2xl">
                     <img
@@ -196,7 +196,7 @@ export default function StudyAdvisory() {
                     </p>
                   </div>
                 </div>
-              </Link>
+              </a>
             ))}
           </div>
         </div>

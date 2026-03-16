@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
 import SEO from "../components/SEO";
 import AboutSection from "../components/layout/AboutSection";
 import EventRegistrationSection from "../components/layout/EventRegistrationSection";
@@ -52,12 +51,12 @@ export default function Home() {
         <div className="bg-white py-12 lg:py-8">
           <Services />
           <div className="mt-8 text-center">
-            <Link
-              to="/services"
+            <a
+              href="https://waarc.edu.np/services"
               className="inline-block rounded-xl border border-gray-300 px-8 py-3 text-sm font-semibold text-[#1e2a4a] transition hover:bg-gray-100"
             >
               Explore All Services
-            </Link>
+            </a>
           </div>
         </div>
 

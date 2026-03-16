@@ -11,7 +11,6 @@ import { router } from "./router";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <HelmetProvider>
-      {/* Toast Notifications */}
       <Toaster
         position="top-right"
         toastOptions={{
@@ -35,8 +34,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           },
         }}
       />
-
-      {/* App Router */}
       <RouterProvider router={router} />
     </HelmetProvider>
   </React.StrictMode>

@@ -1,6 +1,5 @@
 import { Lightbulb, Target } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router";
 import Breadcrumbs from "../components/Breadcrumbs";
 import SEO from "../components/SEO";
 import Services from "../components/layout/Services";
@@ -196,12 +195,12 @@ export default function About() {
                 meaningful impact.
               </p>
               <p className="mt-12">
-                <Link
-                  to="/contact"
+                <a
+                  href="https://waarc.edu.np/contact"
                   className="rounded-xl bg-[#17254e] px-14 py-5 font-semibold text-white shadow-2xl hover:bg-[#17254eee] duration-300"
                 >
                   Contact Us
-                </Link>
+                </a>
               </p>
             </div>
           </div>

@@ -8,7 +8,6 @@ const breadcrumbsData = [
 export default function ServicesPage() {
   return (
     <>
-      {/* Breadcrumb */}
       <Breadcrumbs breadcrumbs={breadcrumbsData} />
       <div className="bg-white py-12 lg:py-8">
         <Services />

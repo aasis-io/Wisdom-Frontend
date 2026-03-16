@@ -7,7 +7,6 @@ import {
   GraduationCap,
   MonitorPlay,
 } from "lucide-react";
-import { Link } from "react-router";
 import Breadcrumbs from "../components/Breadcrumbs";
 import ResearchImg from "./../assets/images/research.jpg";
 const breadcrumbsData = [
@@ -81,13 +80,13 @@ export default function Research() {
               support across every stage of the academic research journey.
             </p>
             <div className="mt-8">
-              <Link
-                to="/contact"
+              <a
+                href="https://waarc.edu.np/contact"
                 className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-semibold text-slate-900 bg-yellow-400 hover:opacity-90 transition text-sm"
               >
                 Get Started
                 <ArrowRight className="h-4 w-4" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -159,13 +158,13 @@ export default function Research() {
               Connect with our academic experts today and take the next step
               toward publication, recognition, and impact.
             </p>
-            <Link
-              to="/contact"
+            <a
+              href="https://waarc.edu.np/contact"
               className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold text-slate-900 bg-yellow-400 text-sm hover:opacity-90 transition"
             >
               Start a project
               <ArrowRight className="h-4 w-4" />
-            </Link>
+            </a>
           </div>
         </div>
       </section>
