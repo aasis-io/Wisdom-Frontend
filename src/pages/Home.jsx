@@ -17,7 +17,6 @@ export default function Home() {
       try {
         const data = await getHomePage();
 
-        // Fix image URL
         if (data.image) {
           const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
           data.image = data.image.startsWith("http")
@@ -27,7 +26,6 @@ export default function Home() {
 
         setHomeData(data);
 
-        // Preload LCP image as soon as URL is known
         if (data.image) {
           const link = document.createElement("link");
           link.rel = "preload";
@@ -44,8 +42,6 @@ export default function Home() {
     fetchData();
   }, []);
 
-  // Never return null — HeroSection renders its own skeleton while homeData is null,
-  // keeping the layout stable and avoiding a full-page CLS collapse.
   return (
     <>
       {homeData && (

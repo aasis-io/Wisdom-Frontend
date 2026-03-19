@@ -51,7 +51,7 @@ export default function About() {
       <SEO
         title={
           aboutData.metaTitle ||
-          "About WAARC | Wisdom Academy & Research Center Nepal"
+          "About WAARC | Wisdom Academy and Research Center Nepal"
         }
         description={
           aboutData.metaDescription ||
