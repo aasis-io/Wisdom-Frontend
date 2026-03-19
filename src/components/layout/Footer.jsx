@@ -28,27 +28,27 @@ const socialIconsMap = [
 function LinkSkeleton({ count }) {
   return Array.from({ length: count }).map((_, i) => (
     <li key={i} className="h-5">
-      <span className="block h-3.5 w-24 rounded bg-white/10 animate-pulse" />
+      <div className="h-4 w-32 rounded bg-white/10 animate-pulse" />
     </li>
   ));
 }
 
 function LinkColumn({ heading, links, loading, skeletonCount }) {
   return (
-    <div className="min-h-[180px]">
+    <div className="min-h-[200px]">
       <h4 className="mb-4 text-sm font-semibold text-white/90">{heading}</h4>
 
-      <ul className="space-y-3 text-sm text-white/70">
+      <ul className="space-y-3 text-sm text-white/70 min-h-[140px]">
         {loading ? (
           <LinkSkeleton count={skeletonCount} />
         ) : (
-          links.map((link) => (
-            <li key={link.id || link.name} className="h-5">
+          links.slice(0, skeletonCount).map((link, idx) => (
+            <li key={link.id || link.name || idx} className="h-5">
               <a
                 href={link.link || link.href}
                 target={link.link ? "_blank" : undefined}
                 rel={link.link ? "noopener noreferrer" : undefined}
-                className="hover:text-white transition-colors"
+                className="hover:text-white transition-colors block h-5"
               >
                 {link.title || link.name}
               </a>
@@ -61,26 +61,39 @@ function LinkColumn({ heading, links, loading, skeletonCount }) {
 }
 
 export default function Footer() {
-  const [usefulLinks, setUsefulLinks] = useState(null); // ✅ IMPORTANT FIX
-  const [socials, setSocials] = useState(null); // ✅ IMPORTANT FIX
+  // ✅ NEVER NULL → prevents layout shift
+  const [usefulLinks, setUsefulLinks] = useState([]);
+  const [socials, setSocials] = useState({});
+
+  const [loadingLinks, setLoadingLinks] = useState(true);
+  const [loadingSocials, setLoadingSocials] = useState(true);
 
   useEffect(() => {
     getUsefulLinks()
-      .then(setUsefulLinks)
-      .catch(() => setUsefulLinks([]));
+      .then((data) => {
+        setUsefulLinks(data || []);
+        setLoadingLinks(false);
+      })
+      .catch(() => {
+        setUsefulLinks([]);
+        setLoadingLinks(false);
+      });
 
     getSiteSettings()
-      .then(setSocials)
-      .catch(() => setSocials({}));
+      .then((data) => {
+        setSocials(data || {});
+        setLoadingSocials(false);
+      })
+      .catch(() => {
+        setSocials({});
+        setLoadingSocials(false);
+      });
   }, []);
 
-  const isLoadingLinks = usefulLinks === null;
-  const isLoadingSocials = socials === null;
-
   return (
-    <footer className="relative bg-[#0E1B3D] text-white">
-      {/* Wave */}
-      <div className="absolute -top-1 left-0 w-full h-16 overflow-hidden pointer-events-none">
+    <footer className="relative bg-[#0E1B3D] text-white contain-layout">
+      {/* Wave (fixed height, no shift) */}
+      <div className="absolute top-0 left-0 w-full h-16 overflow-hidden pointer-events-none">
         <svg
           className="block h-full w-full"
           viewBox="0 0 1440 100"
@@ -95,7 +108,7 @@ export default function Footer() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-6 pb-10 pt-28">
-        <div className="grid gap-12 lg:grid-cols-5">
+        <div className="grid gap-12 lg:grid-cols-5 min-h-[320px]">
           {/* BRAND */}
           <div className="lg:col-span-2 flex flex-col gap-5 min-h-[160px]">
             <div className="w-56 h-[56px]">
@@ -116,11 +129,11 @@ export default function Footer() {
           </div>
 
           {/* LINKS */}
-          <div className="grid gap-10 grid-cols-2 lg:col-span-3 lg:grid-cols-3 min-h-[180px]">
+          <div className="grid gap-10 grid-cols-2 lg:col-span-3 lg:grid-cols-3 min-h-[200px]">
             <LinkColumn
               heading="Useful Links"
-              links={usefulLinks ?? []}
-              loading={isLoadingLinks}
+              links={usefulLinks}
+              loading={loadingLinks}
               skeletonCount={4}
             />
 
@@ -140,10 +153,10 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Divider */}
+        {/* Divider (fixed height) */}
         <div className="my-10 h-px bg-white/10" />
 
-        {/* Bottom */}
+        {/* Bottom (stable layout) */}
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row min-h-[56px]">
           <p className="text-sm text-white/60">
             © {new Date().getFullYear()} WAARC. All rights reserved.
@@ -157,11 +170,13 @@ export default function Footer() {
                 <a
                   key={name}
                   href={link || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   aria-label={name}
-                  className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-white/70 transition-colors"
-                  style={{ opacity: link ? 1 : 0.4 }} // ✅ prevents layout shift
+                  className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-white/70"
+                  style={{
+                    opacity: link ? 1 : 0.35,
+                    minWidth: "36px",
+                    minHeight: "36px",
+                  }}
                 >
                   <Icon size={16} />
                 </a>
