@@ -177,13 +177,14 @@ export default function Navbar() {
           <Link to="/" aria-label="Go to WAARC homepage">
             <img
               src={Logo}
-              alt="WAARC Logo"
-              width={64}
-              height={64}
+              alt="Wisdom Academy and Research Center"
+              width={165}
+              height={80}
+              loading="eager"
+              decoding="async"
               className="h-16 w-auto"
             />
           </Link>
-
           {/* ================= Desktop Navigation ================= */}
           <nav
             ref={desktopRef}

@@ -26,8 +26,8 @@ const socialIconsMap = [
 ];
 
 function LinkSkeleton({ count }) {
-  return Array.from({ length: count }, (_, i) => (
-    <li key={i}>
+  return Array.from({ length: count }).map((_, i) => (
+    <li key={i} className="h-5">
       <span className="block h-3.5 w-24 rounded bg-white/10 animate-pulse" />
     </li>
   ));
@@ -35,7 +35,7 @@ function LinkSkeleton({ count }) {
 
 function LinkColumn({ heading, links, loading, skeletonCount }) {
   return (
-    <div className="min-h-45">
+    <div className="min-h-[180px]">
       <h4 className="mb-4 text-sm font-semibold text-white/90">{heading}</h4>
 
       <ul className="space-y-3 text-sm text-white/70">
@@ -43,7 +43,7 @@ function LinkColumn({ heading, links, loading, skeletonCount }) {
           <LinkSkeleton count={skeletonCount} />
         ) : (
           links.map((link) => (
-            <li key={link.id || link.name}>
+            <li key={link.id || link.name} className="h-5">
               <a
                 href={link.link || link.href}
                 target={link.link ? "_blank" : undefined}
@@ -61,8 +61,8 @@ function LinkColumn({ heading, links, loading, skeletonCount }) {
 }
 
 export default function Footer() {
-  const [usefulLinks, setUsefulLinks] = useState([]);
-  const [socials, setSocials] = useState({});
+  const [usefulLinks, setUsefulLinks] = useState(null); // ✅ IMPORTANT FIX
+  const [socials, setSocials] = useState(null); // ✅ IMPORTANT FIX
 
   useEffect(() => {
     getUsefulLinks()
@@ -74,9 +74,12 @@ export default function Footer() {
       .catch(() => setSocials({}));
   }, []);
 
+  const isLoadingLinks = usefulLinks === null;
+  const isLoadingSocials = socials === null;
+
   return (
     <footer className="relative bg-[#0E1B3D] text-white">
-      {/* Decorative wave (safe) */}
+      {/* Wave */}
       <div className="absolute -top-1 left-0 w-full h-16 overflow-hidden pointer-events-none">
         <svg
           className="block h-full w-full"
@@ -94,30 +97,30 @@ export default function Footer() {
       <div className="relative mx-auto max-w-7xl px-6 pb-10 pt-28">
         <div className="grid gap-12 lg:grid-cols-5">
           {/* BRAND */}
-          <div className="lg:col-span-2 flex flex-col gap-5 min-h-40">
-            <div className="w-56">
+          <div className="lg:col-span-2 flex flex-col gap-5 min-h-[160px]">
+            <div className="w-56 h-[56px]">
               <img
                 src={Logo}
                 alt="Wisdom Academy & Research Center"
                 width={224}
                 height={56}
-                className="w-full h-auto object-contain"
+                className="w-full h-full object-contain"
                 loading="eager"
                 decoding="async"
               />
             </div>
 
-            <p className="max-w-sm text-sm text-white/70">
+            <p className="max-w-sm text-sm text-white/70 min-h-[40px]">
               Top learning experiences that create more talent in the world.
             </p>
           </div>
 
           {/* LINKS */}
-          <div className="grid gap-10 grid-cols-2 lg:col-span-3 lg:grid-cols-3 min-h-45">
+          <div className="grid gap-10 grid-cols-2 lg:col-span-3 lg:grid-cols-3 min-h-[180px]">
             <LinkColumn
               heading="Useful Links"
-              links={usefulLinks}
-              loading={usefulLinks.length === 0}
+              links={usefulLinks ?? []}
+              loading={isLoadingLinks}
               skeletonCount={4}
             />
 
@@ -141,7 +144,7 @@ export default function Footer() {
         <div className="my-10 h-px bg-white/10" />
 
         {/* Bottom */}
-        <div className="flex flex-col items-center justify-between gap-6 md:flex-row min-h-15">
+        <div className="flex flex-col items-center justify-between gap-6 md:flex-row min-h-[56px]">
           <p className="text-sm text-white/60">
             © {new Date().getFullYear()} WAARC. All rights reserved.
           </p>
@@ -150,19 +153,18 @@ export default function Footer() {
             {socialIconsMap.map(({ name, icon: Icon }) => {
               const link = socials?.[name];
 
-              return link ? (
+              return (
                 <a
                   key={name}
-                  href={link}
+                  href={link || "#"}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={name}
-                  className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-white/70 hover:bg-white/20 hover:text-white transition-colors"
+                  className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-white/70 transition-colors"
+                  style={{ opacity: link ? 1 : 0.4 }} // ✅ prevents layout shift
                 >
                   <Icon size={16} />
                 </a>
-              ) : (
-                <div key={name} className="w-9 h-9 rounded-full bg-white/10" />
               );
             })}
           </div>

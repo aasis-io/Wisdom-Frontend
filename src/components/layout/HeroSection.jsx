@@ -48,7 +48,6 @@ export default function HeroSection() {
       className="relative w-full overflow-hidden"
       aria-label="Hero Section"
     >
-      {/* ✅ Background (non-LCP, properly lazy + hidden from a11y) */}
       <div className="absolute inset-0 opacity-20">
         <img
           src={Bg}
@@ -105,12 +104,12 @@ export default function HeroSection() {
               height={800}
               fetchpriority="high"
               decoding="async"
+              loading="eager"
             />
           </div>
         </div>
       </div>
 
-      {/* ✅ Decorative Wave */}
       <div className="pointer-events-none absolute -bottom-1.5 left-0 w-full h-8 sm:h-10 md:h-12 overflow-hidden">
         <img
           src={Wave}
