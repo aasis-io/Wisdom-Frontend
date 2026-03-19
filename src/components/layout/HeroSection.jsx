@@ -96,7 +96,6 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* ✅ LCP Image */}
           <div className="relative mx-auto w-full max-w-md lg:max-w-4xl">
             <img
               src={homeData.image}

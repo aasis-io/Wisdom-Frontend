@@ -11,8 +11,8 @@ const services = [
       "Guiding students towards the right education and global opportunities",
     image: ConsultingImg,
     path: "https://waarc.edu.np/services/study-advisory",
-    width: 600, // image width in px
-    height: 400, // image height in px
+    width: 600,
+    height: 400,
   },
   {
     title: "Research",
@@ -27,7 +27,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section>
+    <section className="py-12">
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center">
@@ -41,22 +41,28 @@ export default function Services() {
         </div>
 
         {/* Cards */}
-        <div className="mt-8 grid gap-8 lg:grid-cols-2">
+        <div className="mt-10 grid gap-8 lg:grid-cols-2">
           {services.map((service, idx) => (
             <Link key={idx} to={service.path} className="block">
+              {/* FIX: reserve space BEFORE image loads */}
               <div
-                className="group relative overflow-hidden rounded-3xl w-full"
-                style={{ aspectRatio: `${service.width} / ${service.height}` }}
+                className="group relative overflow-hidden rounded-3xl w-full bg-gray-100"
+                style={{
+                  aspectRatio: "3 / 2", // ✅ stable fixed ratio (IMPORTANT FIX)
+                }}
               >
+                {/* Image */}
                 <img
                   src={service.image}
                   alt={service.title}
                   width={service.width}
                   height={service.height}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
                 />
 
-                {/* Gradient Overlay */}
+                {/* Overlay */}
                 <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/50 to-transparent" />
 
                 {/* Content */}
@@ -74,7 +80,7 @@ export default function Services() {
         </div>
 
         {/* Slider Dots */}
-        <div className="mt-8 flex justify-center gap-3">
+        <div className="mt-10 flex justify-center gap-3">
           <span className="h-2 w-10 rounded-full bg-[#f2b84b]" />
           <span className="h-2 w-2 rounded-full bg-gray-300" />
           <span className="h-2 w-2 rounded-full bg-gray-300" />

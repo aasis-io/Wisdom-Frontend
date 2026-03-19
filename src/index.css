@@ -317,7 +317,59 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 .jvectormap-region.jvectormap-element:hover {
   fill: #465fff;
 }
+/* ===================== CUSTOM ANIMATIONS (MISSING TAILWIND HELPERS) ===================== */
 
+/* Pulse (for skeleton loaders) */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Fade in (useful for API-loaded content to reduce visual jank) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Skeleton shimmer (optional upgrade over pulse) */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06) 25%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.06) 75%
+  );
+  background-size: 200px 100%;
+  animation: shimmer 1.2s infinite;
+}
 /* ===================== DARK MODE ===================== */
 .dark body {
   background-color: #101828;

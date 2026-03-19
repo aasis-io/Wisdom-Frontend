@@ -27,22 +27,23 @@ const socialIconsMap = [
 
 function LinkSkeleton({ count }) {
   return Array.from({ length: count }, (_, i) => (
-    <li key={i} className="leading-5">
-      <span className="inline-block h-3.5 w-24 rounded bg-white/20 animate-pulse" />
+    <li key={i}>
+      <span className="block h-3.5 w-24 rounded bg-white/10 animate-pulse" />
     </li>
   ));
 }
 
 function LinkColumn({ heading, links, loading, skeletonCount }) {
   return (
-    <div>
+    <div className="min-h-45">
       <h4 className="mb-4 text-sm font-semibold text-white/90">{heading}</h4>
+
       <ul className="space-y-3 text-sm text-white/70">
         {loading ? (
           <LinkSkeleton count={skeletonCount} />
         ) : (
           links.map((link) => (
-            <li key={link.id || link.name} className="leading-5">
+            <li key={link.id || link.name}>
               <a
                 href={link.link || link.href}
                 target={link.link ? "_blank" : undefined}
@@ -60,24 +61,23 @@ function LinkColumn({ heading, links, loading, skeletonCount }) {
 }
 
 export default function Footer() {
-  const [usefulLinks, setUsefulLinks] = useState(null); // null = loading
-  const [socials, setSocials] = useState(null); // null = loading
+  const [usefulLinks, setUsefulLinks] = useState([]);
+  const [socials, setSocials] = useState({});
 
   useEffect(() => {
     getUsefulLinks()
       .then(setUsefulLinks)
       .catch(() => setUsefulLinks([]));
+
     getSiteSettings()
       .then(setSocials)
       .catch(() => setSocials({}));
   }, []);
 
-  const usefulLoading = usefulLinks === null;
-  const socialsLoading = socials === null;
-
   return (
     <footer className="relative bg-[#0E1B3D] text-white">
-      <div className="absolute -top-1 left-0 w-full h-16 overflow-hidden leading-none z-10">
+      {/* Decorative wave (safe) */}
+      <div className="absolute -top-1 left-0 w-full h-16 overflow-hidden pointer-events-none">
         <svg
           className="block h-full w-full"
           viewBox="0 0 1440 100"
@@ -94,14 +94,14 @@ export default function Footer() {
       <div className="relative mx-auto max-w-7xl px-6 pb-10 pt-28">
         <div className="grid gap-12 lg:grid-cols-5">
           {/* BRAND */}
-          <div className="lg:col-span-2 flex flex-col gap-5">
-            <div className="w-56 aspect-224/56">
+          <div className="lg:col-span-2 flex flex-col gap-5 min-h-40">
+            <div className="w-56">
               <img
                 src={Logo}
                 alt="Wisdom Academy & Research Center"
                 width={224}
                 height={56}
-                className="w-full h-full object-contain"
+                className="w-full h-auto object-contain"
                 loading="eager"
                 decoding="async"
               />
@@ -113,19 +113,21 @@ export default function Footer() {
           </div>
 
           {/* LINKS */}
-          <div className="grid gap-10 grid-cols-2 lg:col-span-3 lg:grid-cols-3">
+          <div className="grid gap-10 grid-cols-2 lg:col-span-3 lg:grid-cols-3 min-h-45">
             <LinkColumn
               heading="Useful Links"
-              links={usefulLinks ?? []}
-              loading={usefulLoading}
+              links={usefulLinks}
+              loading={usefulLinks.length === 0}
               skeletonCount={4}
             />
+
             <LinkColumn
               heading="Quick Links"
               links={quickLinks}
               loading={false}
               skeletonCount={5}
             />
+
             <LinkColumn
               heading="Company"
               links={companyLinks}
@@ -135,40 +137,34 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* DIVIDER */}
+        {/* Divider */}
         <div className="my-10 h-px bg-white/10" />
 
-        {/* BOTTOM BAR */}
-        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+        {/* Bottom */}
+        <div className="flex flex-col items-center justify-between gap-6 md:flex-row min-h-15">
           <p className="text-sm text-white/60">
             © {new Date().getFullYear()} WAARC. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-2 h-8.5">
-            {socialsLoading
-              ? socialIconsMap.map(({ name }) => (
-                  <div
-                    key={name}
-                    className="w-8.5 h-8.5 rounded-full bg-white/10 animate-pulse"
-                    aria-hidden="true"
-                  />
-                ))
-              : socialIconsMap.map(({ name, icon: Icon }) => {
-                  const link = socials?.[name];
-                  if (!link) return null;
-                  return (
-                    <a
-                      key={name}
-                      href={link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Visit our ${name} page`}
-                      className="flex items-center justify-center w-8.5 h-8.5 rounded-full bg-white/10 text-white/70 hover:bg-white/20 hover:text-white transition-colors"
-                    >
-                      <Icon size={16} aria-hidden="true" />
-                    </a>
-                  );
-                })}
+          <div className="flex items-center gap-2 h-9">
+            {socialIconsMap.map(({ name, icon: Icon }) => {
+              const link = socials?.[name];
+
+              return link ? (
+                <a
+                  key={name}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={name}
+                  className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-white/70 hover:bg-white/20 hover:text-white transition-colors"
+                >
+                  <Icon size={16} />
+                </a>
+              ) : (
+                <div key={name} className="w-9 h-9 rounded-full bg-white/10" />
+              );
+            })}
           </div>
         </div>
       </div>
