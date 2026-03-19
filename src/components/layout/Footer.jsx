@@ -25,9 +25,6 @@ const socialIconsMap = [
   { name: "youtube", icon: Youtube },
 ];
 
-// CLS FIX: skeleton items must match the exact height of real links
-// (text-sm = 14px, leading-5 = 20px line-height) so swapping them
-// in never causes a height change.
 function LinkSkeleton({ count }) {
   return Array.from({ length: count }, (_, i) => (
     <li key={i} className="leading-5">
@@ -80,9 +77,6 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-[#0E1B3D] text-white">
-      {/* WAVE
-          CLS FIX: h-16 on the wrapper reserves exactly 64px before the SVG
-          is parsed, so nothing below it shifts on load. */}
       <div className="absolute -top-1 left-0 w-full h-16 overflow-hidden leading-none z-10">
         <svg
           className="block h-full w-full"
@@ -101,10 +95,6 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-5">
           {/* BRAND */}
           <div className="lg:col-span-2 flex flex-col gap-5">
-            {/* CLS FIX: aspect-[224/56] on the wrapper tells the browser
-                exactly how tall the logo slot is before the SVG file arrives.
-                Without this, height is 0 until the asset loads → shift.
-                w-full h-full on the img fills that reserved space. */}
             <div className="w-56 aspect-224/56">
               <img
                 src={Logo}
@@ -117,9 +107,6 @@ export default function Footer() {
               />
             </div>
 
-            {/* CLS FIX: removed min-h-6 — that was masking a font-swap shift,
-                not fixing it. Fix font shifts at the source with
-                font-display: optional in your global @font-face rule. */}
             <p className="max-w-sm text-sm text-white/70">
               Top learning experiences that create more talent in the world.
             </p>
@@ -157,12 +144,6 @@ export default function Footer() {
             © {new Date().getFullYear()} WAARC. All rights reserved.
           </p>
 
-          {/* CLS FIX: h-[34px] on the row reserves the exact height of the
-              social buttons while the API call is in-flight. Skeleton circles
-              are the same 34×34 as the real buttons so no shift occurs when
-              they swap in. Hiding icons with opacity-0 (old approach) kept
-              them in the layout but invisible — that still caused shifts when
-              the row height changed. */}
           <div className="flex items-center gap-2 h-8.5">
             {socialsLoading
               ? socialIconsMap.map(({ name }) => (
