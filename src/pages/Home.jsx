@@ -26,6 +26,16 @@ export default function Home() {
         }
 
         setHomeData(data);
+
+        // Preload LCP image as soon as URL is known
+        if (data.image) {
+          const link = document.createElement("link");
+          link.rel = "preload";
+          link.as = "image";
+          link.href = data.image;
+          link.fetchPriority = "high";
+          document.head.appendChild(link);
+        }
       } catch (error) {
         console.error("Failed to fetch homepage data", error);
       }
@@ -34,17 +44,19 @@ export default function Home() {
     fetchData();
   }, []);
 
-  if (!homeData) return null;
-
+  // Never return null — HeroSection renders its own skeleton while homeData is null,
+  // keeping the layout stable and avoiding a full-page CLS collapse.
   return (
     <>
-      <SEO
-        title={homeData.metaTitle}
-        description={homeData.metaDescription}
-        canonical="https://waarc.edu.np/"
-        keywords={homeData.metaKeywords}
-        ogImage={homeData.image}
-      />
+      {homeData && (
+        <SEO
+          title={homeData.metaTitle}
+          description={homeData.metaDescription}
+          canonical="https://waarc.edu.np/"
+          keywords={homeData.metaKeywords}
+          ogImage={homeData.image}
+        />
+      )}
 
       <section>
         <HeroSection homeData={homeData} />

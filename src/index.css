@@ -1,32 +1,32 @@
 @import "tailwindcss";
 
 @font-face {
-  font-display: optional; /* was: swap — optional never swaps after first paint → no CLS */
+  font-display: swap; /* swap: use fallback immediately, swap in Inter once loaded — no invisible text */
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
-  src: url("../fonts/inter-v20-latin-regular.woff2") format("woff2");
+  src: url("/fonts/inter-v20-latin-regular.woff2") format("woff2");
 }
 @font-face {
-  font-display: optional;
+  font-display: swap;
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
-  src: url("../fonts/inter-v20-latin-500.woff2") format("woff2");
+  src: url("/fonts/inter-v20-latin-500.woff2") format("woff2");
 }
 @font-face {
-  font-display: optional;
+  font-display: swap;
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
-  src: url("../fonts/inter-v20-latin-600.woff2") format("woff2");
+  src: url("/fonts/inter-v20-latin-600.woff2") format("woff2");
 }
 @font-face {
-  font-display: optional;
+  font-display: swap;
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  src: url("../fonts/inter-v20-latin-700.woff2") format("woff2");
+  src: url("/fonts/inter-v20-latin-700.woff2") format("woff2");
 }
 
 :root {

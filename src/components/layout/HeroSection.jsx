@@ -1,47 +1,49 @@
-import { useEffect, useState } from "react";
 import { FaBullseye, FaLightbulb } from "react-icons/fa";
 import { Link } from "react-router";
-import { getHomePage } from "../../services/api";
 
 import Bg from "./../../assets/images/bg.webp";
 import Wave from "./../../assets/images/wave.svg";
 
-export default function HeroSection() {
-  const [homeData, setHomeData] = useState(null);
+// Skeleton shown while homeData is still loading — prevents layout shift
+function HeroSkeleton() {
+  return (
+    <section className="relative w-full overflow-hidden" aria-label="Hero Section" aria-busy="true">
+      <div className="absolute inset-0 opacity-20">
+        <img src={Bg} alt="" aria-hidden="true" className="w-full h-full object-cover" loading="eager" />
+        <div className="absolute inset-0 bg-black/10" />
+      </div>
+      <div className="relative mx-auto max-w-7xl px-6 py-12 lg:pt-16 lg:pb-24">
+        <div className="grid gap-12 lg:grid-cols-[40%_60%] items-center">
+          {/* Left skeleton */}
+          <div className="space-y-4">
+            <div className="h-12 w-3/4 rounded-lg bg-gray-200 animate-pulse" />
+            <div className="h-12 w-1/2 rounded-lg bg-gray-200 animate-pulse" />
+            <div className="mt-6 space-y-2">
+              <div className="h-4 w-full rounded bg-gray-200 animate-pulse" />
+              <div className="h-4 w-5/6 rounded bg-gray-200 animate-pulse" />
+              <div className="h-4 w-4/6 rounded bg-gray-200 animate-pulse" />
+            </div>
+            <div className="mt-8 h-12 w-40 rounded-xl bg-gray-300 animate-pulse" />
+          </div>
+          {/* Right skeleton — same aspect ratio as real image to prevent shift */}
+          <div className="relative mx-auto w-full max-w-md lg:max-w-4xl">
+            <div
+              className="w-full rounded-3xl bg-gray-200 animate-pulse"
+              style={{ aspectRatio: "3 / 2" }}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute -bottom-1.5 left-0 w-full h-8 sm:h-10 md:h-12 overflow-hidden">
+        <img src={Wave} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="eager" />
+      </div>
+    </section>
+  );
+}
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getHomePage();
-
-        // Fix image path
-        if (data.image) {
-          const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
-          data.image = data.image.startsWith("http")
-            ? data.image
-            : `${baseUrl}${data.image.startsWith("/") ? "" : "/"}${data.image}`;
-        }
-
-        setHomeData(data);
-
-        // ✅ Preload LCP image immediately
-        if (data.image) {
-          const link = document.createElement("link");
-          link.rel = "preload";
-          link.as = "image";
-          link.href = data.image;
-          link.fetchPriority = "high";
-          document.head.appendChild(link);
-        }
-      } catch (error) {
-        console.error("Failed to fetch home data", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (!homeData) return null;
+// homeData is passed in from the parent (Home.jsx) — no second fetch here
+export default function HeroSection({ homeData }) {
+  if (!homeData) return <HeroSkeleton />;
 
   return (
     <section

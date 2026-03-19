@@ -16,9 +16,9 @@ import { getSiteSettings } from "../../services/api";
 import Logo from "./../../assets/images/logo-dark.svg";
 
 const DEFAULT_SETTINGS = {
-  phone: "----",
-  email: "----",
-  location: "----",
+  phone: "",
+  email: "",
+  location: "",
   facebook: "",
   twitter: "",
   linkedin: "",
@@ -95,27 +95,25 @@ export default function Navbar() {
       <header className="relative z-30 w-full bg-white shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
         {/* ================= Top Bar (Desktop) ================= */}
         <div className="hidden md:block bg-[#0E1B3D] text-white text-sm">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 min-h-8">
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 h-9">
             <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2 min-w-25">
-                <Phone
-                  className="text-[#F4B740]"
-                  size={14}
-                  aria-hidden="true"
-                />
-                <span>{siteSettings.phone}</span>
+              <div className="flex items-center gap-2 min-w-[120px]">
+                <Phone className="text-[#F4B740] shrink-0" size={14} aria-hidden="true" />
+                {siteSettings.phone
+                  ? <span>{siteSettings.phone}</span>
+                  : <span className="inline-block h-3.5 w-24 rounded bg-white/10 animate-pulse" aria-hidden="true" />}
               </div>
-              <div className="flex items-center gap-2 min-w-35">
-                <Mail className="text-[#F4B740]" size={14} aria-hidden="true" />
-                <span>{siteSettings.email}</span>
+              <div className="flex items-center gap-2 min-w-[160px]">
+                <Mail className="text-[#F4B740] shrink-0" size={14} aria-hidden="true" />
+                {siteSettings.email
+                  ? <span>{siteSettings.email}</span>
+                  : <span className="inline-block h-3.5 w-36 rounded bg-white/10 animate-pulse" aria-hidden="true" />}
               </div>
-              <div className="flex items-center gap-2 min-w-35">
-                <MapPin
-                  className="text-[#F4B740]"
-                  size={14}
-                  aria-hidden="true"
-                />
-                <span>{siteSettings.location}</span>
+              <div className="flex items-center gap-2 min-w-[160px]">
+                <MapPin className="text-[#F4B740] shrink-0" size={14} aria-hidden="true" />
+                {siteSettings.location
+                  ? <span>{siteSettings.location}</span>
+                  : <span className="inline-block h-3.5 w-36 rounded bg-white/10 animate-pulse" aria-hidden="true" />}
               </div>
             </div>
 
@@ -156,11 +154,13 @@ export default function Navbar() {
         </div>
 
         {/* ================= Mobile Top Bar ================= */}
-        <div className="block md:hidden bg-[#0E1B3D] text-white text-sm min-h-8">
+        <div className="block md:hidden bg-[#0E1B3D] text-white text-sm h-9">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
-            <div className="flex items-center gap-2">
-              <Phone className="text-[#F4B740]" size={14} aria-hidden="true" />
-              <span>{siteSettings.phone}</span>
+            <div className="flex items-center gap-2 min-w-[120px]">
+              <Phone className="text-[#F4B740] shrink-0" size={14} aria-hidden="true" />
+              {siteSettings.phone
+                ? <span>{siteSettings.phone}</span>
+                : <span className="inline-block h-3.5 w-24 rounded bg-white/10 animate-pulse" aria-hidden="true" />}
             </div>
 
             <a

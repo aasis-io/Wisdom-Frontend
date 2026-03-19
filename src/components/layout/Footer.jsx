@@ -97,7 +97,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="relative bg-[#0E1B3D] text-white contain: layout paint style">
+    <footer className="relative bg-[#0E1B3D] text-white" style={{ contain: "layout paint style" }}>
       {/* FIXED WAVE (no shift) */}
       <div className="absolute top-0 left-0 w-full h-16 overflow-hidden pointer-events-none">
         <svg
@@ -176,7 +176,7 @@ export default function Footer() {
               return (
                 <a
                   key={name}
-                  href={link || "javascript:void(0)"}
+                  href={link || "#"}
                   aria-label={name}
                   className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10"
                   style={{ opacity: link ? 1 : 0.35 }}
