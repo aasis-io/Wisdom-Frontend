@@ -1,28 +1,33 @@
 import { ArrowUp } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 export default function ScrollToTop() {
   const { pathname } = useLocation();
   const [visible, setVisible] = useState(false);
+  const ticking = useRef(false);
 
-  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: "smooth",
+      behavior: "instant",
     });
   }, [pathname]);
 
-  // Show / hide button on scroll
   useEffect(() => {
-    const toggleVisibility = () => {
-      setVisible(window.scrollY > 300);
+    const onScroll = () => {
+      if (!ticking.current) {
+        window.requestAnimationFrame(() => {
+          setVisible(window.scrollY > 300);
+          ticking.current = false;
+        });
+        ticking.current = true;
+      }
     };
 
-    window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeEventListener("scroll", toggleVisibility);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const scrollToTop = () => {
@@ -37,19 +42,13 @@ export default function ScrollToTop() {
       onClick={scrollToTop}
       aria-label="Scroll to top"
       className={`
-        fixed z-60
+        fixed z-50
         flex h-11 w-11 items-center justify-center
         rounded-full bg-[#17254e] text-white
         shadow-lg transition-all duration-300
         hover:scale-110 hover:shadow-xl
 
-        /* Positioning */
-        right-8 bottom-6
-        sm:right-5 sm:bottom-8
-        lg:right-6 lg:bottom-6
-
-        /* iOS safe area */
-        pb-[env(safe-area-inset-bottom)]
+        right-6 bottom-6
 
         ${visible ? "opacity-100" : "pointer-events-none opacity-0"}
       `}
