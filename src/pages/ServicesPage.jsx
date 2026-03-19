@@ -9,7 +9,7 @@ export default function ServicesPage() {
   return (
     <>
       <Breadcrumbs breadcrumbs={breadcrumbsData} />
-      <section className="bg-white py-12 lg:py-8 contain-layout">
+      <section className="bg-white py-8 lg:py-8 contain-layout">
         <Services />
       </section>
 

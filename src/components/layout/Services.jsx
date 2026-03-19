@@ -27,7 +27,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section className="py-12">
+    <section className="py-6">
       <div className="mx-auto max-w-7xl px-6">
         {/* Header (stable text block) */}
         <div className="mx-auto max-w-3xl text-center">
