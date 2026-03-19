@@ -14,7 +14,7 @@ export default function HeroSection() {
       try {
         const data = await getHomePage();
 
-        // Fix image path from backend
+        // Fix image path
         if (data.image) {
           const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
           data.image = data.image.startsWith("http")
@@ -23,6 +23,16 @@ export default function HeroSection() {
         }
 
         setHomeData(data);
+
+        // ✅ Preload LCP image immediately
+        if (data.image) {
+          const link = document.createElement("link");
+          link.rel = "preload";
+          link.as = "image";
+          link.href = data.image;
+          link.fetchPriority = "high";
+          document.head.appendChild(link);
+        }
       } catch (error) {
         console.error("Failed to fetch home data", error);
       }
@@ -35,14 +45,15 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative w-full overflow-hidden border-l-indigo-950/10"
+      className="relative w-full overflow-hidden"
       aria-label="Hero Section"
     >
-      {/* Background */}
+      {/* ✅ Background (non-LCP, properly lazy + hidden from a11y) */}
       <div className="absolute inset-0 opacity-20">
         <img
           src={Bg}
-          alt="Decorative background pattern"
+          alt=""
+          aria-hidden="true"
           className="w-full h-full object-cover"
           loading="lazy"
         />
@@ -54,19 +65,18 @@ export default function HeroSection() {
         <div className="grid gap-12 lg:grid-cols-[40%_60%] items-center">
           {/* Left Content */}
           <div className="lg:text-left">
-            {/* Use semantic h1 with clear keywords */}
-            <h1 className="text-4xl font-extrabold leading-snug text-[#17254e] sm:text-4xl md:text-5xl xl:text-5xl">
+            <h1 className="text-4xl font-extrabold leading-snug text-[#17254e] sm:text-5xl">
               {homeData.title}
             </h1>
 
-            <p className="mt-6 max-w-lg mx-auto text-base text-gray-700 sm:mx-0 sm:text-md md:text-lg">
+            <p className="mt-6 max-w-lg text-gray-700 text-base sm:text-lg">
               {homeData.description}
             </p>
 
-            <div className="mt-8 flex">
+            <div className="mt-8">
               <Link
                 to="/contact"
-                className="rounded-xl bg-[#1e2a4a] px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-[#16203a]"
+                className="inline-block rounded-xl bg-[#1e2a4a] px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-[#16203a]"
               >
                 Get in touch
               </Link>
@@ -86,27 +96,27 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right Image */}
+          {/* ✅ LCP Image */}
           <div className="relative mx-auto w-full max-w-md lg:max-w-4xl">
             <img
-              src={homeData.image} // LCP hero image
+              src={homeData.image}
               alt={`Hero image for ${homeData.title}`}
               className="w-full rounded-3xl object-cover"
               width={1200}
               height={800}
-              decoding="async"
               fetchpriority="high"
-              loading="eager" // <-- load immediately
+              decoding="async"
             />
           </div>
         </div>
       </div>
 
-      {/* Bottom Wave */}
-      <div className="pointer-events-none absolute -bottom-1.5 left-0 w-full h-8 sm:h-10 md:h-12 lg:h-12 overflow-hidden">
+      {/* ✅ Decorative Wave */}
+      <div className="pointer-events-none absolute -bottom-1.5 left-0 w-full h-8 sm:h-10 md:h-12 overflow-hidden">
         <img
           src={Wave}
-          alt="Decorative wave divider"
+          alt=""
+          aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover"
           loading="lazy"
         />
