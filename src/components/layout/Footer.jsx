@@ -108,7 +108,7 @@ export default function Footer() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-6 pb-10 pt-28">
-        <div className="grid gap-12 lg:grid-cols-5 min-h-[320px]">
+        <div className="grid gap-12 lg:grid-cols-5 min-h-[220px]">
           {/* BRAND */}
           <div className="lg:col-span-2 flex flex-col gap-5 min-h-[160px]">
             <div className="w-56 h-[56px]">
