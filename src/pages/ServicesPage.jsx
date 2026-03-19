@@ -9,9 +9,10 @@ export default function ServicesPage() {
   return (
     <>
       <Breadcrumbs breadcrumbs={breadcrumbsData} />
-      <div className="bg-white py-12 lg:py-8">
+      <section className="bg-white py-12 lg:py-8 contain-layout">
         <Services />
-      </div>
+      </section>
+
     </>
   );
 }

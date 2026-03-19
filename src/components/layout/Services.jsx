@@ -29,7 +29,7 @@ export default function Services() {
   return (
     <section className="py-12">
       <div className="mx-auto max-w-7xl px-6">
-        {/* Header */}
+        {/* Header (stable text block) */}
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-lg font-semibold uppercase tracking-wide text-[#1e2a4a]">
             Our Services
@@ -40,30 +40,25 @@ export default function Services() {
           </p>
         </div>
 
-        {/* Cards */}
-        <div className="mt-10 grid gap-8 lg:grid-cols-2">
+        {/* Grid (prevent shift with min-height) */}
+        <div className="mt-10 grid gap-8 grid-cols-1 lg:grid-cols-2 min-h-[420px]">
           {services.map((service, idx) => (
-            <Link key={idx} to={service.path} className="block">
-              {/* FIX: reserve space BEFORE image loads */}
-              <div
-                className="group relative overflow-hidden rounded-3xl w-full bg-gray-100"
-                style={{
-                  aspectRatio: "3 / 2", // ✅ stable fixed ratio (IMPORTANT FIX)
-                }}
-              >
+            <Link key={idx} to={service.path} className="block group">
+              {/* CLS SAFE IMAGE WRAPPER (no aspect-ratio dependency) */}
+              <div className="relative w-full pt-[66.66%] bg-gray-100 overflow-hidden rounded-3xl">
                 {/* Image */}
                 <img
                   src={service.image}
                   alt={service.title}
                   width={service.width}
                   height={service.height}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
+                  loading={idx === 0 ? "eager" : "lazy"} // 🔥 fix CLS above fold
                   decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
 
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
 
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col justify-end p-8 pb-10">
@@ -79,7 +74,7 @@ export default function Services() {
           ))}
         </div>
 
-        {/* Slider Dots */}
+        {/* Dots (no shift risk) */}
         <div className="mt-10 flex justify-center gap-3">
           <span className="h-2 w-10 rounded-full bg-[#f2b84b]" />
           <span className="h-2 w-2 rounded-full bg-gray-300" />
