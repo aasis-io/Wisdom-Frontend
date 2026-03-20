@@ -6,7 +6,6 @@ export default function AboutSection() {
     <section className="relative bg-[#f5f6fb] py-20 overflow-hidden">
       <div className="absolute inset-0 opacity-[0.06] bg-[radial-gradient(#000_1px,transparent_1px)] bg-size-[24px_24px]" />
       <div className="relative mx-auto max-w-7xl px-6">
-        {/* ABOUT HEADER */}
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#1e2a4a]">
             About WAARC
@@ -24,7 +23,6 @@ export default function AboutSection() {
           </button>
         </div>
 
-        {/* WHY CHOOSE US */}
         <div className="mt-16">
           <WhyChooseUs />
         </div>

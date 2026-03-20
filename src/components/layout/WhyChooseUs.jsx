@@ -29,7 +29,6 @@ export default function WhyChooseUs() {
     fetchData();
   }, []);
 
-  // Placeholder while data loads to prevent CLS
   if (!aboutData)
     return (
       <div className="grid gap-16 lg:grid-cols-[40%_60%] items-center">
@@ -61,13 +60,12 @@ export default function WhyChooseUs() {
       </h3>
 
       <div className="grid gap-16 lg:grid-cols-[40%_60%] items-center">
-        {/* LEFT IMAGE WITH LOGOS */}
         <div className="relative mx-auto flex w-full max-w-md items-center justify-center">
           <img
             src={aboutData.image}
             alt="Research work"
-            width={600} // reserve width
-            height={400} // reserve height
+            width={600} 
+            height={400} 
             className="w-full rounded-3xl"
           />
 
@@ -76,14 +74,14 @@ export default function WhyChooseUs() {
               <img
                 src={LogoOut}
                 alt="Rotating outer logo"
-                width={128} // reserve size
+                width={128}
                 height={128}
                 className="absolute inset-0 h-full w-full animate-spin-slow"
               />
               <img
                 src={LogoIn}
                 alt="Inner logo"
-                width={72} // reserve size
+                width={64}
                 height={72}
                 className="relative z-10"
               />
