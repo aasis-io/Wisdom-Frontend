@@ -95,7 +95,7 @@ export default function Navbar() {
       <header className="relative z-30 w-full bg-white shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
         {/* ================= Top Bar (Desktop) ================= */}
         <div className="hidden md:block bg-[#0E1B3D] text-white text-sm">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 h-9">
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 h-10">
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-2 min-w-[120px]">
                 <Phone className="text-[#F4B740] shrink-0" size={14} aria-hidden="true" />
