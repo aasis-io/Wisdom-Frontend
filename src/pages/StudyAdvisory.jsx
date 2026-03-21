@@ -381,7 +381,7 @@ export default function StudyAdvisory() {
               {/* Honeypot */}
               <input type="text" name="honeypot" className="hidden" />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full overflow-visible">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 w-full min-w-0">
                 {/* Full Name */}
                 <div className="w-full min-w-0">
                   <label className="text-xs sm:text-sm text-white/70 mb-2 block">
@@ -392,11 +392,11 @@ export default function StudyAdvisory() {
                     name="full_name"
                     placeholder="John Doe"
                     required
-                    className="w-full rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3.5 text-sm sm:text-base text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all"
+                    className="w-full min-w-0 box-border text-[16px] sm:text-base rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3.5 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all"
                   />
                 </div>
 
-                {/* Purpose Dropdown (FIXED SAFARI + VISIBILITY) */}
+                {/* Purpose Dropdown */}
                 <div className="w-full min-w-0 relative z-20">
                   <label className="text-xs sm:text-sm text-white/70 mb-2 block">
                     Purpose *
@@ -407,7 +407,7 @@ export default function StudyAdvisory() {
                     value={purposeType}
                     onChange={(e) => setPurposeType(e.target.value)}
                     required
-                    className="w-full min-w-0 rounded-xl border border-white/20 px-4 py-3.5 text-sm sm:text-base text-white bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/60 transition-all appearance-none"
+                    className="w-full min-w-0 text-[16px] sm:text-base rounded-xl border border-white/20 px-4 py-3.5 text-white bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/60 transition-all appearance-none"
                   >
                     <option value="">Select purpose</option>
                     <option value="study">Study abroad counselling</option>
@@ -430,18 +430,18 @@ export default function StudyAdvisory() {
                       name="custom_purpose"
                       placeholder="Write your purpose..."
                       required
-                      className="w-full rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3.5 text-sm sm:text-base text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all"
+                      className="w-full min-w-0 box-border text-[16px] sm:text-base rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3.5 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all"
                     />
                   </div>
                 )}
 
-                {/* WhatsApp / Phone (FIXED DROPDOWN + Z-INDEX + SAFARI) */}
-                <div className="relative z-9999 w-full min-w-0 md:col-span-2">
+                {/* WhatsApp / Phone */}
+                <div className="relative z-30 w-full min-w-0 md:col-span-2">
                   <label className="text-xs sm:text-sm text-white/70 mb-2 block">
                     WhatsApp Number *
                   </label>
 
-                  <div className="rounded-xl border border-white/20 bg-white/10 backdrop-blur-lg px-3 py-2">
+                  <div className="rounded-xl border border-white/20 bg-white/10 backdrop-blur-lg px-3 py-2 overflow-hidden">
                     <PhoneInput
                       defaultCountry="np"
                       value={phone}
@@ -455,8 +455,8 @@ export default function StudyAdvisory() {
                       }}
                       inputStyle={{
                         width: "100%",
-                        height: "38px",
-                        fontSize: "15px",
+                        height: "40px",
+                        fontSize: "16px",
                         border: "none",
                         outline: "none",
                         background: "transparent",
@@ -474,7 +474,7 @@ export default function StudyAdvisory() {
                             backgroundColor: "#ffffff",
                             color: "#111827",
                             borderRadius: "12px",
-                            zIndex: 9999999,
+                            zIndex: 99999,
                             position: "absolute",
                             boxShadow: "0 15px 40px rgba(0,0,0,0.2)",
                           },
@@ -494,7 +494,7 @@ export default function StudyAdvisory() {
                     name="date"
                     min={today}
                     required
-                    className="w-full rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3.5 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all"
+                    className="w-full min-w-0 max-w-full box-border overflow-hidden text-[16px] sm:text-base rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3.5 text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all"
                   />
                 </div>
 
@@ -507,7 +507,7 @@ export default function StudyAdvisory() {
                     type="time"
                     name="time"
                     required
-                    className="w-full rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3.5 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all"
+                    className="w-full min-w-0 max-w-full box-border overflow-hidden text-[16px] sm:text-base rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3.5 text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all"
                   />
                 </div>
               </div>
