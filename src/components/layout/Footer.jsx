@@ -97,21 +97,10 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="relative bg-[#0E1B3D] text-white" style={{ contain: "layout paint style" }}>
-      {/* FIXED WAVE (no shift) */}
-      <div className="absolute top-0 left-0 w-full h-16 overflow-hidden pointer-events-none">
-        <svg
-          className="block h-full w-full"
-          viewBox="0 0 1440 100"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0,30 C240,45 480,25 720,30 960,35 1200,45 1440,30 L1440,0 L0,0 Z"
-            fill="#ffffff"
-          />
-        </svg>
-      </div>
-
+    <footer
+      className="relative bg-[#0E1B3D] text-white"
+      style={{ contain: "layout paint style" }}
+    >
       <div className="relative mx-auto max-w-7xl px-6 pb-10 pt-28">
         {/* GRID (fixed structure height) */}
         <div className="grid gap-12 lg:grid-cols-5 min-h-[220px]">

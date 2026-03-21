@@ -3,15 +3,18 @@ import {
   Award,
   Briefcase,
   FileText,
-  LineChart,
   Scale,
   Target,
-  Users,
+  Users
 } from "lucide-react";
 import { Link } from "react-router";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Italy from "./../assets/images/italy.jpg";
 import Thailand from "./../assets/images/thailand.jpg";
+
+import emailjs from "@emailjs/browser";
+import { useRef, useState } from "react";
+import { toast } from "react-hot-toast";
 
 const breadcrumbsData = [
   { name: "Home", link: "/" },
@@ -116,6 +119,37 @@ const primaryColor = "#17254e";
 const secondaryColor = "#fbbf24";
 
 export default function StudyAdvisory() {
+  const formRef = useRef();
+  const [loading, setLoading] = useState(false);
+
+  const today = new Date().toISOString().split("T")[0];
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Honeypot spam protection
+    if (formRef.current.honeypot.value) return;
+
+    setLoading(true);
+
+    try {
+      await emailjs.sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_BOOKING_TEMPLATE_ID,
+        formRef.current,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
+      toast.success("Consultation booked successfully!");
+      formRef.current.reset();
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to book consultation. Try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="bg-white">
       <Breadcrumbs breadcrumbs={breadcrumbsData} />
@@ -279,35 +313,118 @@ export default function StudyAdvisory() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="mx-auto max-w-7xl px-6 py-12">
+      {/* CTA (UPDATED WITH FORM) */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16">
         <div
-          className="relative overflow-hidden rounded-3xl p-16 text-white"
+          className="relative overflow-hidden rounded-3xl p-6 sm:p-10 lg:p-14 text-white shadow-xl"
           style={{
             background: `linear-gradient(135deg, ${primaryColor}, ${primaryColor}dd)`,
           }}
         >
-          <div className="absolute right-0 top-1/6 opacity-10">
-            <LineChart className="h-48 w-48" />
+          {/* Decorative Background */}
+          <div className="absolute inset-0 opacity-10 pointer-events-none">
+            <div className="absolute -top-10 -right-10 w-72 h-72 bg-white/20 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
           </div>
-          <div className="relative z-10 max-w-2xl">
-            <h2 className="text-2xl font-bold">
+
+          {/* Content */}
+          <div className="relative z-10 max-w-3xl">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold leading-tight">
               Expert Guidance for Studying Abroad
             </h2>
-            <p className="mt-4 text-white/90">
-              Book a consultation to explore international education
-              opportunities with confidence.
+
+            <p className="mt-3 sm:mt-4 text-white/80 text-sm sm:text-base max-w-xl">
+              Book a personalized consultation and take the first step toward
+              your international education journey with confidence.
             </p>
-            <div className="mt-8">
-              <Link
-                to="/contact"
-                style={{ backgroundColor: secondaryColor }}
-                className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold text-slate-900 hover:opacity-90 transition"
-              >
-                Schedule a Consultation
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </div>
+
+            <form
+              ref={formRef}
+              onSubmit={handleSubmit}
+              className="mt-8 sm:mt-10 space-y-5"
+            >
+              {/* Honeypot */}
+              <input type="text" name="honeypot" className="hidden" />
+
+              {/* Inputs */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+                {/* Full Name */}
+                <div>
+                  <label className="text-xs sm:text-sm text-white/70 mb-1.5 block">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="full_name"
+                    placeholder="John Doe"
+                    required
+                    className="w-full rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3 text-sm text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all duration-200"
+                  />
+                </div>
+
+                {/* Purpose */}
+                <div>
+                  <label className="text-xs sm:text-sm text-white/70 mb-1.5 block">
+                    Purpose *
+                  </label>
+                  <input
+                    type="text"
+                    name="purpose"
+                    placeholder="Study in Italy"
+                    required
+                    className="w-full rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3 text-sm text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all duration-200"
+                  />
+                </div>
+
+                {/* Date */}
+                <div>
+                  <label className="text-xs sm:text-sm text-white/70 mb-1.5 block">
+                    Preferred Date *
+                  </label>
+                  <input
+                    type="date"
+                    name="date"
+                    min={today}
+                    required
+                    className="w-full rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all duration-200"
+                  />
+                </div>
+
+                {/* Time */}
+                <div>
+                  <label className="text-xs sm:text-sm text-white/70 mb-1.5 block">
+                    Preferred Time *
+                  </label>
+                  <input
+                    type="time"
+                    name="time"
+                    required
+                    className="w-full rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all duration-200"
+                  />
+                </div>
+              </div>
+
+              {/* Note */}
+              <p className="text-xs text-white/50">
+                All times are in Nepal Standard Time (NPT)
+              </p>
+
+              {/* CTA */}
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  style={{ backgroundColor: secondaryColor }}
+                  className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 font-semibold text-slate-900 shadow-md transition-all duration-200 ${
+                    loading
+                      ? "opacity-70 cursor-not-allowed"
+                      : "hover:scale-[1.02] hover:shadow-lg"
+                  }`}
+                >
+                  {loading ? "Booking..." : "Book Consultation"}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </section>
