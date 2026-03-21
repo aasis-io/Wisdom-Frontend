@@ -489,12 +489,16 @@ export default function StudyAdvisory() {
                   <label className="text-xs sm:text-sm text-white/70 mb-2 block">
                     Preferred Date *
                   </label>
+
                   <input
                     type="date"
                     name="date"
                     min={today}
                     required
-                    className="w-full min-w-0 max-w-full box-border overflow-hidden text-[16px] sm:text-base rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3.5 text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all"
+                    className="w-full min-w-0 max-w-full box-border overflow-hidden appearance-none text-[16px] sm:text-base rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3.5 text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all"
+                    style={{
+                      WebkitAppearance: "none", // ✅ Safari fix
+                    }}
                   />
                 </div>
 
@@ -503,11 +507,15 @@ export default function StudyAdvisory() {
                   <label className="text-xs sm:text-sm text-white/70 mb-2 block">
                     Preferred Time *
                   </label>
+
                   <input
                     type="time"
                     name="time"
                     required
-                    className="w-full min-w-0 max-w-full box-border overflow-hidden text-[16px] sm:text-base rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3.5 text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all"
+                    className="w-full min-w-0 max-w-full box-border overflow-hidden appearance-none text-[16px] sm:text-base rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3.5 text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all"
+                    style={{
+                      WebkitAppearance: "none", // ✅ Safari fix
+                    }}
                   />
                 </div>
               </div>
