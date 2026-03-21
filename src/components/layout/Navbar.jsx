@@ -154,7 +154,7 @@ export default function Navbar() {
         </div>
 
         {/* ================= Mobile Top Bar ================= */}
-        <div className="block md:hidden bg-[#0E1B3D] text-white text-sm h-9">
+        <div className="block md:hidden bg-[#0E1B3D] text-white text-sm h-11">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
             <div className="flex items-center gap-2 min-w-[120px]">
               <Phone className="text-[#F4B740] shrink-0" size={14} aria-hidden="true" />
