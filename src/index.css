@@ -391,3 +391,46 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 .dark .menu-item-icon-active {
   color: #7592ff;
 }
+/***==== React Tel  ====****/
+.react-international-phone-input {
+  color: white !important;
+  background: transparent !important;
+}
+
+.react-international-phone-input-container {
+  width: 100%;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.react-international-phone-country-selector {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.react-international-phone-country-selector-button {
+  color: white !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 6px 8px !important;
+}
+
+.react-international-phone-flag {
+  filter: brightness(1.2);
+}
+
+.react-international-phone-country-selector-dropdown {
+  background: white !important;
+  color: #111827 !important;
+  z-index: 999999 !important;
+  position: absolute !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+.react-international-phone-country-selector {
+  z-index: 999999 !important;
+}
+
+.react-international-phone-country-selector-dropdown * {
+  color: #111827 !important;
+}

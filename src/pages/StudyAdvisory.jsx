@@ -5,7 +5,7 @@ import {
   FileText,
   Scale,
   Target,
-  Users
+  Users,
 } from "lucide-react";
 import { Link } from "react-router";
 import Breadcrumbs from "../components/Breadcrumbs";
@@ -15,6 +15,7 @@ import Thailand from "./../assets/images/thailand.jpg";
 import emailjs from "@emailjs/browser";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
+import { PhoneInput, defaultCountries } from "react-international-phone";
 
 const breadcrumbsData = [
   { name: "Home", link: "/" },
@@ -121,18 +122,50 @@ const secondaryColor = "#fbbf24";
 export default function StudyAdvisory() {
   const formRef = useRef();
   const [loading, setLoading] = useState(false);
-
+  const [purposeType, setPurposeType] = useState("");
+  const [phone, setPhone] = useState("");
   const today = new Date().toISOString().split("T")[0];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Honeypot spam protection
     if (formRef.current.honeypot.value) return;
 
     setLoading(true);
 
     try {
+      // build full purpose text
+      let fullPurpose = "";
+
+      if (purposeType === "study") {
+        fullPurpose = "Study abroad counselling";
+      } else if (purposeType === "research") {
+        fullPurpose = "Academic research consultation";
+      } else if (purposeType === "office") {
+        fullPurpose = "Office visit appointment";
+      } else if (purposeType === "others") {
+        const custom = formRef.current.custom_purpose?.value || "";
+        fullPurpose = custom || "Others";
+      }
+      if (formRef.current.honeypot.value) return;
+      if (!phone || phone.trim().length < 6) {
+        toast.error("Please enter a valid WhatsApp number");
+        return;
+      }
+      // inject full purpose into form (so EmailJS sends correct value)
+      let hiddenPurpose = formRef.current.querySelector(
+        'input[name="purpose"]'
+      );
+
+      if (!hiddenPurpose) {
+        hiddenPurpose = document.createElement("input");
+        hiddenPurpose.type = "hidden";
+        hiddenPurpose.name = "purpose";
+        formRef.current.appendChild(hiddenPurpose);
+      }
+
+      hiddenPurpose.value = fullPurpose;
+
       await emailjs.sendForm(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_BOOKING_TEMPLATE_ID,
@@ -142,6 +175,8 @@ export default function StudyAdvisory() {
 
       toast.success("Consultation booked successfully!");
       formRef.current.reset();
+      setPurposeType("");
+      setPhone("");
     } catch (error) {
       console.error(error);
       toast.error("Failed to book consultation. Try again.");
@@ -330,27 +365,26 @@ export default function StudyAdvisory() {
           {/* Content */}
           <div className="relative z-10 max-w-3xl">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold leading-tight">
-              Expert Guidance for Studying Abroad
+              Schedule an Appointment
             </h2>
 
             <p className="mt-3 sm:mt-4 text-white/80 text-sm sm:text-base max-w-xl">
-              Book a personalized consultation and take the first step toward
-              your international education journey with confidence.
+              Schedule a consultation with us to discuss your needs and get
+              expert guidance.
             </p>
 
             <form
               ref={formRef}
               onSubmit={handleSubmit}
-              className="mt-8 sm:mt-10 space-y-5"
+              className="mt-8 sm:mt-10 space-y-6 w-full"
             >
               {/* Honeypot */}
               <input type="text" name="honeypot" className="hidden" />
 
-              {/* Inputs */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full overflow-visible">
                 {/* Full Name */}
-                <div>
-                  <label className="text-xs sm:text-sm text-white/70 mb-1.5 block">
+                <div className="w-full min-w-0">
+                  <label className="text-xs sm:text-sm text-white/70 mb-2 block">
                     Full Name *
                   </label>
                   <input
@@ -358,27 +392,101 @@ export default function StudyAdvisory() {
                     name="full_name"
                     placeholder="John Doe"
                     required
-                    className="w-full rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3 text-sm text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all duration-200"
+                    className="w-full rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3.5 text-sm sm:text-base text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all"
                   />
                 </div>
 
-                {/* Purpose */}
-                <div>
-                  <label className="text-xs sm:text-sm text-white/70 mb-1.5 block">
+                {/* Purpose Dropdown (FIXED SAFARI + VISIBILITY) */}
+                <div className="w-full min-w-0 relative z-20">
+                  <label className="text-xs sm:text-sm text-white/70 mb-2 block">
                     Purpose *
                   </label>
-                  <input
-                    type="text"
-                    name="purpose"
-                    placeholder="Study in Italy"
+
+                  <select
+                    name="purpose_type"
+                    value={purposeType}
+                    onChange={(e) => setPurposeType(e.target.value)}
                     required
-                    className="w-full rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3 text-sm text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all duration-200"
-                  />
+                    className="w-full min-w-0 rounded-xl border border-white/20 px-4 py-3.5 text-sm sm:text-base text-white bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/60 transition-all appearance-none"
+                  >
+                    <option value="">Select purpose</option>
+                    <option value="study">Study abroad counselling</option>
+                    <option value="research">
+                      Academic research consultation
+                    </option>
+                    <option value="office">Office visit appointment</option>
+                    <option value="others">Others</option>
+                  </select>
+                </div>
+
+                {/* Custom Purpose */}
+                {purposeType === "others" && (
+                  <div className="w-full min-w-0 md:col-span-2">
+                    <label className="text-xs sm:text-sm text-white/70 mb-2 block">
+                      Please specify your purpose *
+                    </label>
+                    <input
+                      type="text"
+                      name="custom_purpose"
+                      placeholder="Write your purpose..."
+                      required
+                      className="w-full rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3.5 text-sm sm:text-base text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all"
+                    />
+                  </div>
+                )}
+
+                {/* WhatsApp / Phone (FIXED DROPDOWN + Z-INDEX + SAFARI) */}
+                <div className="relative z-9999 w-full min-w-0 md:col-span-2">
+                  <label className="text-xs sm:text-sm text-white/70 mb-2 block">
+                    WhatsApp Number *
+                  </label>
+
+                  <div className="rounded-xl border border-white/20 bg-white/10 backdrop-blur-lg px-3 py-2">
+                    <PhoneInput
+                      defaultCountry="np"
+                      value={phone}
+                      onChange={setPhone}
+                      countries={defaultCountries}
+                      forceDialCode
+                      disableCountryGuess
+                      inputProps={{
+                        name: "whatsapp",
+                        required: true,
+                      }}
+                      inputStyle={{
+                        width: "100%",
+                        height: "38px",
+                        fontSize: "15px",
+                        border: "none",
+                        outline: "none",
+                        background: "transparent",
+                        color: "#ffffff",
+                      }}
+                      countrySelectorStyleProps={{
+                        buttonStyle: {
+                          background: "rgba(255,255,255,0.15)",
+                          border: "1px solid rgba(255,255,255,0.2)",
+                          borderRadius: "10px",
+                          color: "#fff",
+                        },
+                        dropdownStyleProps: {
+                          style: {
+                            backgroundColor: "#ffffff",
+                            color: "#111827",
+                            borderRadius: "12px",
+                            zIndex: 9999999,
+                            position: "absolute",
+                            boxShadow: "0 15px 40px rgba(0,0,0,0.2)",
+                          },
+                        },
+                      }}
+                    />
+                  </div>
                 </div>
 
                 {/* Date */}
-                <div>
-                  <label className="text-xs sm:text-sm text-white/70 mb-1.5 block">
+                <div className="w-full min-w-0">
+                  <label className="text-xs sm:text-sm text-white/70 mb-2 block">
                     Preferred Date *
                   </label>
                   <input
@@ -386,20 +494,20 @@ export default function StudyAdvisory() {
                     name="date"
                     min={today}
                     required
-                    className="w-full rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all duration-200"
+                    className="w-full rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3.5 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all"
                   />
                 </div>
 
                 {/* Time */}
-                <div>
-                  <label className="text-xs sm:text-sm text-white/70 mb-1.5 block">
+                <div className="w-full min-w-0">
+                  <label className="text-xs sm:text-sm text-white/70 mb-2 block">
                     Preferred Time *
                   </label>
                   <input
                     type="time"
                     name="time"
                     required
-                    className="w-full rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all duration-200"
+                    className="w-full rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 px-4 py-3.5 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:bg-white/20 transition-all"
                   />
                 </div>
               </div>
@@ -415,7 +523,7 @@ export default function StudyAdvisory() {
                   type="submit"
                   disabled={loading}
                   style={{ backgroundColor: secondaryColor }}
-                  className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 font-semibold text-slate-900 shadow-md transition-all duration-200 ${
+                  className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 font-semibold text-slate-900 shadow-md transition-all duration-200 ${
                     loading
                       ? "opacity-70 cursor-not-allowed"
                       : "hover:scale-[1.02] hover:shadow-lg"
