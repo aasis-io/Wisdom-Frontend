@@ -240,13 +240,13 @@ export default function Navbar() {
 
           {/* ================= Right Actions ================= */}
           <div className="flex items-center gap-4">
-            <a
-              href="https://waarc.edu.np/contact"
+            <Link
+              to="contact"
               className="hidden md:inline-flex items-center gap-2 bg-[#0E1B3D] px-5 py-3 rounded-lg text-sm text-white"
             >
               <Mail size={18} aria-hidden="true" />
               Contact Us
-            </a>
+            </Link>
 
             <button
               aria-label="Toggle menu"
@@ -318,13 +318,13 @@ export default function Navbar() {
               )
             )}
 
-            <a
-              href="https://waarc.edu.np/contact"
+            <Link
+              to="/contact"
               className="mt-4 flex items-center gap-2 rounded-lg bg-[#F4B740] px-4 py-2 text-[#0E1B3D]"
             >
               <Mail size={18} aria-hidden="true" />
               Contact Us
-            </a>
+            </Link>
           </nav>
         </div>
       </header>
