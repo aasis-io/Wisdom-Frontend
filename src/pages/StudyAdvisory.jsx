@@ -441,7 +441,7 @@ export default function StudyAdvisory() {
                     WhatsApp Number *
                   </label>
 
-                  <div className="rounded-xl border border-white/20 bg-white/10 backdrop-blur-lg px-3 py-2 overflow-hidden">
+                  <div className="relative rounded-xl border border-white/20 bg-white/10 backdrop-blur-lg px-3 py-2">
                     <PhoneInput
                       defaultCountry="np"
                       value={phone}
