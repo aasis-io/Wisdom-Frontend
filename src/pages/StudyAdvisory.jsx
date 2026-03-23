@@ -408,7 +408,7 @@ export default function StudyAdvisory() {
                     onChange={(e) => setPurposeType(e.target.value)}
                     required
                     className="w-full min-w-0 text-[16px] sm:text-base rounded-xl border border-white/20 px-4 py-3.5 
-  text-white bg-[#17254e] focus:outline-none focus:ring-2 focus:ring-white/60 transition-all appearance-none"
+  text-white bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/60 transition-all appearance-none"
                   >
                     <option
                       value=""
