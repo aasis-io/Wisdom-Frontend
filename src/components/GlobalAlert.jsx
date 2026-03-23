@@ -40,7 +40,6 @@ const GlobalAlert = () => {
         setVisible(false);
       }
     } catch (err) {
-      console.error("Failed to load alert", err);
       setVisible(false);
     } finally {
       setLoading(false);
