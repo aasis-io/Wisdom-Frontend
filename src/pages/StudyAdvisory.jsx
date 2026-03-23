@@ -407,15 +407,39 @@ export default function StudyAdvisory() {
                     value={purposeType}
                     onChange={(e) => setPurposeType(e.target.value)}
                     required
-                    className="w-full min-w-0 text-[16px] sm:text-base rounded-xl border border-white/20 px-4 py-3.5 text-white bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/60 transition-all appearance-none"
+                    className="w-full min-w-0 text-[16px] sm:text-base rounded-xl border border-white/20 px-4 py-3.5 
+  text-white bg-[#17254e] focus:outline-none focus:ring-2 focus:ring-white/60 transition-all appearance-none"
                   >
-                    <option value="">Select purpose</option>
-                    <option value="study">Study abroad counselling</option>
-                    <option value="research">
+                    <option
+                      value=""
+                      style={{ color: "white", backgroundColor: "#17254e" }}
+                    >
+                      Select purpose
+                    </option>
+                    <option
+                      value="study"
+                      style={{ color: "white", backgroundColor: "#17254e" }}
+                    >
+                      Study abroad counselling
+                    </option>
+                    <option
+                      value="research"
+                      style={{ color: "white", backgroundColor: "#17254e" }}
+                    >
                       Academic research consultation
                     </option>
-                    <option value="office">Office visit appointment</option>
-                    <option value="others">Others</option>
+                    <option
+                      value="office"
+                      style={{ color: "white", backgroundColor: "#17254e" }}
+                    >
+                      Office visit appointment
+                    </option>
+                    <option
+                      value="others"
+                      style={{ color: "white", backgroundColor: "#17254e" }}
+                    >
+                      Others
+                    </option>
                   </select>
                 </div>
 
