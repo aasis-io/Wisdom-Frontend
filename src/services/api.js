@@ -18,7 +18,6 @@ export const getUpcomingEvent = async () => {
     const response = await api.get("/getEvent"); // your backend endpoint
     return response.data;
   } catch (error) {
-    console.error("Failed to fetch upcoming event:", error);
     throw error;
   }
 };
@@ -41,6 +40,18 @@ export const registerForEvent = async (data) => {
   }
 };
 
+/**
+ * Get the alert
+ * Expected response: { title, image, link }
+ */
+export const getAlert = async () => {
+  try {
+    const response = await api.get("/getNotices");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 /* ------------------------------------------------------------------
    HOME PAGE
 ------------------------------------------------------------------- */
