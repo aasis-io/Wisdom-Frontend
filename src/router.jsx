@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Journals from "./pages/Journals";
 import NotFoundPage from "./pages/NotFoundPage";
 import Research from "./pages/Research";
+import ScheduleConsultationPage from "./pages/ScheduleConsultationPage";
 import ServicesPage from "./pages/ServicesPage";
 import Consulting from "./pages/StudyAdvisory";
 import Team from "./pages/Team";
@@ -31,6 +32,7 @@ export const router = createBrowserRouter([
       { path: "/study/thailand", element: <Thailand /> },
       { path: "/career", element: <Career /> },
       { path: "/collaborate", element: <Collaborate /> },
+      { path: "/schedule-consultation", element: <ScheduleConsultationPage /> },
       { path: "*", element: <NotFoundPage /> },
     ],
   },

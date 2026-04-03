@@ -14,8 +14,6 @@ import Thailand from "./../assets/images/thailand.jpg";
 
 import { useRef, useState } from "react";
 
-import ConsultationCTA from "./../components/ConsultationCTA";
-
 const breadcrumbsData = [
   { name: "Home", link: "/" },
   { name: "Services", link: "/services" },
@@ -288,6 +286,7 @@ export default function StudyAdvisory() {
       </section>
 
       {/* CTA */}
+      {/* CTA */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16">
         <div
           className="rounded-3xl p-6 sm:p-10 lg:p-14 text-white shadow-xl"
@@ -295,21 +294,22 @@ export default function StudyAdvisory() {
             background: `linear-gradient(135deg, ${primaryColor}, ${primaryColor}dd)`,
           }}
         >
-          <div className="max-w-3xl">
+          <div className="text-center">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">
-              Schedule an Appointment
+              Schedule a Consultation
             </h2>
             <p className="mt-3 text-white/80">
-              Schedule a consultation with us to discuss your needs and get
+              Book a consultation with our team to discuss your needs and get
               expert guidance.
             </p>
 
             <div className="mt-8">
-              <ConsultationCTA
-                formRef={formRef}
-                loading={loading}
-                setLoading={setLoading}
-              />
+              <a
+                href="/schedule-consultation"
+                className="inline-flex items-center rounded-2xl bg-yellow-400 px-6 py-3 text-sm sm:text-base font-semibold text-black shadow-md transition hover:scale-105"
+              >
+                Schedule Now
+              </a>
             </div>
           </div>
         </div>
