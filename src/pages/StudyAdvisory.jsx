@@ -304,12 +304,12 @@ export default function StudyAdvisory() {
             </p>
 
             <div className="mt-8">
-              <a
-                href="/schedule-consultation"
+              <Link
+                to="/schedule-consultation"
                 className="inline-flex items-center rounded-2xl bg-yellow-400 px-6 py-3 text-sm sm:text-base font-semibold text-black shadow-md transition hover:scale-105"
               >
                 Schedule Now
-              </a>
+              </Link>
             </div>
           </div>
         </div>
