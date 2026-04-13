@@ -13,13 +13,16 @@ export default function Home() {
   const [homeData, setHomeData] = useState(null);
 
   useEffect(() => {
+    let preloadLink = null;
+
     const fetchData = async () => {
       try {
         const data = await getHomePage();
 
         // Normalize image URL
         if (data?.image) {
-          const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
+          const baseUrl =
+            import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "") || "";
 
           data.image = data.image.startsWith("http")
             ? data.image
@@ -30,12 +33,12 @@ export default function Home() {
 
         // Preload hero image for performance
         if (data?.image) {
-          const link = document.createElement("link");
-          link.rel = "preload";
-          link.as = "image";
-          link.href = data.image;
-          link.fetchPriority = "high";
-          document.head.appendChild(link);
+          preloadLink = document.createElement("link");
+          preloadLink.rel = "preload";
+          preloadLink.as = "image";
+          preloadLink.href = data.image;
+          preloadLink.fetchPriority = "high";
+          document.head.appendChild(preloadLink);
         }
       } catch (error) {
         console.error("Failed to fetch homepage data", error);
@@ -43,15 +46,20 @@ export default function Home() {
     };
 
     fetchData();
+
+    return () => {
+      if (preloadLink) {
+        document.head.removeChild(preloadLink);
+      }
+    };
   }, []);
 
   return (
     <>
-      {/* ✅ ALWAYS RENDER SEO (CRITICAL FIX FOR GOOGLE) */}
+      {/* SEO META + STRUCTURED SIGNALS */}
       <SEO
         title={
-          homeData?.metaTitle ||
-          "Wisdom Academy & Research Center (WAARC) | Nepal"
+          homeData?.metaTitle || "Wisdom Academy & Research Center (WAARC)"
         }
         description={
           homeData?.metaDescription ||
@@ -66,6 +74,10 @@ export default function Home() {
       />
 
       <section>
+        {/* SEO-only H1 for Google site name detection */}
+        <h1 className="sr-only">Wisdom Academy & Research Center</h1>
+
+        {/* Visible backend hero content */}
         <HeroSection homeData={homeData} />
 
         <div className="bg-white py-12 lg:py-8">

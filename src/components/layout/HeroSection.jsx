@@ -3,7 +3,6 @@ import { Link } from "react-router";
 import Bg from "./../../assets/images/bg.webp";
 import Wave from "./../../assets/images/wave.svg";
 
-// Skeleton (prevents layout shift)
 function HeroSkeleton() {
   return (
     <section

@@ -6,21 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#4CAF50" />
 
-  <!-- SEO TITLE -->
-  <title>Wisdom Academy & Research Center (WAARC) | Nepal Research & Education</title>
-
-  <!-- META DESCRIPTION -->
+  <!-- PRIMARY SEO -->
+  <title>Wisdom Academy & Research Center (WAARC)</title>
   <meta name="description"
     content="Wisdom Academy & Research Center (WAARC) is a Nepal-based research and consultancy organization providing academic support, training, and professional services." />
-
-  <!-- KEYWORDS -->
-  <meta name="keywords"
-    content="WAARC, Wisdom Academy, research center Nepal, education Nepal, consultancy Nepal, academic services" />
-
-  <!-- INDEXING -->
   <meta name="robots" content="index, follow" />
-
-  <!-- CANONICAL -->
   <link rel="canonical" href="https://waarc.edu.np/" />
 
   <!-- OPEN GRAPH -->
@@ -30,12 +20,12 @@
     content="Nepal-based research and consultancy organization providing academic and professional services." />
   <meta property="og:url" content="https://waarc.edu.np/" />
   <meta property="og:image" content="https://waarc.edu.np/og-image.webp" />
-  <meta property="og:site_name" content="WAARC" />
+  <meta property="og:site_name" content="Wisdom Academy & Research Center" />
 
   <!-- TWITTER -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Wisdom Academy & Research Center (WAARC)" />
-  <meta name="twitter:description" content="Research & consultancy organization in Nepal." />
+  <meta name="twitter:description" content="Research and consultancy organization in Nepal." />
   <meta name="twitter:image" content="https://waarc.edu.np/og-image.webp" />
 
   <!-- FAVICONS -->
@@ -47,21 +37,26 @@
   <!-- MANIFEST -->
   <link rel="manifest" href="/site.webmanifest.json" />
 
-  <!-- FONTS PRELOAD -->
-  <link rel="preload" href="/fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="/fonts/inter-v20-latin-500.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="/fonts/inter-v20-latin-600.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="/fonts/inter-v20-latin-700.woff2" as="font" type="font/woff2" crossorigin />
-
-  <!-- STRUCTURED DATA (IMPORTANT FOR GOOGLE) -->
+  <!-- STRUCTURED DATA: WEBSITE + ORGANIZATION -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Wisdom Academy & Research Center (WAARC)",
-    "url": "https://waarc.edu.np/",
-    "description": "Research and consultancy organization in Nepal.",
-    "logo": "https://waarc.edu.np/logo.png"
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "name": "Wisdom Academy & Research Center",
+        "alternateName": ["WAARC", "Wisdom Academy"],
+        "url": "https://waarc.edu.np/"
+      },
+      {
+        "@type": "Organization",
+        "name": "Wisdom Academy & Research Center",
+        "alternateName": "WAARC",
+        "url": "https://waarc.edu.np/",
+        "logo": "https://waarc.edu.np/logo.png",
+        "description": "Nepal-based research and consultancy organization."
+      }
+    ]
   }
   </script>
 
@@ -74,7 +69,6 @@
     gtag('config', 'G-XGCKM2Z4CQ');
   </script>
 
-  <!-- BASIC STYLES -->
   <style>
     body {
       margin: 0;
