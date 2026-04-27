@@ -6,7 +6,7 @@ import Logo from "./../../assets/images/logo-light.svg";
 const quickLinks = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
-  { name: "Our Work", href: "/work" },
+  // { name: "Our Work", href: "/work" },
   { name: "Book Consultation", href: "/schedule-consultation" },
   { name: "Contact Us", href: "/contact" },
 ];
