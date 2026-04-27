@@ -1,7 +1,5 @@
 import emailjs from "@emailjs/browser";
 import { useEffect, useRef, useState } from "react";
-import ReactDatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { toast } from "react-hot-toast";
@@ -47,26 +45,27 @@ function Field({ label, full, col, children }) {
   );
 }
 
-/* ── time string <-> Date helpers ── */
-function timeStrToDate(str) {
-  const m = (str || "").match(/^(\d{2}):(\d{2}) (AM|PM)$/);
-  if (!m) return null;
-  let h = parseInt(m[1]);
-  const min = parseInt(m[2]);
-  const p = m[3];
-  if (p === "AM" && h === 12) h = 0;
-  if (p === "PM" && h !== 12) h += 12;
-  const d = new Date();
-  d.setHours(h, min, 0, 0);
-  return d;
+/* ── NEW: generate time slot strings like "11:45 AM" ── */
+function generateSlots(startH, startM, endH, endM, step) {
+  const slots = [];
+  let total = startH * 60 + startM;
+  const end = endH * 60 + endM;
+  while (total <= end) {
+    const h24 = Math.floor(total / 60);
+    const min = total % 60;
+    const period = h24 >= 12 ? "PM" : "AM";
+    const h12 = h24 % 12 || 12;
+    slots.push(`${pad(h12)}:${pad(min)} ${period}`);
+    total += step;
+  }
+  return slots;
 }
-function dateToTimeStr(d) {
-  if (!d) return "";
-  let h = d.getHours();
-  const min = d.getMinutes();
-  const p = h >= 12 ? "PM" : "AM";
-  h = h % 12 || 12;
-  return `${String(h).padStart(2, "0")}:${String(min).padStart(2, "0")} ${p}`;
+
+function getSlotsForDate(dateStr) {
+  if (!dateStr) return generateSlots(11, 45, 12, 45, 15);
+  const day = new Date(dateStr + "T00:00:00").getDay(); // 0=Sun … 6=Sat
+  if (day === 6) return generateSlots(14, 45, 18, 45, 30); // Saturday
+  return generateSlots(11, 45, 12, 45, 15); // Sun–Fri
 }
 
 /* ══════════════ MAIN FORM ══════════════ */
@@ -74,7 +73,9 @@ export default function ConsultationCTA({ formRef, loading, setLoading }) {
   const [purposeType, setPurposeType] = useState("");
   const [phone, setPhone] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTime, setSelectedTime] = useState("09:00 AM");
+  const [selectedTime, setSelectedTime] = useState(
+    () => getSlotsForDate("")[0],
+  );
   const [showCal, setShowCal] = useState(false);
   const calRef = useRef(null);
 
@@ -86,6 +87,11 @@ export default function ConsultationCTA({ formRef, loading, setLoading }) {
     document.addEventListener("mousedown", h);
     return () => document.removeEventListener("mousedown", h);
   }, []);
+
+  /* Reset time to first valid slot whenever date changes */
+  useEffect(() => {
+    setSelectedTime(getSlotsForDate(selectedDate)[0]);
+  }, [selectedDate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -100,6 +106,8 @@ export default function ConsultationCTA({ formRef, loading, setLoading }) {
         study: "Study abroad counselling",
         research: "Academic research consultation",
         office: "Office visit appointment",
+        financialCounseling: "Financial Counseling",
+        dovCounseling: "Dov/CIMEA Counseling",
       };
       const fullPurpose =
         purposeMap[purposeType] ||
@@ -122,14 +130,14 @@ export default function ConsultationCTA({ formRef, loading, setLoading }) {
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_BOOKING_TEMPLATE_ID,
         formRef.current,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
       );
       toast.success("Consultation booked successfully!");
       formRef.current.reset();
       setPurposeType("");
       setPhone("");
       setSelectedDate("");
-      setSelectedTime("09:00 AM");
+      setSelectedTime(getSlotsForDate("")[0]);
       setShowCal(false);
     } catch (err) {
       console.error(err);
@@ -139,9 +147,10 @@ export default function ConsultationCTA({ formRef, loading, setLoading }) {
     }
   };
 
+  const timeSlots = getSlotsForDate(selectedDate);
+
   return (
     <>
-      {/* scoped overrides for DayPicker + phone input */}
       <style>{`
         /* ── calendar ── */
         .rdp { --rdp-accent-color: #17254e; --rdp-background-color: rgba(23,37,78,.08); margin: 0; }
@@ -171,7 +180,6 @@ export default function ConsultationCTA({ formRef, loading, setLoading }) {
           flex-shrink: 0;
         }
         .rip .react-international-phone-country-selector-button:focus { border-color: rgba(251,191,36,.5) !important; outline: none !important; }
-        /* flag + dial code text white */
         .rip .react-international-phone-country-selector-button__button-content { color: #fff !important; }
         .rip .react-international-phone-dial-code-preview {
           color: #fff !important;
@@ -204,19 +212,6 @@ export default function ConsultationCTA({ formRef, loading, setLoading }) {
         }
         .rip .react-international-phone-country-selector-dropdown__list-item { color: #fff !important; }
         .rip .react-international-phone-country-selector-dropdown__list-item:hover { background: rgba(251,191,36,.15) !important; }
-
-        /* ── react-datepicker time picker ── */
-        .react-datepicker__time-box{ width:100px !important; }
-        .react-datepicker { background: #1a2a5e !important; border: 1px solid rgba(255,255,255,.12) !important; border-radius: 1rem !important; font-family: inherit !important; box-shadow: 0 20px 60px rgba(0,0,0,.3) !important; }
-        .react-datepicker__time-container { width: 140px !important; }
-        .react-datepicker__time-container .react-datepicker__time { background: #1a2a5e !important; border-radius: 0 1rem 1rem 0 !important; }
-        .react-datepicker__time-list { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.2) transparent; }
-        .react-datepicker__time-list-item { color: rgba(255,255,255,.65) !important; font-size: 14px !important; font-weight: 500 !important; border-radius: 8px !important; margin: 2px 6px !important; padding: 8px 10px !important; transition: background .12s, color .12s !important; }
-        .react-datepicker__time-list-item:hover { background: rgba(255,255,255,.1) !important; color: #fff !important; }
-        .react-datepicker__time-list-item--selected { background: #fbbf24 !important; color: #000 !important; font-weight: 700 !important; }
-        .react-datepicker__header--time { background: #17254e !important; border-bottom: 1px solid rgba(255,255,255,.08) !important; border-radius: 1rem 1rem 0 0 !important; padding: 10px 0 !important; }
-        .react-datepicker-popper { z-index: 9999 !important; }
-        .react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle { fill: #1a2a5e !important; color: #1a2a5e !important; stroke: rgba(255,255,255,.12) !important; }
       `}</style>
 
       <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
@@ -252,6 +247,12 @@ export default function ConsultationCTA({ formRef, loading, setLoading }) {
               <option value="office" className="bg-[#17254e]">
                 Office Visit
               </option>
+              <option value="financialCounseling" className="bg-[#17254e]">
+                Financial Counseling
+              </option>
+              <option value="dovCounseling" className="bg-[#17254e]">
+                Dov/CIMEA Counseling
+              </option>
               <option value="others" className="bg-[#17254e]">
                 Others
               </option>
@@ -283,7 +284,7 @@ export default function ConsultationCTA({ formRef, loading, setLoading }) {
             <input type="hidden" name="whatsapp" value={phone} />
           </Field>
 
-          {/* Date — calendar opens below, full width on mobile */}
+          {/* Date */}
           <Field label="Preferred Date" col="max-sm:col-span-2">
             <div ref={calRef} className="relative">
               <button
@@ -334,21 +335,20 @@ export default function ConsultationCTA({ formRef, loading, setLoading }) {
             </div>
           </Field>
 
-          {/* Time */}
+          {/* Time — replaced ReactDatePicker with a plain <select> */}
           <Field label="Preferred Time" col="max-sm:col-span-2">
-            <ReactDatePicker
-              selected={timeStrToDate(selectedTime)}
-              onChange={(d) => d && setSelectedTime(dateToTimeStr(d))}
-              showTimeSelect
-              showTimeSelectOnly
-              timeIntervals={15}
-              timeCaption=""
-              dateFormat="hh:mm aa"
-              placeholderText="Select time"
-              className={inp}
-              wrapperClassName="w-full"
-            />
-            <input type="hidden" name="time" value={selectedTime} />
+            <select
+              value={selectedTime}
+              onChange={(e) => setSelectedTime(e.target.value)}
+              name="time"
+              className={`${inp} cursor-pointer appearance-none`}
+            >
+              {timeSlots.map((slot) => (
+                <option key={slot} value={slot} className="bg-[#17254e]">
+                  {slot}
+                </option>
+              ))}
+            </select>
           </Field>
         </div>
 

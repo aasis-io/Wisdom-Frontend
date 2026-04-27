@@ -1,5 +1,5 @@
 import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getSiteSettings, getUsefulLinks } from "../../services/api";
 import Logo from "./../../assets/images/logo-light.svg";
 
@@ -7,7 +7,7 @@ const quickLinks = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
   { name: "Our Work", href: "/work" },
-  { name: "Future Plans", href: "/future-plans" },
+  { name: "Book Consultation", href: "/schedule-consultation" },
   { name: "Contact Us", href: "/contact" },
 ];
 
