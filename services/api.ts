@@ -41,9 +41,9 @@ export const getAboutPage = async () => {
   return response.data;
 };
 
-/* ------------------------------------------------------------------
+/* -----------------------------------------------------------------
    TEAM MEMBERS
-------------------------------------------------------------------- */
+------------------------------------------------------------------ */
 export const getTeamMembers = async () => {
   const response = await api.get("/getTeam");
   return response.data;
