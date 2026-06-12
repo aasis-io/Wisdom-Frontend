@@ -1,0 +1,220 @@
+"use client";
+
+import {
+  ChevronDown, Facebook, Linkedin, Mail, MapPin,
+  Menu, Phone, Twitter, X, Youtube,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+
+const DEFAULT_SETTINGS = { phone: "", email: "", location: "", facebook: "", twitter: "", linkedin: "", youtube: "" };
+
+const NAV_ITEMS = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  {
+    label: "Work With Us",
+    children: [
+      { label: "Careers", href: "/career" },
+      { label: "Collaboration", href: "/collaborate" },
+    ],
+  },
+  {
+    label: "About Us",
+    children: [
+      { label: "Who We Are", href: "/about" },
+      { label: "Our Team", href: "/team" },
+    ],
+  },
+  {
+    label: "Media",
+    children: [{ label: "Gallery", href: "/gallery" }],
+  },
+  { label: "Journal Database", href: "/journals" },
+];
+
+export default function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [desktopOpenMenu, setDesktopOpenMenu] = useState<string | null>(null);
+  const [mobileOpenMenu, setMobileOpenMenu] = useState<string | null>(null);
+  const [siteSettings, setSiteSettings] = useState(DEFAULT_SETTINGS);
+  const desktopRef = useRef<HTMLElement>(null);
+  const mobileRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/getSiteSettings`)
+      .then((r) => r.json())
+      .then((data) => setSiteSettings({ ...DEFAULT_SETTINGS, ...data }))
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (desktopRef.current && !desktopRef.current.contains(e.target as Node)) setDesktopOpenMenu(null);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (mobileRef.current && !mobileRef.current.contains(e.target as Node)) setMobileOpenMenu(null);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  return (
+    <>
+      <header className="relative z-30 w-full bg-white shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
+        {/* Top Bar Desktop */}
+        <div className="hidden md:block bg-[#0E1B3D] text-white text-sm">
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 h-10">
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2 min-w-[120px]">
+                <Phone className="text-[#F4B740] shrink-0" size={14} aria-hidden="true" />
+                {siteSettings.phone
+                  ? <span>{siteSettings.phone}</span>
+                  : <span className="inline-block h-3.5 w-24 rounded bg-white/10 animate-pulse" />}
+              </div>
+              <div className="flex items-center gap-2 min-w-[160px]">
+                <Mail className="text-[#F4B740] shrink-0" size={14} aria-hidden="true" />
+                {siteSettings.email
+                  ? <span>{siteSettings.email}</span>
+                  : <span className="inline-block h-3.5 w-36 rounded bg-white/10 animate-pulse" />}
+              </div>
+              <div className="flex items-center gap-2 min-w-[160px]">
+                <MapPin className="text-[#F4B740] shrink-0" size={14} aria-hidden="true" />
+                {siteSettings.location
+                  ? <span>{siteSettings.location}</span>
+                  : <span className="inline-block h-3.5 w-36 rounded bg-white/10 animate-pulse" />}
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              {[
+                { icon: Facebook, link: siteSettings.facebook, name: "Facebook" },
+                { icon: Youtube, link: siteSettings.youtube, name: "YouTube" },
+                { icon: Twitter, link: siteSettings.twitter, name: "X (Twitter)" },
+                { icon: Linkedin, link: siteSettings.linkedin, name: "LinkedIn" },
+              ].map(({ icon: Icon, link, name }, i) => (
+                <a
+                  key={i} href={link || "#"} target="_blank" rel="noopener noreferrer"
+                  aria-label={`Visit our ${name} page`}
+                  className={`flex h-8 w-8 items-center justify-center rounded-full bg-[#F4B740] text-[#0E1B3D] hover:opacity-80 transition ${!link ? "pointer-events-none opacity-0" : ""}`}
+                >
+                  <Icon size={14} aria-hidden="true" />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Top Bar */}
+        <div className="block md:hidden bg-[#0E1B3D] text-white text-sm h-11">
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
+            <div className="flex items-center gap-2 min-w-[120px]">
+              <Phone className="text-[#F4B740] shrink-0" size={14} aria-hidden="true" />
+              {siteSettings.phone ? <span>{siteSettings.phone}</span> : <span className="inline-block h-3.5 w-24 rounded bg-white/10 animate-pulse" />}
+            </div>
+            <a href={`tel:${siteSettings.phone}`} className="rounded bg-[#F4B740] px-3 py-1 text-[#0E1B3D] font-medium">
+              Call Now
+            </a>
+          </div>
+        </div>
+
+        {/* Main Navbar */}
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+          <Link href="/" aria-label="Go to WAARC homepage">
+            <Image
+              src="/images/logo-dark.svg" alt="Wisdom Academy and Research Center"
+              width={165} height={80} loading="eager" className="h-16 w-auto"
+            />
+          </Link>
+
+          {/* Desktop Nav */}
+          <nav ref={desktopRef} className="hidden lg:flex items-center gap-8 text-base font-medium text-gray-800">
+            {NAV_ITEMS.map((item) =>
+              item.children ? (
+                <div key={item.label} className="relative">
+                  <button
+                    onClick={() => setDesktopOpenMenu(desktopOpenMenu === item.label ? null : item.label)}
+                    className="flex items-center gap-1 hover:text-[#F4B740]"
+                  >
+                    {item.label}
+                    <ChevronDown size={16} aria-hidden="true" className={`transition-transform ${desktopOpenMenu === item.label ? "rotate-180" : ""}`} />
+                  </button>
+                  {desktopOpenMenu === item.label && (
+                    <div className="absolute top-full left-0 mt-2 w-48 rounded-lg bg-white shadow-lg py-2">
+                      {item.children.map((child) => (
+                        <Link key={child.label} href={child.href} onClick={() => setDesktopOpenMenu(null)} className="block px-4 py-2 hover:bg-gray-100">
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link key={item.label} href={item.href!} className="hover:text-[#F4B740]">
+                  {item.label}
+                </Link>
+              )
+            )}
+          </nav>
+
+          {/* Right Actions */}
+          <div className="flex items-center gap-4">
+            <Link href="/contact" className="hidden md:inline-flex items-center gap-2 bg-[#0E1B3D] px-5 py-3 rounded-lg text-sm text-white">
+              <Mail size={18} aria-hidden="true" />
+              Contact Us
+            </Link>
+            <button
+              aria-label="Toggle menu"
+              className="lg:hidden flex items-center gap-1 font-medium"
+              onClick={() => setMobileOpen(!mobileOpen)}
+            >
+              <span>MENU</span>
+              {mobileOpen ? <X size={26} className="text-[#0E1B3D]" /> : <Menu size={26} className="text-gray-700" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        <div className={`absolute left-0 top-full w-full bg-white shadow-md lg:hidden transition-all ${mobileOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}>
+          <nav ref={mobileRef} className="flex flex-col gap-4 px-6 py-6 font-medium text-gray-700">
+            {NAV_ITEMS.map((item) =>
+              item.children ? (
+                <div key={item.label}>
+                  <button
+                    onClick={() => setMobileOpenMenu(mobileOpenMenu === item.label ? null : item.label)}
+                    className="flex w-full items-center justify-between py-2"
+                  >
+                    {item.label}
+                    <ChevronDown size={16} aria-hidden="true" className={`transition-transform ${mobileOpenMenu === item.label ? "rotate-180" : ""}`} />
+                  </button>
+                  {mobileOpenMenu === item.label &&
+                    item.children.map((child) => (
+                      <Link key={child.label} href={child.href} onClick={() => setMobileOpen(false)} className="block px-4 py-2 rounded hover:bg-gray-100">
+                        {child.label}
+                      </Link>
+                    ))}
+                </div>
+              ) : (
+                <Link key={item.label} href={item.href!} onClick={() => setMobileOpen(false)} className="py-2">
+                  {item.label}
+                </Link>
+              )
+            )}
+            <Link href="/contact" className="mt-4 flex items-center gap-2 rounded-lg bg-[#F4B740] px-4 py-2 text-[#0E1B3D]">
+              <Mail size={18} aria-hidden="true" /> Contact Us
+            </Link>
+          </nav>
+        </div>
+      </header>
+
+      {mobileOpen && (
+        <div className="fixed inset-0 z-20 bg-black/20 backdrop-blur-sm lg:hidden" onClick={() => setMobileOpen(false)} />
+      )}
+    </>
+  );
+}
