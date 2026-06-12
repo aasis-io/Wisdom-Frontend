@@ -1,4 +1,3 @@
-import React from "react";
 // import { Pagination } from "swiper/modules";
 // import { Swiper, SwiperSlide } from "swiper/react";
 // import Work1 from "./../../assets/images/work1.jpg";
@@ -38,7 +37,7 @@ export default function FuturePlans() {
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <div className="mb-12 max-w-3xl">
-          <span className="text-sm font-semibold text-[#f4b740]">
+          <span className="text-base font-semibold text-[#e6a23c]">
             Future Plans
           </span>
 
@@ -62,15 +61,15 @@ export default function FuturePlans() {
               <span className="absolute inset-0 animate-spin-slow rounded-full border border-dashed border-[#1e2a4a]/30" />
 
               {/* Inner orbit */}
-              <span className="absolute inset-3 animate-spin-reverse rounded-full border border-[#f4b740]/40" />
+              <span className="absolute inset-3 animate-spin-reverse rounded-full border border-[#e6a23c]/40" />
 
               {/* Orbiting nodes */}
               <span className="absolute left-1/2 -top-1 h-2 w-2 -translate-x-1/2 rounded-full bg-[#1e2a4a]" />
-              <span className="absolute bottom-2 left-2 h-2 w-2 rounded-full bg-[#f4b740]" />
+              <span className="absolute bottom-2 left-2 h-2 w-2 rounded-full bg-[#e6a23c]" />
               <span className="absolute right-2 top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-[#1e2a4a]" />
 
               {/* Core */}
-              <span className="absolute inset-6 rounded-full bg-linear-to-br from-[#1e2a4a] to-[#f4b740] shadow-md" />
+              <span className="absolute inset-6 rounded-full bg-linear-to-br from-[#1e2a4a] to-[#e6a23c] shadow-md" />
             </div>
 
             <h3 className="text-2xl font-bold text-[#1e2a4a]">Coming Soon</h3>

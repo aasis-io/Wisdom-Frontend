@@ -18,7 +18,7 @@ export default function AboutSection() {
             students to world-class opportunities, shaping the future of
             research and global education.
           </p>
-          <button className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#f4b740] px-8 py-3 font-semibold lg:font-medium text-white shadow-md transition hover:scale-105 hover:bg-[#e6aa33]">
+          <button className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#e6a23c] px-8 py-3 font-semibold lg:font-medium text-white shadow-md transition hover:scale-105 hover:bg-[#e6aa33]">
             Read More →
           </button>
         </div>

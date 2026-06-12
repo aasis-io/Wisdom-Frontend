@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import React from "react";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Work1 from "./../../assets/images/work1.webp";
@@ -44,7 +43,7 @@ export default function OurWorks() {
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <div className="mb-8 max-w-3xl">
-          <span className="text-sm font-semibold text-[#f4b740]">
+          <span className="text-base font-semibold text-[#e6a23c]">
             Our Works
           </span>
 

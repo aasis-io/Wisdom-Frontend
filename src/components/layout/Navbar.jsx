@@ -98,19 +98,19 @@ export default function Navbar() {
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 h-10">
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-2 min-w-[120px]">
-                <Phone className="text-[#F4B740] shrink-0" size={14} aria-hidden="true" />
+                <Phone className="text-[#e6a23c] shrink-0" size={14} aria-hidden="true" />
                 {siteSettings.phone
                   ? <span>{siteSettings.phone}</span>
                   : <span className="inline-block h-3.5 w-24 rounded bg-white/10 animate-pulse" aria-hidden="true" />}
               </div>
               <div className="flex items-center gap-2 min-w-[160px]">
-                <Mail className="text-[#F4B740] shrink-0" size={14} aria-hidden="true" />
+                <Mail className="text-[#e6a23c] shrink-0" size={14} aria-hidden="true" />
                 {siteSettings.email
                   ? <span>{siteSettings.email}</span>
                   : <span className="inline-block h-3.5 w-36 rounded bg-white/10 animate-pulse" aria-hidden="true" />}
               </div>
               <div className="flex items-center gap-2 min-w-[160px]">
-                <MapPin className="text-[#F4B740] shrink-0" size={14} aria-hidden="true" />
+                <MapPin className="text-[#e6a23c] shrink-0" size={14} aria-hidden="true" />
                 {siteSettings.location
                   ? <span>{siteSettings.location}</span>
                   : <span className="inline-block h-3.5 w-36 rounded bg-white/10 animate-pulse" aria-hidden="true" />}
@@ -142,7 +142,7 @@ export default function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Visit our ${name} page`}
-                  className={`flex h-8 w-8 items-center justify-center rounded-full bg-[#F4B740] text-[#0E1B3D] hover:opacity-80 transition ${
+                  className={`flex h-8 w-8 items-center justify-center rounded-full bg-[#e6a23c] text-[#0E1B3D] hover:opacity-80 transition ${
                     !link ? "pointer-events-none opacity-0" : ""
                   }`}
                 >
@@ -157,7 +157,7 @@ export default function Navbar() {
         <div className="block md:hidden bg-[#0E1B3D] text-white text-sm h-11">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
             <div className="flex items-center gap-2 min-w-[120px]">
-              <Phone className="text-[#F4B740] shrink-0" size={14} aria-hidden="true" />
+              <Phone className="text-[#e6a23c] shrink-0" size={14} aria-hidden="true" />
               {siteSettings.phone
                 ? <span>{siteSettings.phone}</span>
                 : <span className="inline-block h-3.5 w-24 rounded bg-white/10 animate-pulse" aria-hidden="true" />}
@@ -165,7 +165,7 @@ export default function Navbar() {
 
             <a
               href={`tel:${siteSettings.phone}`}
-              className="rounded bg-[#F4B740] px-3 py-1 text-[#0E1B3D] font-medium"
+              className="rounded bg-[#e6a23c] px-3 py-1 text-[#0E1B3D] font-medium"
             >
               Call Now
             </a>
@@ -199,7 +199,7 @@ export default function Navbar() {
                         desktopOpenMenu === item.label ? null : item.label
                       )
                     }
-                    className="flex items-center gap-1 hover:text-[#F4B740]"
+                    className="flex items-center gap-1 hover:text-[#e6a23c]"
                   >
                     {item.label}
                     <ChevronDown
@@ -230,7 +230,7 @@ export default function Navbar() {
                 <Link
                   key={item.label}
                   to={item.href}
-                  className="hover:text-[#F4B740]"
+                  className="hover:text-[#e6a23c]"
                 >
                   {item.label}
                 </Link>
@@ -320,7 +320,7 @@ export default function Navbar() {
 
             <Link
               to="/contact"
-              className="mt-4 flex items-center gap-2 rounded-lg bg-[#F4B740] px-4 py-2 text-[#0E1B3D]"
+              className="mt-4 flex items-center gap-2 rounded-lg bg-[#e6a23c] px-4 py-2 text-[#0E1B3D]"
             >
               <Mail size={18} aria-hidden="true" />
               Contact Us

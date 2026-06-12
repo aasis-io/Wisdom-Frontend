@@ -1,5 +1,5 @@
 import { ArrowRight, CalendarDays, Mail, Phone, User } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { getUpcomingEvent, registerForEvent } from "../../services/api";
 
@@ -82,7 +82,7 @@ export default function EventRegistrationSection() {
             // EVENT AVAILABLE → SHOW ELEGANT CTA ONLY
             <div className="grid lg:grid-cols-2">
               <div className="flex flex-col justify-center px-8 pt-12 pb-6 md:py-12 text-white sm:px-12">
-                <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-[#F4B740]">
+                <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-[#e6a23c]">
                   Upcoming Event
                 </p>
 
@@ -92,7 +92,7 @@ export default function EventRegistrationSection() {
 
                 {event.eventDate && (
                   <div className="mb-6 flex items-center gap-3 text-white/80">
-                    <CalendarDays className="h-5 w-5 text-[#F4B740]" />
+                    <CalendarDays className="h-5 w-5 text-[#e6a23c]" />
                     <span className="text-sm md:text-base">
                       {new Date(event.eventDate).toDateString()}
                     </span>
@@ -110,7 +110,7 @@ export default function EventRegistrationSection() {
                     href={event.registrationLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex w-fit items-center gap-2 rounded-xl bg-[#F4B740] px-6 py-4 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-[#e6ac2f]"
+                    className="inline-flex w-fit items-center gap-2 rounded-xl bg-[#e6a23c] px-6 py-4 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-[#e6ac2f]"
                   >
                     Register for This Event
                     <ArrowRight className="h-4 w-4" />
@@ -159,7 +159,7 @@ export default function EventRegistrationSection() {
                           value={formData.fullName}
                           onChange={handleChange}
                           placeholder="Enter your Full Name"
-                          className="w-full rounded-xl bg-white py-4 pl-10 pr-4 text-sm text-gray-900 outline-none ring-2 ring-transparent transition focus:ring-[#F4B740]"
+                          className="w-full rounded-xl bg-white py-4 pl-10 pr-4 text-sm text-gray-900 outline-none ring-2 ring-transparent transition focus:ring-[#e6a23c]"
                         />
                       </div>
                     </div>
@@ -176,7 +176,7 @@ export default function EventRegistrationSection() {
                           value={formData.email}
                           onChange={handleChange}
                           placeholder="Enter your Email Address"
-                          className="w-full rounded-xl bg-white py-4 pl-10 pr-4 text-sm text-gray-900 outline-none ring-2 ring-transparent transition focus:ring-[#F4B740]"
+                          className="w-full rounded-xl bg-white py-4 pl-10 pr-4 text-sm text-gray-900 outline-none ring-2 ring-transparent transition focus:ring-[#e6a23c]"
                         />
                       </div>
                     </div>
@@ -193,7 +193,7 @@ export default function EventRegistrationSection() {
                           value={formData.phone}
                           onChange={handleChange}
                           placeholder="Enter your Phone Number"
-                          className="w-full rounded-xl bg-white py-4 pl-10 pr-4 text-sm text-gray-900 outline-none ring-2 ring-transparent transition focus:ring-[#F4B740]"
+                          className="w-full rounded-xl bg-white py-4 pl-10 pr-4 text-sm text-gray-900 outline-none ring-2 ring-transparent transition focus:ring-[#e6a23c]"
                         />
                       </div>
                     </div>
@@ -201,7 +201,7 @@ export default function EventRegistrationSection() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className={`w-full rounded-xl bg-[#F4B740] py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#e6ac2f] ${
+                      className={`w-full rounded-xl bg-[#e6a23c] py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#e6ac2f] ${
                         loading ? "cursor-not-allowed opacity-50" : ""
                       }`}
                     >

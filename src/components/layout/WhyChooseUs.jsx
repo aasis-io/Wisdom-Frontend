@@ -48,8 +48,8 @@ export default function WhyChooseUs() {
 
   const cardsConfig = [
     { icon: <Calendar className="h-6 w-6" />, color: "bg-[#1e2a4a]" },
-    { icon: <FileText className="h-6 w-6" />, color: "bg-[#f4b740]" },
-    { icon: <Users className="h-6 w-6" />, color: "bg-[#f4b740]" },
+    { icon: <FileText className="h-6 w-6" />, color: "bg-[#e6a23c]" },
+    { icon: <Users className="h-6 w-6" />, color: "bg-[#e6a23c]" },
     { icon: <TrendingUp className="h-6 w-6" />, color: "bg-[#1e2a4a]" },
   ];
 

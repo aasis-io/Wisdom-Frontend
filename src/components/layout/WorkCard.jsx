@@ -24,7 +24,7 @@ function WorkCard({ image, category, title, description }) {
       {/* Content */}
       <div className="flex min-h-[210px] flex-col justify-between p-6">
         <div>
-          <span className="text-sm font-semibold text-[#f4b740]">
+          <span className="text-sm font-semibold text-[#e6a23c]">
             {category}
           </span>
 
