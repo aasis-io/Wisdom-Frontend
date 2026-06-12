@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
         hostname: "flagcdn.com",
       },
       // Add your production API hostname below if different from waarc.edu.np
-      // { protocol: "https", hostname: "api.yourserver.com" },
+      // { protocol: "https", hostname: "api.yourserver.com"  },
     ],
   },
 };
