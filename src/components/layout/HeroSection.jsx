@@ -1,7 +1,6 @@
 import { FaBullseye, FaLightbulb } from "react-icons/fa";
 import { Link } from "react-router";
 import HeroParticles from "../HeroParticles";
-import Bg from "./../../assets/images/bg.webp";
 import Wave from "./../../assets/images/wave.svg";
 
 function HeroSkeleton() {
@@ -11,15 +10,10 @@ function HeroSkeleton() {
       aria-label="Hero Section Loading"
       aria-busy="true"
     >
-      <div className="absolute inset-0 opacity-20">
-        <img
-          src={Bg}
-          alt=""
-          aria-hidden="true"
-          className="w-full h-full object-cover"
-          loading="eager"
-        />
-        <div className="absolute inset-0 bg-black/10" />
+      <div className="absolute inset-0 z-0">
+        <HeroParticles />
+        {/* <div className="absolute inset-0 bg-linear-to-b from-white/70 to-white/90" /> */}
+        <div className="absolute inset-0 bg-[#f7f7f7] -z-10" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-6 py-12 lg:pt-16 lg:pb-24">

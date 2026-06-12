@@ -31,7 +31,19 @@ export default function HeroParticles() {
         },
         interactivity: {
           events: {
-            onHover: { enable: false, mode: ["grab", "bubble"] },
+            onHover: { enable: true, mode: ["grab", "bubble"] },
+          },
+          modes: {
+            grab: {
+              distance: 150,
+              links: { opacity: 0.6 },
+            },
+            bubble: {
+              distance: 180,
+              size: 6,
+              opacity: 0.7,
+              duration: 0.4,
+            },
           },
         },
         detectRetina: true,
