@@ -8,6 +8,8 @@ export default function HeroParticles() {
     const ctx = canvas.getContext("2d");
     let animationId;
 
+    const isMobile = () => window.innerWidth < 768;
+
     const resize = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
@@ -15,7 +17,6 @@ export default function HeroParticles() {
     resize();
     window.addEventListener("resize", resize);
 
-    const PARTICLE_COUNT = 75;
     const COLOR = "#1e2a4a";
     const mouse = { x: null, y: null };
 
@@ -29,18 +30,20 @@ export default function HeroParticles() {
       mouse.y = null;
     });
 
+    const PARTICLE_COUNT = isMobile() ? 30 : 75;
+    const SPEED = isMobile() ? 0.4 : 0.6;
+
     const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.8,
-      vy: (Math.random() - 0.5) * 0.8,
+      vx: (Math.random() - 0.5) * SPEED,
+      vy: (Math.random() - 0.5) * SPEED,
       size: Math.random() * 2 + 1,
     }));
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw links
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -57,7 +60,6 @@ export default function HeroParticles() {
           }
         }
 
-        // Grab effect — draw line from mouse to nearby particles
         if (mouse.x !== null) {
           const dx = particles[i].x - mouse.x;
           const dy = particles[i].y - mouse.y;
@@ -74,9 +76,7 @@ export default function HeroParticles() {
         }
       }
 
-      // Draw particles
       particles.forEach((p) => {
-        // Bubble effect near mouse
         let size = p.size;
         if (mouse.x !== null) {
           const dx = p.x - mouse.x;
@@ -91,7 +91,6 @@ export default function HeroParticles() {
         ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
         ctx.fill();
 
-        // Move
         p.x += p.vx;
         p.y += p.vy;
         if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
