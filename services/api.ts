@@ -49,9 +49,9 @@ export const getTeamMembers = async () => {
   return response.data;
 };
 
-/* ------------------------------------------------------------------
+/* -----------------------------------------------------------------
    JOURNALS
-------------------------------------------------------------------- */
+------------------------------------------------------------------ */
 export const getJournals = async () => {
   const response = await api.get("/getJournals");
   return response.data;
