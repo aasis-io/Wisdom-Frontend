@@ -22,12 +22,12 @@ export default function HeroParticles() {
             enable: true,
             color: "#1e2a4a",
             distance: 120,
-            opacity: 0.3,
+            opacity: 0.26,
             width: 1,
           },
           move: { enable: true, speed: 0.8 },
           size: { value: { min: 1, max: 3 } },
-          opacity: { value: 0.5 },
+          opacity: { value: 0.4 },
         },
         interactivity: {
           events: {
